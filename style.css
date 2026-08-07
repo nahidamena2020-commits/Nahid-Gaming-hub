@@ -1,27 +1,42 @@
 body {
-    margin: 0;
+    font-family: Arial, sans-serif;
     background: #111;
     color: white;
-    font-family: Arial, sans-serif;
     text-align: center;
+    margin: 0;
+    padding: 20px;
 }
 
 h1 {
-    background: #00b894;
-    padding: 20px;
-    margin: 0;
+    font-size: 40px;
 }
 
-button {
-    background: #0984e3;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    margin: 10px;
-    border-radius: 8px;
+.gallery {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.gallery img {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+textarea {
+    width: 80%;
+    height: 100px;
+    padding: 10px;
     font-size: 16px;
 }
 
-button:hover {
-    background: #0652DD;
+button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
 }
+nn
