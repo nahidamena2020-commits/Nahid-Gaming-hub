@@ -1,44 +1,145 @@
 <!DOCTYPE html>
 <html lang="bn">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nahid Gallery Hub</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
+    <!-- Personal photo gallery  -->
     <header>
         <h1>📘 Nahid Gallery Hub</h1>
         <p>My Personal Photo Community</p>
     </header>
 
-    <main>
-        <div class="post">
-            <img src="photo3.jpg" alt="Photo 3">
+    <!-- প্রোফাইল সেকশন -->
+    <div class="profile">
+        <img src="photo1.jpg" alt="Profile Photo">
+        <div>
             <h3>Nahid</h3>
-            <p>Beautiful memory ✨</p>
-            <button>👍 Like</button>
-            <button>💬 Comment</button>
-            <button>↗ Share</button>
+            <p>ওয়েবসাইটে স্বাগতম! আমার ছবির দুনিয়া।</p>
+        </div>
+    </div>
+
+    <!-- প্রথম পোস্ট -->
+    <div class="post" id="post-1">
+        <img src="photo3.jpg" alt="Photo 3">
+        <h3>Nahid</h3>
+        <p>সৈকতের সুন্দর একটি মুহূর্ত 🌅 প্রকৃতির সাথে দারুণ সময় কাটলো।</p>
+        
+        <!-- লাইক ও কমেন্টের কাউন্ট -->
+        <div style="margin: 10px 0; font-size: 14px; color: #666;">
+            👍 <span id="like-count-1">15</span> জন লাইক করেছে • 💬 <span id="comment-count-1">2</span> টি কমেন্ট
         </div>
 
-        <div class="post">
-            <img src="photo4.jpg" alt="Photo 4">
-            <h3>Nahid</h3>
-            <p>Another photo 📸</p>
-            <button>👍 Like</button>
-            <button>💬 Comment</button>
-            <button>↗ Share</button>
+        <!-- কমেন্ট লিস্ট -->
+        <div id="comment-list-1" style="margin-bottom: 10px; font-size: 14px;">
+            <div style="background: #f0f2f5; padding: 6px 10px; border-radius: 6px; margin-top: 5px;"><strong>Tanvir:</strong> অসাধারণ ছবি ভাই!</div>
+            <div style="background: #f0f2f5; padding: 6px 10px; border-radius: 6px; margin-top: 5px;"><strong>Rakibul:</strong> দারুণ ভিউ!</div>
         </div>
-    </main>
 
+        <!-- বাটন সেকশন -->
+        <div class="actions">
+            <button class="love" onclick="likePost(1)">👍 লাইক</button>
+            <button class="comment" onclick="addComment(1)">💬 কমেন্ট</button>
+            <button class="download" onclick="downloadImage('photo3.jpg', 'Nahid-Photo-1.jpg')">📥 ডাউনলোড</button>
+        </div>
+    </div>
+
+    <!-- দ্বিতীয় পোস্ট -->
+    <div class="post" id="post-2">
+        <img src="photo4.jpg" alt="Photo 4">
+        <h3>Nahid</h3>
+        <p>স্মরণীয় একটি বিকেল 📸 জীবনকে উপভোগ করার ছোট ছোট মুহূর্ত।</p>
+        
+        <!-- লাইক ও কমেন্টের কাউন্ট -->
+        <div style="margin: 10px 0; font-size: 14px; color: #666;">
+            👍 <span id="like-count-2">24</span> জন লাইক করেছে • 💬 <span id="comment-count-2">2</span> টি কমেন্ট
+        </div>
+
+        <!-- কমেন্ট লিস্ট -->
+        <div id="comment-list-2" style="margin-bottom: 10px; font-size: 14px;">
+            <div style="background: #f0f2f5; padding: 6px 10px; border-radius: 6px; margin-top: 5px;"><strong>Sakib:</strong> চরম হইছে বস!</div>
+            <div style="background: #f0f2f5; padding: 6px 10px; border-radius: 6px; margin-top: 5px;"><strong>Fahim:</strong> অনেক সুন্দর ক্লিক!</div>
+        </div>
+
+        <!-- বাটন সেকশন -->
+        <div class="actions">
+            <button class="love" onclick="likePost(2)">👍 লাইক</button>
+            <button class="comment" onclick="addComment(2)">💬 কমেন্ট</button>
+            <button class="download" onclick="downloadImage('photo4.jpg', 'Nahid-Photo-2.jpg')">📥 ডাউনলোড</button>
+        </div>
+    </div>
+
+    <!-- তৃতীয় পোস্ট -->
+    <div class="post" id="post-3">
+        <img src="photo5.jpg" alt="Photo 5">
+        <h3>Nahid</h3>
+        <p>বন্ধুদের সাথে আড্ডা এবং ঘুরে বেড়ানোর দিনগুলো ✨</p>
+        
+        <!-- লাইক ও কমেন্টের কাউন্ট -->
+        <div style="margin: 10px 0; font-size: 14px; color: #666;">
+            👍 <span id="like-count-3">19</span> জন লাইক করেছে • 💬 <span id="comment-count-3">1</span> টি কমেন্ট
+        </div>
+
+        <!-- কমেন্ট লিস্ট -->
+        <div id="comment-list-3" style="margin-bottom: 10px; font-size: 14px;">
+            <div style="background: #f0f2f5; padding: 6px 10px; border-radius: 6px; margin-top: 5px;"><strong>Arman:</strong> খুব সুন্দর স্মৃতি!</div>
+        </div>
+
+        <!-- বাটন সেকশন -->
+        <div class="actions">
+            <button class="love" onclick="likePost(3)">👍 লাইক</button>
+            <button class="comment" onclick="addComment(3)">💬 কমেন্ট</button>
+            <button class="download" onclick="downloadImage('photo5.jpg', 'Nahid-Photo-3.jpg')">📥 ডাউনলোড</button>
+        </div>
+    </div>
+
+    <!-- ফুটার -->
     <footer>
-        <p>© 2026 Nahid Gallery Hub</p>
+        <p>© 2026 Nahid Gallery Hub. All rights reserved.</p>
     </footer>
 
-</body>
+    <!-- জাভাস্ক্রিপ্ট কার্যকারিতা -->
+    <script>
+        function likePost(postId) {
+            const likeCountSpan = document.getElementById(`like-count-${postId}`);
+            let currentLikes = parseInt(likeCountSpan.innerText);
+            currentLikes++;
+            likeCountSpan.innerText = currentLikes;
+        }
 
-</html>
+        function addComment(postId) {
+            let commentText = prompt("আপনার কমেন্টটি এখানে লিখুন:");
+            if (commentText && commentText.trim() !== "") {
+                const commentCountSpan = document.getElementById(`comment-count-${postId}`);
+                const commentListDiv = document.getElementById(`comment-list-${postId}`);
+                
+                let currentComments = parseInt(commentCountSpan.innerText);
+                currentComments++;
+                commentCountSpan.innerText = currentComments;
+
+                let newComment = document.createElement('div');
+                newComment.style.background = "#f0f2f5";
+                newComment.style.padding = "6px 10px";
+                newComment.style.borderRadius = "6px";
+                newComment.style.marginTop = "5px";
+                newComment.innerHTML = `<strong>ভিজিটর:</strong> ${commentText}`;
+                commentListDiv.appendChild(newComment);
+            }
+        }
+
+        function downloadImage(url, filename) {
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+    </script>
+
+</body>
+    </html>
