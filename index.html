@@ -1,133 +1,78 @@
-<!DOCTYPE html>
-<html lang="en">
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#0f0f0f;
+    color:white;
+}
 
-<head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+header{
+    text-align:center;
+    padding:25px;
+    background:#1c1c1c;
+}
 
-<title>Nahid Gallery Hub</title>
 
-<link rel="stylesheet" href="style.css">
+nav{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    padding:15px;
+}
 
-</head>
 
+button{
+    padding:10px 18px;
+    border:none;
+    border-radius:20px;
+    cursor:pointer;
+}
 
-<body>
 
-<h1>📸 Nahid Gallery Hub</h1>
+.profile{
+    display:flex;
+    align-items:center;
+    gap:20px;
+    padding:20px;
+}
 
-<p>Welcome to my personal photo gallery</p>
 
+.profile img{
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    object-fit:cover;
+}
 
-<hr>
 
+h2{
+    text-align:center;
+}
 
-<h2>🖼 My Photos</h2>
 
-<div class="gallery">
+.post{
+    background:#1b1b1b;
+    width:90%;
+    max-width:500px;
+    margin:20px auto;
+    padding:15px;
+    border-radius:15px;
+}
 
-<div class="card">
-<img src="photo1.jpg" alt="My Photo">
-<h3>My First Photo</h3>
 
-<a href="photo1.jpg" download>
-<button>⬇ Download</button>
-</a>
+.post img{
+    width:100%;
+    border-radius:15px;
+}
 
-<button>❤️ Love</button>
 
-<br><br>
+.post button{
+    margin:5px;
+}
 
-<input type="text" placeholder="Write a comment">
 
-<button>💬 Comment</button>
-
-</div>
-
-
-<div class="card">
-<img src="photo2.jpg" alt="My Photo">
-<h3>My Second Photo</h3>
-
-<a href="photo2.jpg" download>
-<button>⬇ Download</button>
-</a>
-
-<button>❤️ Love</button>
-
-<br><br>
-
-<input type="text" placeholder="Write a comment">
-
-<button>💬 Comment</button>
-
-</div>
-
-
-<div class="card">
-<img src="photo3.jpg" alt="My Photo">
-<h3>My Third Photo</h3>
-
-<a href="photo3.jpg" download>
-<button>⬇ Download</button>
-</a>
-
-<button>❤️ Love</button>
-
-<br><br>
-
-<input type="text" placeholder="Write a comment">
-
-<button>💬 Comment</button>
-
-</div>
-
-
-<div class="card">
-<img src="photo4.jpg" alt="My Photo">
-<h3>My Fourth Photo</h3>
-
-<a href="photo4.jpg" download>
-<button>⬇ Download</button>
-</a>
-
-<button>❤️ Love</button>
-
-<br><br>
-
-<input type="text" placeholder="Write a comment">
-
-<button>💬 Comment</button>
-
-
-
-</div>
-
-
-<hr>
-
-
-<h2>💬 Feedback</h2>
-
-
-<textarea placeholder="Write your feedback"></textarea>
-
-<br><br>
-
-<button>Send Feedback</button>
-
-
-<hr>
-
-
-<footer>
-
-<p>© 2026 Nahid Gallery Hub</p>
-
-</footer>
-
-
-</body>
-
-</html>
+footer{
+    text-align:center;
+    padding:20px;
+    background:#1c1c1c;
+}
