@@ -1,2 +1,2 @@
-# Nahid-Gaming-hub
-Gaming social platform
+# Nahid-photo-hub
+Personal photo platform
