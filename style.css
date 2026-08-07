@@ -1,4 +1,27 @@
 body {
-  background-color: black;
-  color: white;
+    margin: 0;
+    background: #111;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+h1 {
+    background: #00b894;
+    padding: 20px;
+    margin: 0;
+}
+
+button {
+    background: #0984e3;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+button:hover {
+    background: #0652DD;
 }
