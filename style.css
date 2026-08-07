@@ -1,6 +1,6 @@
 body{
 margin:0;
-font-family:Arial, sans-serif;
+font-family:Arial,sans-serif;
 background:white;
 color:#111;
 }
@@ -15,17 +15,16 @@ text-align:center;
 
 
 .profile{
-background:white;
 display:flex;
 align-items:center;
 gap:15px;
-padding:15px;
+padding:20px;
 }
 
 
 .profile img{
-width:70px;
-height:70px;
+width:80px;
+height:80px;
 border-radius:50%;
 object-fit:cover;
 }
@@ -35,8 +34,9 @@ object-fit:cover;
 background:white;
 max-width:500px;
 margin:20px auto;
-border-radius:10px;
 padding:15px;
+border-radius:10px;
+box-shadow:0 2px 8px #ccc;
 }
 
 
@@ -46,21 +46,10 @@ border-radius:10px;
 }
 
 
-.post-header p{
-color:gray;
-}
-
-
-.buttons{
-display:flex;
-justify-content:space-around;
-}
-
-
 button{
-padding:10px 20px;
+padding:10px;
+margin:5px;
 border:none;
-background:#eee;
 border-radius:8px;
 }
 
