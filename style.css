@@ -1,42 +1,63 @@
-body {
-    font-family: Arial, sans-serif;
-    background: #111;
-    color: white;
-    text-align: center;
-    margin: 0;
-    padding: 20px;
+body{
+margin:0;
+font-family:Arial;
+background:#111;
+color:white;
 }
 
-h1 {
-    font-size: 40px;
+
+header{
+text-align:center;
+padding:25px;
+background:#222;
 }
 
-.gallery {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;
+
+nav{
+text-align:center;
+padding:15px;
 }
 
-.gallery img {
-    width: 250px;
-    height: 250px;
-    object-fit: cover;
-    border-radius: 15px;
+
+button{
+padding:10px 20px;
+border-radius:20px;
+border:none;
 }
 
-textarea {
-    width: 80%;
-    height: 100px;
-    padding: 10px;
-    font-size: 16px;
+
+.profile{
+display:flex;
+align-items:center;
+gap:20px;
+padding:20px;
 }
 
-button {
-    padding: 12px 25px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 16px;
+
+.profile img{
+width:90px;
+height:90px;
+border-radius:50%;
 }
 
+
+.post{
+background:#222;
+width:90%;
+max-width:500px;
+margin:auto;
+padding:15px;
+border-radius:15px;
+}
+
+
+.post img{
+width:100%;
+border-radius:15px;
+}
+
+
+footer{
+text-align:center;
+padding:20px;
+}
