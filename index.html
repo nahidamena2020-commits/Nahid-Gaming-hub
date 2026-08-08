@@ -152,7 +152,7 @@
         /* Moderator Panel */
         .mod-panel {
             width: 95%;
-            max-width: 600px;
+            max-width: 650px;
             margin: 20px auto;
             background: #eff6ff;
             border: 2px dashed #3b82f6;
@@ -179,18 +179,39 @@
             font-weight: 600;
             width: 100%;
         }
-        .password-box {
+        .mod-box {
             background: #fff;
             padding: 15px;
             border-radius: 8px;
             margin-top: 15px;
             border: 1px solid #bfdbfe;
         }
+        .mod-comment-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f8fafc;
+            padding: 8px 10px;
+            border-radius: 6px;
+            margin-bottom: 6px;
+            font-size: 0.85rem;
+            border: 1px solid #e2e8f0;
+        }
+        .delete-comment-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            width: auto !important;
+        }
 
         /* Post Card */
         .post {
             width: 95%;
-            max-width: 600px;
+            max-width: 650px;
             margin: 20px auto;
             background: var(--card-bg);
             border-radius: var(--radius-lg);
@@ -280,11 +301,6 @@
                     <span class="toggle-eye" onclick="togglePassword('user-password', this)">👁️</span>
                 </div>
 
-                <!-- ওটিপি ভেরিফিকেশন ফিল্ড (রেজিস্ট্রেশনের সময় আসবে) -->
-                <div id="otp-input-container" style="display: none;">
-                    <input type="text" id="otp-code-input" placeholder="৪ ডিজিটের ওটিপি কোড লিখুন">
-                </div>
-
                 <button id="user-auth-btn" onclick="handleUserAuth()">লগইন করুন</button>
             </div>
 
@@ -310,7 +326,7 @@
             <p id="welcome-user-msg" style="color: #64748b; margin-top: 5px;"></p>
         </header>
 
-        <!-- মডারেটর কন্ট্রোল প্যানেল -->
+        <!-- মডারেটর কন্ট্রোল প্যানেল (অ্যানালিটিক্স ও কমেন্ট মডারেশনসহ) -->
         <div id="moderator-control-panel" class="mod-panel" style="display: none;">
             <h3>🛠️ মডারেটর পোস্ট কন্ট্রোল প্যানেল</h3>
             <input type="text" id="new-post-title" placeholder="পোস্টের শিরোনাম বা ক্যাপশন হেডিং...">
@@ -321,8 +337,24 @@
 
             <button onclick="addNewPost()">নতুন পোস্ট পাবলিশ করুন</button>
 
+            <!-- সাইট পরিসংখ্যান (Analytics) বক্স -->
+            <div class="mod-box">
+                <h3 style="color: #1e293b; margin-bottom: 8px;">📊 সাইট পরিসংখ্যান (Analytics)</h3>
+                <p id="stat-users" style="font-size: 0.95rem; margin-bottom: 4px;">রেজিস্টার্ড ইউজার: ০ জন</p>
+                <p id="stat-posts" style="font-size: 0.95rem; margin-bottom: 4px;">মোট পোস্ট: ০ টি</p>
+                <p id="stat-comments" style="font-size: 0.95rem;">মোট কমেন্ট: ০ টি</p>
+            </div>
+
+            <!-- কমেন্ট মডারেটর বক্স (খারাপ কমেন্ট ডিলিট করার জন্য) -->
+            <div class="mod-box">
+                <h3 style="color: #1e293b; margin-bottom: 8px;">💬 কমেন্ট মডারেটর (কমেন্ট মুছুন)</h3>
+                <div id="mod-comment-list" style="max-height: 220px; overflow-y: auto;">
+                    <!-- ডায়নামিক কমেন্ট লিস্ট এখানে আসবে -->
+                </div>
+            </div>
+
             <!-- পাসওয়ার্ড পরিবর্তনের বক্স -->
-            <div class="password-box">
+            <div class="mod-box">
                 <h3 style="color: #1e293b; margin-bottom: 8px;">🔐 মডারেটর পাসওয়ার্ড পরিবর্তন করুন</h3>
                 <div class="pass-wrapper" style="margin-bottom: 10px;">
                     <input type="password" id="new-mod-password" placeholder="নতুন পাসওয়ার্ড লিখুন" style="margin-bottom: 0;">
@@ -341,9 +373,7 @@
     </div>
 
     <script>
-        let authMode = 'login'; // 'login' or 'register'
-        let generatedOtp = '';
-        let pendingUserObj = null;
+        let authMode = 'login';
 
         const defaultPosts = [
             {
@@ -382,7 +412,6 @@
             }
         }
 
-        // পাসওয়ার্ড শো/হাইডের ফাংশন
         function togglePassword(fieldId, iconElem) {
             let passwordField = document.getElementById(fieldId);
             if (passwordField.type === "password") {
@@ -411,17 +440,12 @@
             let btnLoginTab = document.getElementById("btn-login-tab");
             let btnRegTab = document.getElementById("btn-reg-tab");
             let authBtn = document.getElementById("user-auth-btn");
-            let otpContainer = document.getElementById("otp-input-container");
-
-            otpContainer.style.display = "none";
-            generatedOtp = '';
-            pendingUserObj = null;
 
             if (mode === 'register') {
                 nameField.style.display = "block";
                 btnLoginTab.classList.remove("active");
                 btnRegTab.classList.add("active");
-                authBtn.innerText = "ওটিপি কোড পাঠান";
+                authBtn.innerText = "রেজিস্ট্রেশন সম্পন্ন করুন";
             } else {
                 nameField.style.display = "none";
                 btnRegTab.classList.remove("active");
@@ -435,29 +459,15 @@
             let password = document.getElementById("user-password").value.trim();
             let users = JSON.parse(localStorage.getItem("nahid_users") || "[]");
 
+            if (!phone || !password) {
+                alert("দয়া করে ফোন নাম্বার এবং পাসওয়ার্ড উভয়ই দিন!");
+                return;
+            }
+
             if (authMode === 'register') {
-                let otpContainer = document.getElementById("otp-input-container");
-
-                // যদি ওটিপি অলরেডি পাঠানো হয়ে থাকে তবে কোড ভেরিফাই করবে
-                if (pendingUserObj) {
-                    let enteredOtp = document.getElementById("otp-code-input").value.trim();
-                    if (enteredOtp !== generatedOtp) {
-                        alert("ভুল ওটিপি কোড! সঠিক কোডটি দিন।");
-                        return;
-                    }
-
-                    users.push(pendingUserObj);
-                    localStorage.setItem("nahid_users", JSON.stringify(users));
-                    
-                    alert("রেজিস্ট্রেশন ও ভেরিফিকেশন সফল হয়েছে! এখন লগইন করুন।");
-                    switchAuthMode('login');
-                    document.getElementById("user-password").value = "";
-                    return;
-                }
-
                 let name = document.getElementById("user-name").value.trim();
-                if (!name || !phone || !password) {
-                    alert("দয়া করে নাম, ফোন নাম্বার এবং পাসওয়ার্ড সব পূরণ করুন!");
+                if (!name) {
+                    alert("দয়া করে আপনার নামটি লিখুন!");
                     return;
                 }
 
@@ -467,22 +477,14 @@
                     return;
                 }
 
-                // অটো ৪ ডিজিটের ওটিপি কোড জেনারেট করা
-                generatedOtp = Math.floor(1000 + Math.random() * 9000).toString();
-                pendingUserObj = { name: name, phone: phone, password: password, role: 'user' };
-
-                // রিয়েল এসএমএস-এর মতো পপআপ নোটিফিকেশনে কোডটি দেখিয়ে দেওয়া
-                alert(`আপনার (${phone}) নাম্বারে একটি অটো ভেরিফিকেশন কোড পাঠানো হয়েছে।\n\n[অটো এসএমএস] আপনার কোডটি হলো: ${generatedOtp}`);
-
-                otpContainer.style.display = "block";
-                document.getElementById("user-auth-btn").innerText = "কোড ভেরিফাই করুন ও একাউন্ট খুলুন";
-
+                let newUser = { name: name, phone: phone, password: password, role: 'user' };
+                users.push(newUser);
+                localStorage.setItem("nahid_users", JSON.stringify(users));
+                
+                alert("রেজিস্ট্রেশন সফল হয়েছে! এখন লগইন করুন।");
+                switchAuthMode('login');
+                document.getElementById("user-password").value = "";
             } else {
-                if (!phone || !password) {
-                    alert("দয়া করে ফোন নাম্বার এবং পাসওয়ার্ড দিন!");
-                    return;
-                }
-
                 let foundUser = users.find(u => u.phone === phone && u.password === password);
                 if (!foundUser) {
                     alert("ভুল ফোন নাম্বার অথবা পাসওয়ার্ড! আবার চেষ্টা করুন।");
@@ -528,6 +530,7 @@
 
             if (userData.role === "moderator") {
                 document.getElementById("moderator-control-panel").style.display = "block";
+                updateModeratorDashboard();
             }
 
             loadPosts();
@@ -545,6 +548,58 @@
                 return defaultPosts;
             }
             return JSON.parse(posts);
+        }
+
+        function updateModeratorDashboard() {
+            let users = JSON.parse(localStorage.getItem("nahid_users") || "[]");
+            let posts = getPosts();
+            
+            let totalComments = 0;
+            posts.forEach(p => {
+                if (p.comments) totalComments += p.comments.length;
+            });
+
+            // স্ট্যাটস আপডেট
+            document.getElementById("stat-users").innerText = `রেজিস্টার্ড ইউজার: ${users.length} জন`;
+            document.getElementById("stat-posts").innerText = `মোট পোস্ট: ${posts.length} টি`;
+            document.getElementById("stat-comments").innerText = `মোট কমেন্ট: ${totalComments} টি`;
+
+            // কমেন্ট লিস্ট রেন্ডার করা (ডিলিট অপশনসহ)
+            let commentListContainer = document.getElementById("mod-comment-list");
+            commentListContainer.innerHTML = "";
+
+            let hasComments = false;
+            posts.forEach(post => {
+                if (post.comments && post.comments.length > 0) {
+                    post.comments.forEach((comm, cIndex) => {
+                        hasComments = true;
+                        let row = document.createElement("div");
+                        row.className = "mod-comment-row";
+                        row.innerHTML = `
+                            <span><strong>${comm.user}:</strong> ${comm.text}</span>
+                            <button class="delete-comment-btn" onclick="deleteComment(${post.id}, ${cIndex})">মুছুন</button>
+                        `;
+                        commentListContainer.appendChild(row);
+                    });
+                }
+            });
+
+            if (!hasComments) {
+                commentListContainer.innerHTML = `<p style="color: #64748b; font-size: 0.85rem; text-align: center; padding: 10px;">কোনো কমেন্ট নেই</p>`;
+            }
+        }
+
+        function deleteComment(postId, commentIndex) {
+            if (confirm("আপনি কি নিশ্চিত এই কমেন্টটি মুছে ফেলতে চান?")) {
+                let posts = getPosts();
+                let post = posts.find(p => p.id === postId);
+                if (post && post.comments) {
+                    post.comments.splice(commentIndex, 1);
+                    localStorage.setItem("nahid_posts", JSON.stringify(posts));
+                    loadPosts();
+                    updateModeratorDashboard();
+                }
+            }
         }
 
         function loadPosts() {
@@ -609,6 +664,11 @@
                 post.comments.push({ user: currentUser.name, text: commentText });
                 localStorage.setItem("nahid_posts", JSON.stringify(posts));
                 loadPosts();
+                
+                let activeUser = JSON.parse(localStorage.getItem("nahid_current_user"));
+                if (activeUser && activeUser.role === 'moderator') {
+                    updateModeratorDashboard();
+                }
             }
         }
 
@@ -645,6 +705,7 @@
                 imageInput.value = "";
 
                 loadPosts();
+                updateModeratorDashboard();
                 alert("সফলভাবে নতুন পোস্ট পাবলিশ করা হয়েছে!");
             }
             
