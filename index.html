@@ -8,104 +8,105 @@
 </head>
 <body>
 
-    <!-- Personal photo gallery  -->
+    <!-- Top Header -->
     <header>
         <h1>📘 Nahid Gallery Hub</h1>
         <p>My Personal Photo Community</p>
     </header>
 
-    <!-- প্রোফাইল সেকশন -->
+    <!-- Profile Section -->
     <div class="profile">
         <img src="photo1.jpg" alt="Profile Photo">
         <div>
-            <h3>😓😓😓</h3>
-            <p>welcome! My Photo world</p>
+            <h3>Nahid Hasan</h3>
+            <p>Welcome to my photo world! 🖤</p>
         </div>
     </div>
 
-    <!--  fast post  -->
+    <!-- First Post -->
     <div class="post" id="post-1">
-        <img src="photo1.jpg" alt="Photo 3">
+        <img src="photo1.jpg" alt="Post Photo 1">
         <h3>Nahid</h3>
-        <p>মানুষ হারিয়ে গেলে খুঁজে পাওয়া যায় , কিন্তু বদলে গেলে ফিরে পাওয়া যায় না</p>
+        <p>মানুষ হারিয়ে গেলে খুঁজে পাওয়া যায়, কিন্তু বদলে গেলে ফিরে পাওয়া যায় না।</p>
         
-        <!-- like comment count -->
-        <div style="margin: 10px 0; font-size: 14px; color: #666;">
-            👍 <span id="like-count-1">15</span> person liking  • 💬 <span id="comment-count-1">2</span> comment 
+        <!-- Stats Area -->
+        <div class="post-stats">
+            👍 <span id="like-count-1">15</span> people liking  • 💬 <span id="comment-count-1">2</span> comments
         </div>
 
-        <!-- commentallyst  -->
-        <div id="comment-list-1" style="margin-bottom: 10px; font-size: 14px;">
-            <div style="background: #f0f2f5; padding: 6px 10px; border-radius: 6px; margin-top: 5px;"><strong>Tanvir:</strong> অসলেই ভাই😓!</div>
-            <div style="background: #f0f2f5; padding: 6px 10px; border-radius: 6px; margin-top: 5px;"><strong>Rakibul:</strong> সত্যিই ভাই😓😔!</div>
+        <!-- Comment List -->
+        <div id="comment-list-1" class="comment-list">
+            <div class="comment-item"><strong>Tanvir:</strong> আসলেই ভাই 😓!</div>
+            <div class="comment-item"><strong>Rakibul:</strong> সত্যিই ভাই 😓😔!</div>
         </div>
 
-        <!-- বাটন সেকশন -->
+        <!-- Action Buttons -->
         <div class="actions">
-            <button class="love" onclick="likePost(1)">👍 like</button>
+            <button class="love" onclick="likePost(1)">👍 Like</button>
             <button class="comment" onclick="addComment(1)">💬 Comment</button>
-            <button class="download" onclick="downloadImage('photo3.jpg', 'Nahid-Photo-1.jpg')">📥 Download</button>
+            <button class="download" onclick="downloadImage('photo1.jpg', 'Nahid-Photo-1.jpg')">📥 Download</button>
         </div>
     </div>
 
-    <!-- second post -->
+    <!-- Second Post -->
     <div class="post" id="post-2">
-        <img src="photo2.jpg" alt="Photo 4">
+        <img src="photo2.jpg" alt="Post Photo 2">
         <h3>🖤😭🖤</h3>
-        <p>কলিজায় জায়গা দেওয়া মানুষগুলোই , কলিজা আঘাত করে চলে যায় </p>
+        <p>কলিজায় জায়গা দেওয়া মানুষগুলোই, কলিজায় আঘাত করে চলে যায়।</p>
         
-        <!-- like comment count  -->
-        <div style="margin: 10px 0; font-size: 14px; color: #666;">
-            👍 <span id="like-count-2">24</span> person likeing  • 💬 <span id="comment-count-2">2</span> comment 
+        <!-- Stats Area -->
+        <div class="post-stats">
+            👍 <span id="like-count-2">24</span> people liking  • 💬 <span id="comment-count-2">2</span> comments
         </div>
 
-        <!-- কমেন্ট লিস্ট  -->
-        <div id="comment-list-2" style="margin-bottom: 10px; font-size: 14px;">
-            <div style="background: #f0f2f5; padding: 6px 10px; border-radius: 6px; margin-top: 5px;"><strong>Sakib:</strong> একদম ঠিক কথা ভাই !</div>
-            <div style="background: #f0f2f5; padding: 6px 10px; border-radius: 6px; margin-top: 5px;"><strong>Fahim:</strong> সত্যি,ভাই এটাই বাস্তব !</div>
+        <!-- Comment List -->
+        <div id="comment-list-2" class="comment-list">
+            <div class="comment-item"><strong>Sakib:</strong> একদম ঠিক কথা ভাই!</div>
+            <div class="comment-item"><strong>Fahim:</strong> সত্যি ভাই, এটাই বাস্তব!</div>
         </div>
 
-        <!-- button section   -->
+        <!-- Action Buttons -->
         <div class="actions">
-            <button class="love" onclick="likePost(2)">👍 like</button>
-            <button class="comment" onclick="addComment(2)">💬 comment</button>
-            <button class="download" onclick="downloadImage('photo4.jpg', 'Nahid-Photo-2.jpg')">📥 download</button>
+            <button class="love" onclick="likePost(2)">👍 Like</button>
+            <button class="comment" onclick="addComment(2)">💬 Comment</button>
+            <button class="download" onclick="downloadImage('photo2.jpg', 'Nahid-Photo-2.jpg')">📥 Download</button>
         </div>
     </div>
 
-    <!-- third post  -->
+    <!-- Third Post -->
     <div class="post" id="post-3">
-        <img src="photo4.jpg" alt="Photo 5">
+        <img src="photo4.jpg" alt="Post Photo 3">
         <h3>💔😓🖤</h3>
-        <p>বাস্তবতা নিয়ে এক লাইন বলে যান✨</p>
+        <p>বাস্তবতা নিয়ে এক লাইন বলে যান ✨</p>
         
-        <!-- like comment count  -->
-        <div style="margin: 10px 0; font-size: 14px; color: #666;">
-            👍 <span id="like-count-3">19</span> person liking  • 💬 <span id="comment-count-3">1</span> comment 
+        <!-- Stats Area -->
+        <div class="post-stats">
+            👍 <span id="like-count-3">19</span> people liking  • 💬 <span id="comment-count-3">1</span> comment
         </div>
 
-        <!-- comment list -->
-        <div id="comment-list-3" style="margin-bottom: 10px; font-size: 14px;">
-            <div style="background: #f0f2f5; padding: 6px 10px; border-radius: 6px; margin-top: 5px;"><strong>Arman:</strong>থাকতে বুঝোনি মায়া,হারিয়ে গেলে বুঝবে মায়া!</div>
+        <!-- Comment List -->
+        <div id="comment-list-3" class="comment-list">
+            <div class="comment-item"><strong>Arman:</strong> থাকতে বুঝোনি মায়া, হারিয়ে গেলে বুঝবে মায়া!</div>
         </div>
 
-        <!-- button section  -->
+        <!-- Action Buttons -->
         <div class="actions">
-            <button class="love" onclick="likePost(3)">👍 like</button>
-            <button class="comment" onclick="addComment(3)">💬 comment</button>
-            <button class="download" onclick="downloadImage('photo5.jpg', 'Nahid-Photo-3.jpg')">📥 download</button>
+            <button class="love" onclick="likePost(3)">👍 Like</button>
+            <button class="comment" onclick="addComment(3)">💬 Comment</button>
+            <button class="download" onclick="downloadImage('photo4.jpg', 'Nahid-Photo-3.jpg')">📥 Download</button>
         </div>
     </div>
 
-    <!-- footer  -->
+    <!-- Footer -->
     <footer>
         <p>© 2026 Nahid Gallery Hub. All rights reserved.</p>
     </footer>
 
-    <!-- জাভাস্ক্রিপ্ট কার্যকারিতা -->
+    <!-- JavaScript Functionality -->
     <script>
         function likePost(postId) {
-            const likeCountSpan = document.getElementById(`like-count-${postId}`)     let currentLikes = parseInt(likeCountSpan.innerText);
+            const likeCountSpan = document.getElementById(`like-count-${postId}`);
+            let currentLikes = parseInt(likeCountSpan.innerText);
             currentLikes++;
             likeCountSpan.innerText = currentLikes;
         }
@@ -121,10 +122,7 @@
                 commentCountSpan.innerText = currentComments;
 
                 let newComment = document.createElement('div');
-                newComment.style.background = "#f0f2f5";
-                newComment.style.padding = "6px 10px";
-                newComment.style.borderRadius = "6px";
-                newComment.style.marginTop = "5px";
+                newComment.className = 'comment-item';
                 newComment.innerHTML = `<strong>ভিজিটর:</strong> ${commentText}`;
                 commentListDiv.appendChild(newComment);
             }
@@ -141,4 +139,4 @@
     </script>
 
 </body>
-    </html>
+</html>
