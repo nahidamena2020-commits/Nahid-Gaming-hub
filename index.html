@@ -60,6 +60,26 @@
             transition: var(--transition);
         }
         .auth-card button:hover { background: #1d4ed8; }
+        
+        .pass-wrapper {
+            position: relative;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+        .pass-wrapper input {
+            margin-bottom: 0 !important;
+            padding-right: 45px;
+        }
+        .toggle-eye {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 1.2rem;
+            user-select: none;
+        }
+
         .tab-btns {
             display: flex;
             gap: 10px;
@@ -147,6 +167,7 @@
             border: 1px solid #cbd5e1;
             border-radius: 6px;
             font-size: 0.95rem;
+            background: white;
         }
         .mod-panel button {
             background: #10b981;
@@ -252,14 +273,27 @@
                 <div id="reg-name-field" style="display: none;">
                     <input type="text" id="user-name" placeholder="আপনার নাম লিখুন...">
                 </div>
-                <input type="tel" id="user-phone" placeholder="ফোন নাম্বার লিখুন (যেমন: 017xxxxxxxx)">
-                <input type="password" id="user-password" placeholder="পাসওয়ার্ড দিন">
+                <input type="tel" id="user-phone" placeholder="ফোন নাম্বার (যেমন: 017xxxxxxxx)">
+                
+                <div class="pass-wrapper">
+                    <input type="password" id="user-password" placeholder="পাসওয়ার্ড দিন">
+                    <span class="toggle-eye" onclick="togglePassword('user-password', this)">👁️</span>
+                </div>
+
+                <!-- ওটিপি ভেরিফিকেশন ফিল্ড (রেজিস্ট্রেশনের সময় আসবে) -->
+                <div id="otp-input-container" style="display: none;">
+                    <input type="text" id="otp-code-input" placeholder="৪ ডিজিটের ওটিপি কোড লিখুন">
+                </div>
+
                 <button id="user-auth-btn" onclick="handleUserAuth()">লগইন করুন</button>
             </div>
 
             <!-- মডারেটর লগইন সেকশন -->
             <div id="mod-auth-section" style="display: none;">
-                <input type="password" id="mod-password" placeholder="মডারেটর পাসওয়ার্ড দিন">
+                <div class="pass-wrapper">
+                    <input type="password" id="mod-password" placeholder="মডারেটর পাসওয়ার্ড দিন">
+                    <span class="toggle-eye" onclick="togglePassword('mod-password', this)">👁️</span>
+                </div>
                 <button onclick="handleModLogin()">মডারেটর হিসেবে প্রবেশ</button>
             </div>
         </div>
@@ -276,18 +310,24 @@
             <p id="welcome-user-msg" style="color: #64748b; margin-top: 5px;"></p>
         </header>
 
-        <!-- মডারেটর কন্ট্রোল প্যানেল (শুধু মডারেটর দেখতে পাবে) -->
+        <!-- মডারেটর কন্ট্রোল প্যানেল -->
         <div id="moderator-control-panel" class="mod-panel" style="display: none;">
             <h3>🛠️ মডারেটর পোস্ট কন্ট্রোল প্যানেল</h3>
             <input type="text" id="new-post-title" placeholder="পোস্টের শিরোনাম বা ক্যাপশন হেডিং...">
             <textarea id="new-post-desc" placeholder="পোস্টের মূল কথা..."></textarea>
-            <input type="text" id="new-post-img" placeholder="ছবির ফাইলের নাম (যেমন: photo1.jpg)">
+            
+            <label style="font-size: 0.85rem; color: #1d4ed8; font-weight: bold; display: block; margin-bottom: 4px;">গ্যালারি থেকে ছবি সিলেক্ট করুন:</label>
+            <input type="file" id="new-post-img-file" accept="image/*">
+
             <button onclick="addNewPost()">নতুন পোস্ট পাবলিশ করুন</button>
 
             <!-- পাসওয়ার্ড পরিবর্তনের বক্স -->
             <div class="password-box">
                 <h3 style="color: #1e293b; margin-bottom: 8px;">🔐 মডারেটর পাসওয়ার্ড পরিবর্তন করুন</h3>
-                <input type="password" id="new-mod-password" placeholder="নতুন পাসওয়ার্ড লিখুন">
+                <div class="pass-wrapper" style="margin-bottom: 10px;">
+                    <input type="password" id="new-mod-password" placeholder="নতুন পাসওয়ার্ড লিখুন" style="margin-bottom: 0;">
+                    <span class="toggle-eye" onclick="togglePassword('new-mod-password', this)">👁️</span>
+                </div>
                 <button onclick="changeModPassword()" style="background: #2563eb;">পাসওয়ার্ড আপডেট করুন</button>
             </div>
         </div>
@@ -302,8 +342,9 @@
 
     <script>
         let authMode = 'login'; // 'login' or 'register'
+        let generatedOtp = '';
+        let pendingUserObj = null;
 
-        // ডিফল্ট পোস্ট ডেটা
         const defaultPosts = [
             {
                 id: 1,
@@ -331,15 +372,25 @@
             }
         ];
 
-        // পেজ লোড হলে চেক করা ইউজার আগে থেকে লগইন করা আছে কিনা
         window.onload = function() {
             let currentUser = localStorage.getItem("nahid_current_user");
             if (currentUser) {
                 showApp(JSON.parse(currentUser));
             }
-            // ডিফল্ট মডারেটর পাসওয়ার্ড সেট করা যদি না থাকে
             if (!localStorage.getItem("nahid_mod_pass")) {
                 localStorage.setItem("nahid_mod_pass", "nahid123");
+            }
+        }
+
+        // পাসওয়ার্ড শো/হাইডের ফাংশন
+        function togglePassword(fieldId, iconElem) {
+            let passwordField = document.getElementById(fieldId);
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                iconElem.innerText = "🙈";
+            } else {
+                passwordField.type = "password";
+                iconElem.innerText = "👁️";
             }
         }
 
@@ -360,12 +411,17 @@
             let btnLoginTab = document.getElementById("btn-login-tab");
             let btnRegTab = document.getElementById("btn-reg-tab");
             let authBtn = document.getElementById("user-auth-btn");
+            let otpContainer = document.getElementById("otp-input-container");
+
+            otpContainer.style.display = "none";
+            generatedOtp = '';
+            pendingUserObj = null;
 
             if (mode === 'register') {
                 nameField.style.display = "block";
                 btnLoginTab.classList.remove("active");
                 btnRegTab.classList.add("active");
-                authBtn.innerText = "রেজিস্ট্রেশন সম্পন্ন করুন";
+                authBtn.innerText = "ওটিপি কোড পাঠান";
             } else {
                 nameField.style.display = "none";
                 btnRegTab.classList.remove("active");
@@ -377,37 +433,56 @@
         function handleUserAuth() {
             let phone = document.getElementById("user-phone").value.trim();
             let password = document.getElementById("user-password").value.trim();
-
-            if (!phone || !password) {
-                alert("দয়া করে ফোন নাম্বার এবং পাসওয়ার্ড উভয়ই দিন!");
-                return;
-            }
-
             let users = JSON.parse(localStorage.getItem("nahid_users") || "[]");
 
             if (authMode === 'register') {
-                let name = document.getElementById("user-name").value.trim();
-                if (!name) {
-                    alert("দয়া করে আপনার নামটি লিখুন!");
+                let otpContainer = document.getElementById("otp-input-container");
+
+                // যদি ওটিপি অলরেডি পাঠানো হয়ে থাকে তবে কোড ভেরিফাই করবে
+                if (pendingUserObj) {
+                    let enteredOtp = document.getElementById("otp-code-input").value.trim();
+                    if (enteredOtp !== generatedOtp) {
+                        alert("ভুল ওটিপি কোড! সঠিক কোডটি দিন।");
+                        return;
+                    }
+
+                    users.push(pendingUserObj);
+                    localStorage.setItem("nahid_users", JSON.stringify(users));
+                    
+                    alert("রেজিস্ট্রেশন ও ভেরিফিকেশন সফল হয়েছে! এখন লগইন করুন।");
+                    switchAuthMode('login');
+                    document.getElementById("user-password").value = "";
                     return;
                 }
 
-                // চেক করা এই নাম্বারে আগে অ্যাকাউন্ট আছে কিনা
+                let name = document.getElementById("user-name").value.trim();
+                if (!name || !phone || !password) {
+                    alert("দয়া করে নাম, ফোন নাম্বার এবং পাসওয়ার্ড সব পূরণ করুন!");
+                    return;
+                }
+
                 let existingUser = users.find(u => u.phone === phone);
                 if (existingUser) {
                     alert("এই ফোন নাম্বারে ইতিমধ্যে অ্যাকাউন্ট আছে! দয়া করে লগইন করুন।");
                     return;
                 }
 
-                let newUser = { name: name, phone: phone, password: password, role: 'user' };
-                users.push(newUser);
-                localStorage.setItem("nahid_users", JSON.stringify(users));
-                
-                alert("রেজিস্ট্রেশন সফল হয়েছে! এখন লগইন করুন।");
-                switchAuthMode('login');
-                document.getElementById("user-password").value = "";
+                // অটো ৪ ডিজিটের ওটিপি কোড জেনারেট করা
+                generatedOtp = Math.floor(1000 + Math.random() * 9000).toString();
+                pendingUserObj = { name: name, phone: phone, password: password, role: 'user' };
+
+                // রিয়েল এসএমএস-এর মতো পপআপ নোটিফিকেশনে কোডটি দেখিয়ে দেওয়া
+                alert(`আপনার (${phone}) নাম্বারে একটি অটো ভেরিফিকেশন কোড পাঠানো হয়েছে।\n\n[অটো এসএমএস] আপনার কোডটি হলো: ${generatedOtp}`);
+
+                otpContainer.style.display = "block";
+                document.getElementById("user-auth-btn").innerText = "কোড ভেরিফাই করুন ও একাউন্ট খুলুন";
+
             } else {
-                // লগইন প্রসেস
+                if (!phone || !password) {
+                    alert("দয়া করে ফোন নাম্বার এবং পাসওয়ার্ড দিন!");
+                    return;
+                }
+
                 let foundUser = users.find(u => u.phone === phone && u.password === password);
                 if (!foundUser) {
                     alert("ভুল ফোন নাম্বার অথবা পাসওয়ার্ড! আবার চেষ্টা করুন।");
@@ -540,33 +615,40 @@
         function addNewPost() {
             let title = document.getElementById("new-post-title").value.trim();
             let desc = document.getElementById("new-post-desc").value.trim();
-            let img = document.getElementById("new-post-img").value.trim();
+            let imageInput = document.getElementById("new-post-img-file");
 
-            if (!title || !desc || !img) {
-                alert("দয়া করে সব ঘরগুলো পূরণ করুন!");
+            if (!title || !desc || imageInput.files.length === 0) {
+                alert("দয়া করে শিরোনাম, মূল কথা এবং গ্যালারি থেকে একটি ছবি সিলেক্ট করুন!");
                 return;
             }
 
-            let posts = getPosts();
-            let newPost = {
-                id: posts.length + 1,
-                title: title,
-                desc: desc,
-                img: img,
-                likes: 0,
-                likedBy: [],
-                comments: []
-            };
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                let imageDataUrl = e.target.result;
 
-            posts.unshift(newPost);
-            localStorage.setItem("nahid_posts", JSON.stringify(posts));
+                let posts = getPosts();
+                let newPost = {
+                    id: posts.length + 1,
+                    title: title,
+                    desc: desc,
+                    img: imageDataUrl,
+                    likes: 0,
+                    likedBy: [],
+                    comments: []
+                };
 
-            document.getElementById("new-post-title").value = "";
-            document.getElementById("new-post-desc").value = "";
-            document.getElementById("new-post-img").value = "";
+                posts.unshift(newPost);
+                localStorage.setItem("nahid_posts", JSON.stringify(posts));
 
-            loadPosts();
-            alert("সফলভাবে নতুন পোস্ট পাবলিশ করা হয়েছে!");
+                document.getElementById("new-post-title").value = "";
+                document.getElementById("new-post-desc").value = "";
+                imageInput.value = "";
+
+                loadPosts();
+                alert("সফলভাবে নতুন পোস্ট পাবলিশ করা হয়েছে!");
+            }
+            
+            reader.readAsDataURL(imageInput.files[0]);
         }
 
         function downloadImage(url, filename) {
