@@ -3,129 +3,570 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nahid Gallery Hub</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Nahid Gallery Hub - Portal</title>
+    <style>
+        :root {
+            --header-gradient: linear-gradient(135deg, #ef4444, #10b981);
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
+            --radius-lg: 16px;
+            --transition: all 0.25s ease;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-main); line-height: 1.5; }
+
+        /* Auth Screen */
+        #auth-screen {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            padding: 20px;
+        }
+        .auth-card {
+            background: white;
+            padding: 30px;
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+        .auth-card h2 { margin-bottom: 20px; color: #1e293b; font-size: 1.5rem; }
+        .auth-card input, .auth-card select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        .auth-card button {
+            width: 100%;
+            padding: 12px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .auth-card button:hover { background: #1d4ed8; }
+        .tab-btns {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .tab-btns button {
+            background: #f1f5f9;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+        }
+        .tab-btns button.active {
+            background: #2563eb;
+            color: white;
+            border-color: #2563eb;
+        }
+
+        /* App Container */
+        #app-container { display: none; }
+
+        /* Header & Logo */
+        header {
+            background: white;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .logo-badge {
+            width: 50px;
+            height: 50px;
+            background: var(--header-gradient);
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 14px;
+            box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
+        }
+        header h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            background: var(--header-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .logout-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 8px 14px;
+            background: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+
+        /* Moderator Panel */
+        .mod-panel {
+            width: 95%;
+            max-width: 600px;
+            margin: 20px auto;
+            background: #eff6ff;
+            border: 2px dashed #3b82f6;
+            padding: 20px;
+            border-radius: var(--radius-lg);
+        }
+        .mod-panel h3 { color: #1d4ed8; margin-bottom: 12px; font-size: 1.1rem; }
+        .mod-panel input, .mod-panel textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 0.95rem;
+        }
+        .mod-panel button {
+            background: #10b981;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            width: 100%;
+        }
+        .password-box {
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border: 1px solid #bfdbfe;
+        }
+
+        /* Post Card */
+        .post {
+            width: 95%;
+            max-width: 600px;
+            margin: 20px auto;
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+        }
+        .post img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            object-fit: cover;
+        }
+        .post h3 { font-size: 1.2rem; margin-bottom: 6px; }
+        .post p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 10px; }
+        
+        .post-stats {
+            margin: 10px 0;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+            padding-top: 10px;
+        }
+        .comment-item {
+            background: #f1f5f9;
+            padding: 8px 12px;
+            border-radius: 8px;
+            margin-top: 6px;
+            font-size: 0.9rem;
+        }
+        .actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 12px;
+        }
+        .actions button {
+            flex: 1;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .love { background: #f43f5e; }
+        .comment-btn { background: #2563eb; }
+        .download { background: #16a34a; }
+
+        footer {
+            text-align: center;
+            margin: 40px 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Top Header -->
-    <header>
-        <h1>📘 Nahid Gallery Hub</h1>
-        <p>My Personal Photo Community</p>
-    </header>
+    <!-- লগইন ও সাইনআপ স্ক্রিন -->
+    <div id="auth-screen">
+        <div class="auth-card">
+            <h2>Nahid Gallery Hub</h2>
+            
+            <select id="role-select" onchange="switchRole()" style="margin-bottom: 15px;">
+                <option value="user">ইউজার (User)</option>
+                <option value="moderator">মডারেটর (Moderator)</option>
+            </select>
 
-    <!-- Profile Section -->
-    <div class="profile">
-        <img src="photo1.jpg" alt="Profile Photo">
-        <div>
-            <h3>Nahid Hasan</h3>
-            <p>Welcome to my photo world! 🖤</p>
+            <!-- ইউজার লগইন/রেজিস্ট্রেশন সেকশন -->
+            <div id="user-auth-section">
+                <div class="tab-btns">
+                    <button id="btn-login-tab" class="active" onclick="switchAuthMode('login')">লগইন</button>
+                    <button id="btn-reg-tab" onclick="switchAuthMode('register')">রেজিস্ট্রেশন</button>
+                </div>
+
+                <div id="reg-name-field" style="display: none;">
+                    <input type="text" id="user-name" placeholder="আপনার নাম লিখুন...">
+                </div>
+                <input type="tel" id="user-phone" placeholder="ফোন নাম্বার লিখুন (যেমন: 017xxxxxxxx)">
+                <input type="password" id="user-password" placeholder="পাসওয়ার্ড দিন">
+                <button id="user-auth-btn" onclick="handleUserAuth()">লগইন করুন</button>
+            </div>
+
+            <!-- মডারেটর লগইন সেকশন -->
+            <div id="mod-auth-section" style="display: none;">
+                <input type="password" id="mod-password" placeholder="মডারেটর পাসওয়ার্ড দিন">
+                <button onclick="handleModLogin()">মডারেটর হিসেবে প্রবেশ</button>
+            </div>
         </div>
     </div>
 
-    <!-- First Post -->
-    <div class="post" id="post-1">
-        <img src="photo1.jpg" alt="Post Photo 1">
-        <h3>Nahid</h3>
-        <p>মানুষ হারিয়ে গেলে খুঁজে পাওয়া যায়, কিন্তু বদলে গেলে ফিরে পাওয়া যায় না।</p>
-        
-        <!-- Stats Area -->
-        <div class="post-stats">
-            👍 <span id="like-count-1">15</span> people liking  • 💬 <span id="comment-count-1">2</span> comments
+    <!-- মূল অ্যাপ্লিকেশন স্ক্রিন -->
+    <div id="app-container">
+        <header>
+            <button class="logout-btn" onclick="handleLogout()">লগআউট</button>
+            <div class="logo-container">
+                <div class="logo-badge">N</div>
+                <h1>Nahid Gallery Hub</h1>
+            </div>
+            <p id="welcome-user-msg" style="color: #64748b; margin-top: 5px;"></p>
+        </header>
+
+        <!-- মডারেটর কন্ট্রোল প্যানেল (শুধু মডারেটর দেখতে পাবে) -->
+        <div id="moderator-control-panel" class="mod-panel" style="display: none;">
+            <h3>🛠️ মডারেটর পোস্ট কন্ট্রোল প্যানেল</h3>
+            <input type="text" id="new-post-title" placeholder="পোস্টের শিরোনাম বা ক্যাপশন হেডিং...">
+            <textarea id="new-post-desc" placeholder="পোস্টের মূল কথা..."></textarea>
+            <input type="text" id="new-post-img" placeholder="ছবির ফাইলের নাম (যেমন: photo1.jpg)">
+            <button onclick="addNewPost()">নতুন পোস্ট পাবলিশ করুন</button>
+
+            <!-- পাসওয়ার্ড পরিবর্তনের বক্স -->
+            <div class="password-box">
+                <h3 style="color: #1e293b; margin-bottom: 8px;">🔐 মডারেটর পাসওয়ার্ড পরিবর্তন করুন</h3>
+                <input type="password" id="new-mod-password" placeholder="নতুন পাসওয়ার্ড লিখুন">
+                <button onclick="changeModPassword()" style="background: #2563eb;">পাসওয়ার্ড আপডেট করুন</button>
+            </div>
         </div>
 
-        <!-- Comment List -->
-        <div id="comment-list-1" class="comment-list">
-            <div class="comment-item"><strong>Tanvir:</strong> আসলেই ভাই 😓!</div>
-            <div class="comment-item"><strong>Rakibul:</strong> সত্যিই ভাই 😓😔!</div>
-        </div>
+        <!-- পোস্ট ফিড কন্টেইনার -->
+        <div id="feed-container"></div>
 
-        <!-- Action Buttons -->
-        <div class="actions">
-            <button class="love" onclick="likePost(1)">👍 Like</button>
-            <button class="comment" onclick="addComment(1)">💬 Comment</button>
-            <button class="download" onclick="downloadImage('photo1.jpg', 'Nahid-Photo-1.jpg')">📥 Download</button>
-        </div>
+        <footer>
+            <p>© 2026 Nahid Gallery Hub. All rights reserved.</p>
+        </footer>
     </div>
 
-    <!-- Second Post -->
-    <div class="post" id="post-2">
-        <img src="photo2.jpg" alt="Post Photo 2">
-        <h3>🖤😭🖤</h3>
-        <p>কলিজায় জায়গা দেওয়া মানুষগুলোই, কলিজায় আঘাত করে চলে যায়।</p>
-        
-        <!-- Stats Area -->
-        <div class="post-stats">
-            👍 <span id="like-count-2">24</span> people liking  • 💬 <span id="comment-count-2">2</span> comments
-        </div>
-
-        <!-- Comment List -->
-        <div id="comment-list-2" class="comment-list">
-            <div class="comment-item"><strong>Sakib:</strong> একদম ঠিক কথা ভাই!</div>
-            <div class="comment-item"><strong>Fahim:</strong> সত্যি ভাই, এটাই বাস্তব!</div>
-        </div>
-
-        <!-- Action Buttons -->
-        <div class="actions">
-            <button class="love" onclick="likePost(2)">👍 Like</button>
-            <button class="comment" onclick="addComment(2)">💬 Comment</button>
-            <button class="download" onclick="downloadImage('photo2.jpg', 'Nahid-Photo-2.jpg')">📥 Download</button>
-        </div>
-    </div>
-
-    <!-- Third Post -->
-    <div class="post" id="post-3">
-        <img src="photo4.jpg" alt="Post Photo 3">
-        <h3>💔😓🖤</h3>
-        <p>বাস্তবতা নিয়ে এক লাইন বলে যান ✨</p>
-        
-        <!-- Stats Area -->
-        <div class="post-stats">
-            👍 <span id="like-count-3">19</span> people liking  • 💬 <span id="comment-count-3">1</span> comment
-        </div>
-
-        <!-- Comment List -->
-        <div id="comment-list-3" class="comment-list">
-            <div class="comment-item"><strong>Arman:</strong> থাকতে বুঝোনি মায়া, হারিয়ে গেলে বুঝবে মায়া!</div>
-        </div>
-
-        <!-- Action Buttons -->
-        <div class="actions">
-            <button class="love" onclick="likePost(3)">👍 Like</button>
-            <button class="comment" onclick="addComment(3)">💬 Comment</button>
-            <button class="download" onclick="downloadImage('photo4.jpg', 'Nahid-Photo-3.jpg')">📥 Download</button>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer>
-        <p>© 2026 Nahid Gallery Hub. All rights reserved.</p>
-    </footer>
-
-    <!-- JavaScript Functionality -->
     <script>
+        let authMode = 'login'; // 'login' or 'register'
+
+        // ডিফল্ট পোস্ট ডেটা
+        const defaultPosts = [
+            {
+                id: 1,
+                title: "Nahid",
+                desc: "মানুষ হারিয়ে গেলে খুঁজে পাওয়া যায়, কিন্তু বদলে গেলে ফিরে পাওয়া যায় না।",
+                img: "photo1.jpg",
+                likes: 15,
+                likedBy: [],
+                comments: [
+                    { user: "Tanvir", text: "অসলেই ভাই 😓!" },
+                    { user: "Rakibul", text: "সত্যিই ভাই 😓😔!" }
+                ]
+            },
+            {
+                id: 2,
+                title: "🖤😭🖤",
+                desc: "কলিজায় জায়গা দেওয়া মানুষগুলোই, কলিজায় আঘাত করে চলে যায়।",
+                img: "photo2.jpg",
+                likes: 24,
+                likedBy: [],
+                comments: [
+                    { user: "Sakib", text: "একদম ঠিক কথা ভাই !" },
+                    { user: "Fahim", text: "সত্যি, ভাই এটাই বাস্তব !" }
+                ]
+            }
+        ];
+
+        // পেজ লোড হলে চেক করা ইউজার আগে থেকে লগইন করা আছে কিনা
+        window.onload = function() {
+            let currentUser = localStorage.getItem("nahid_current_user");
+            if (currentUser) {
+                showApp(JSON.parse(currentUser));
+            }
+            // ডিফল্ট মডারেটর পাসওয়ার্ড সেট করা যদি না থাকে
+            if (!localStorage.getItem("nahid_mod_pass")) {
+                localStorage.setItem("nahid_mod_pass", "nahid123");
+            }
+        }
+
+        function switchRole() {
+            let role = document.getElementById("role-select").value;
+            if (role === "moderator") {
+                document.getElementById("user-auth-section").style.display = "none";
+                document.getElementById("mod-auth-section").style.display = "block";
+            } else {
+                document.getElementById("user-auth-section").style.display = "block";
+                document.getElementById("mod-auth-section").style.display = "none";
+            }
+        }
+
+        function switchAuthMode(mode) {
+            authMode = mode;
+            let nameField = document.getElementById("reg-name-field");
+            let btnLoginTab = document.getElementById("btn-login-tab");
+            let btnRegTab = document.getElementById("btn-reg-tab");
+            let authBtn = document.getElementById("user-auth-btn");
+
+            if (mode === 'register') {
+                nameField.style.display = "block";
+                btnLoginTab.classList.remove("active");
+                btnRegTab.classList.add("active");
+                authBtn.innerText = "রেজিস্ট্রেশন সম্পন্ন করুন";
+            } else {
+                nameField.style.display = "none";
+                btnRegTab.classList.remove("active");
+                btnLoginTab.classList.add("active");
+                authBtn.innerText = "লগইন করুন";
+            }
+        }
+
+        function handleUserAuth() {
+            let phone = document.getElementById("user-phone").value.trim();
+            let password = document.getElementById("user-password").value.trim();
+
+            if (!phone || !password) {
+                alert("দয়া করে ফোন নাম্বার এবং পাসওয়ার্ড উভয়ই দিন!");
+                return;
+            }
+
+            let users = JSON.parse(localStorage.getItem("nahid_users") || "[]");
+
+            if (authMode === 'register') {
+                let name = document.getElementById("user-name").value.trim();
+                if (!name) {
+                    alert("দয়া করে আপনার নামটি লিখুন!");
+                    return;
+                }
+
+                // চেক করা এই নাম্বারে আগে অ্যাকাউন্ট আছে কিনা
+                let existingUser = users.find(u => u.phone === phone);
+                if (existingUser) {
+                    alert("এই ফোন নাম্বারে ইতিমধ্যে অ্যাকাউন্ট আছে! দয়া করে লগইন করুন।");
+                    return;
+                }
+
+                let newUser = { name: name, phone: phone, password: password, role: 'user' };
+                users.push(newUser);
+                localStorage.setItem("nahid_users", JSON.stringify(users));
+                
+                alert("রেজিস্ট্রেশন সফল হয়েছে! এখন লগইন করুন।");
+                switchAuthMode('login');
+                document.getElementById("user-password").value = "";
+            } else {
+                // লগইন প্রসেস
+                let foundUser = users.find(u => u.phone === phone && u.password === password);
+                if (!foundUser) {
+                    alert("ভুল ফোন নাম্বার অথবা পাসওয়ার্ড! আবার চেষ্টা করুন।");
+                    return;
+                }
+
+                let sessionData = { name: foundUser.name, phone: foundUser.phone, role: 'user' };
+                localStorage.setItem("nahid_current_user", JSON.stringify(sessionData));
+                showApp(sessionData);
+            }
+        }
+
+        function handleModLogin() {
+            let password = document.getElementById("mod-password").value;
+            let currentModPass = localStorage.getItem("nahid_mod_pass");
+
+            if (password !== currentModPass) {
+                alert("ভুল মডারেটর পাসওয়ার্ড!");
+                return;
+            }
+
+            let modData = { name: "মডারেটর (নাহিদ)", role: 'moderator' };
+            localStorage.setItem("nahid_current_user", JSON.stringify(modData));
+            showApp(modData);
+        }
+
+        function changeModPassword() {
+            let newPass = document.getElementById("new-mod-password").value.trim();
+            if (!newPass) {
+                alert("দয়া করে নতুন পাসওয়ার্ড লিখুন!");
+                return;
+            }
+
+            localStorage.setItem("nahid_mod_pass", newPass);
+            document.getElementById("new-mod-password").value = "";
+            alert("মডারেটর পাসওয়ার্ড সফলভাবে পরিবর্তন করা হয়েছে!");
+        }
+
+        function showApp(userData) {
+            document.getElementById("auth-screen").style.display = "none";
+            document.getElementById("app-container").style.display = "block";
+            document.getElementById("welcome-user-msg").innerText = `স্বাগতম, ${userData.name} (${userData.role === 'moderator' ? '👑 মডারেটর' : '👤 ইউজার'})`;
+
+            if (userData.role === "moderator") {
+                document.getElementById("moderator-control-panel").style.display = "block";
+            }
+
+            loadPosts();
+        }
+
+        function handleLogout() {
+            localStorage.removeItem("nahid_current_user");
+            location.reload();
+        }
+
+        function getPosts() {
+            let posts = localStorage.getItem("nahid_posts");
+            if (!posts) {
+                localStorage.setItem("nahid_posts", JSON.stringify(defaultPosts));
+                return defaultPosts;
+            }
+            return JSON.parse(posts);
+        }
+
+        function loadPosts() {
+            let posts = getPosts();
+            let container = document.getElementById("feed-container");
+            container.innerHTML = "";
+
+            posts.forEach(post => {
+                let commentsHTML = post.comments.map(c => `<div class="comment-item"><strong>${c.user}:</strong> ${c.text}</div>`).join('');
+                
+                let postHTML = `
+                    <div class="post" id="post-${post.id}">
+                        <img src="${post.img}" alt="Post Image" onerror="this.src='photo1.jpg'">
+                        <h3>${post.title}</h3>
+                        <p>${post.desc}</p>
+                        
+                        <div class="post-stats">
+                            👍 <span id="like-count-${post.id}">${post.likes}</span> likes  • 💬 <span id="comment-count-${post.id}">${post.comments.length}</span> comments
+                        </div>
+
+                        <div id="comment-list-${post.id}" style="margin-bottom: 10px;">
+                            ${commentsHTML}
+                        </div>
+
+                        <div class="actions">
+                            <button class="love" onclick="likePost(${post.id})">👍 Like</button>
+                            <button class="comment-btn" onclick="addComment(${post.id})">💬 Comment</button>
+                            <button class="download" onclick="downloadImage('${post.img}', 'Nahid-Photo-${post.id}.jpg')">📥 Download</button>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += postHTML;
+            });
+        }
+
         function likePost(postId) {
-            const likeCountSpan = document.getElementById(`like-count-${postId}`);
-            let currentLikes = parseInt(likeCountSpan.innerText);
-            currentLikes++;
-            likeCountSpan.innerText = currentLikes;
+            let currentUser = JSON.parse(localStorage.getItem("nahid_current_user"));
+            let posts = getPosts();
+            let post = posts.find(p => p.id === postId);
+
+            if (!post.likedBy) post.likedBy = [];
+
+            if (post.likedBy.includes(currentUser.name)) {
+                alert("আপনি ইতিমধ্যে এই পোস্টে লাইক দিয়েছেন!");
+                return;
+            }
+
+            post.likedBy.push(currentUser.name);
+            post.likes++;
+            localStorage.setItem("nahid_posts", JSON.stringify(posts));
+            loadPosts();
         }
 
         function addComment(postId) {
+            let currentUser = JSON.parse(localStorage.getItem("nahid_current_user"));
             let commentText = prompt("আপনার কমেন্টটি এখানে লিখুন:");
+            
             if (commentText && commentText.trim() !== "") {
-                const commentCountSpan = document.getElementById(`comment-count-${postId}`);
-                const commentListDiv = document.getElementById(`comment-list-${postId}`);
+                let posts = getPosts();
+                let post = posts.find(p => p.id === postId);
                 
-                let currentComments = parseInt(commentCountSpan.innerText);
-                currentComments++;
-                commentCountSpan.innerText = currentComments;
-
-                let newComment = document.createElement('div');
-                newComment.className = 'comment-item';
-                newComment.innerHTML = `<strong>ভিজিটর:</strong> ${commentText}`;
-                commentListDiv.appendChild(newComment);
+                post.comments.push({ user: currentUser.name, text: commentText });
+                localStorage.setItem("nahid_posts", JSON.stringify(posts));
+                loadPosts();
             }
+        }
+
+        function addNewPost() {
+            let title = document.getElementById("new-post-title").value.trim();
+            let desc = document.getElementById("new-post-desc").value.trim();
+            let img = document.getElementById("new-post-img").value.trim();
+
+            if (!title || !desc || !img) {
+                alert("দয়া করে সব ঘরগুলো পূরণ করুন!");
+                return;
+            }
+
+            let posts = getPosts();
+            let newPost = {
+                id: posts.length + 1,
+                title: title,
+                desc: desc,
+                img: img,
+                likes: 0,
+                likedBy: [],
+                comments: []
+            };
+
+            posts.unshift(newPost);
+            localStorage.setItem("nahid_posts", JSON.stringify(posts));
+
+            document.getElementById("new-post-title").value = "";
+            document.getElementById("new-post-desc").value = "";
+            document.getElementById("new-post-img").value = "";
+
+            loadPosts();
+            alert("সফলভাবে নতুন পোস্ট পাবলিশ করা হয়েছে!");
         }
 
         function downloadImage(url, filename) {
@@ -137,6 +578,5 @@
             document.body.removeChild(a);
         }
     </script>
-
 </body>
 </html>
