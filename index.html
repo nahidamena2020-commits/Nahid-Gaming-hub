@@ -179,11 +179,40 @@
             font-weight: 600;
             width: 100%;
         }
+        
+        /* Mod Sub-Tabs */
+        .mod-nav-tabs {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 15px;
+            background: #dbeafe;
+            padding: 5px;
+            border-radius: 8px;
+        }
+        .mod-nav-tab {
+            flex: 1;
+            padding: 8px;
+            background: transparent;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            color: #1e4ad8;
+            cursor: pointer;
+            font-size: 0.85rem;
+            text-align: center;
+        }
+        .mod-nav-tab.active {
+            background: #2563eb;
+            color: white;
+        }
+        .mod-section-content { display: none; }
+        .mod-section-content.active { display: block; }
+
         .mod-box {
             background: #fff;
             padding: 15px;
             border-radius: 8px;
-            margin-top: 15px;
+            margin-top: 10px;
             border: 1px solid #bfdbfe;
         }
         .mod-comment-row {
@@ -208,6 +237,24 @@
             width: auto !important;
         }
 
+        /* Tables for User & Download info */
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            background: white;
+            margin-top: 5px;
+        }
+        .info-table th, .info-table td {
+            border: 1px solid #cbd5e1;
+            padding: 8px;
+            text-align: left;
+        }
+        .info-table th {
+            background: #e2e8f0;
+            color: #1e293b;
+        }
+
         /* Post Card */
         .post {
             width: 95%;
@@ -219,7 +266,7 @@
             box-shadow: var(--shadow-md);
             border: 1px solid var(--border-color);
         }
-        .post img {
+        .post img, .post video {
             width: 100%;
             height: auto;
             border-radius: 12px;
@@ -326,45 +373,92 @@
             <p id="welcome-user-msg" style="color: #64748b; margin-top: 5px;"></p>
         </header>
 
-        <!-- মডারেটর কন্ট্রোল প্যানেল (অ্যানালিটিক্স ও কমেন্ট মডারেশনসহ) -->
+        <!-- মডারেটর কন্ট্রোল প্যানেল -->
         <div id="moderator-control-panel" class="mod-panel" style="display: none;">
-            <h3>🛠️ মডারেটর পোস্ট কন্ট্রোল প্যানেল</h3>
-            <input type="text" id="new-post-title" placeholder="পোস্টের শিরোনাম বা ক্যাপশন হেডিং...">
-            <textarea id="new-post-desc" placeholder="পোস্টের মূল কথা..."></textarea>
-            
-            <label style="font-size: 0.85rem; color: #1d4ed8; font-weight: bold; display: block; margin-bottom: 4px;">গ্যালারি থেকে ছবি সিলেক্ট করুন:</label>
-            <input type="file" id="new-post-img-file" accept="image/*">
+            <h3>🛠️ মডারেটর কন্ট্রোল ও ইনফরমেশন প্যানেল</h3>
 
-            <button onclick="addNewPost()">নতুন পোস্ট পাবলিশ করুন</button>
-
-            <!-- সাইট পরিসংখ্যান (Analytics) বক্স -->
-            <div class="mod-box">
-                <h3 style="color: #1e293b; margin-bottom: 8px;">📊 সাইট পরিসংখ্যান (Analytics)</h3>
-                <p id="stat-users" style="font-size: 0.95rem; margin-bottom: 4px;">রেজিস্টার্ড ইউজার: ০ জন</p>
-                <p id="stat-posts" style="font-size: 0.95rem; margin-bottom: 4px;">মোট পোস্ট: ০ টি</p>
-                <p id="stat-comments" style="font-size: 0.95rem;">মোট কমেন্ট: ০ টি</p>
+            <!-- মডারেটর সাব-ট্যাব মেনু -->
+            <div class="mod-nav-tabs">
+                <button class="mod-nav-tab active" onclick="switchModTab('posts-tab')">📝 পোস্ট ও কমেন্ট</button>
+                <button class="mod-nav-tab" onclick="switchModTab('users-tab')">👤 ইউজার ইনফো</button>
+                <button class="mod-nav-tab" onclick="switchModTab('downloads-tab')">📥 ডাউনলোড লগ</button>
             </div>
 
-            <!-- কমেন্ট মডারেটর বক্স (খারাপ কমেন্ট ডিলিট করার জন্য) -->
-            <div class="mod-box">
-                <h3 style="color: #1e293b; margin-bottom: 8px;">💬 কমেন্ট মডারেটর (কমেন্ট মুছুন)</h3>
-                <div id="mod-comment-list" style="max-height: 220px; overflow-y: auto;">
-                    <!-- ডায়নামিক কমেন্ট লিস্ট এখানে আসবে -->
+            <!-- ট্যাব ১: পোস্ট কন্ট্রোল, কমেন্ট মডারেশন ও অ্যানালিটিক্স -->
+            <div id="posts-tab" class="mod-section-content active">
+                <div class="mod-box" style="margin-top:0;">
+                    <h3 style="color: #1d4ed8; margin-bottom: 8px;">নতুন ছবি বা ভিডিও পোস্ট পাবলিশ করুন</h3>
+                    <input type="text" id="new-post-title" placeholder="পোস্টের শিরোনাম বা ক্যাপশন হেডিং...">
+                    <textarea id="new-post-desc" placeholder="পোস্টের মূল কথা..."></textarea>
+                    
+                    <label style="font-size: 0.85rem; color: #1d4ed8; font-weight: bold; display: block; margin-bottom: 4px;">ছবি অথবা ভিডিও সিলেক্ট করুন:</label>
+                    <input type="file" id="new-post-file" accept="image/*,video/*">
+                    <button onclick="addNewPost()">পোস্ট পাবলিশ করুন</button>
+                </div>
+
+                <div class="mod-box">
+                    <h3 style="color: #1e293b; margin-bottom: 8px;">📊 সাইট পরিসংখ্যান (Analytics)</h3>
+                    <p id="stat-users" style="font-size: 0.95rem; margin-bottom: 4px;">রেজিস্টার্ড ইউজার: ০ জন</p>
+                    <p id="stat-posts" style="font-size: 0.95rem; margin-bottom: 4px;">মোট পোস্ট: ০ টি</p>
+                    <p id="stat-comments" style="font-size: 0.95rem;">মোট কমেন্ট: ০ টি</p>
+                </div>
+
+                <div class="mod-box">
+                    <h3 style="color: #1e293b; margin-bottom: 8px;">💬 কমেন্ট মডারেটর (কমেন্ট মুছুন)</h3>
+                    <div id="mod-comment-list" style="max-height: 180px; overflow-y: auto;"></div>
+                </div>
+
+                <div class="mod-box">
+                    <h3 style="color: #1e293b; margin-bottom: 8px;">🔐 মডারেটর পাসওয়ার্ড পরিবর্তন</h3>
+                    <div class="pass-wrapper" style="margin-bottom: 10px;">
+                        <input type="password" id="new-mod-password" placeholder="নতুন পাসওয়ার্ড লিখুন" style="margin-bottom: 0;">
+                        <span class="toggle-eye" onclick="togglePassword('new-mod-password', this)">👁️</span>
+                    </div>
+                    <button onclick="changeModPassword()" style="background: #2563eb;">পাসওয়ার্ড আপডেট করুন</button>
                 </div>
             </div>
 
-            <!-- পাসওয়ার্ড পরিবর্তনের বক্স -->
-            <div class="mod-box">
-                <h3 style="color: #1e293b; margin-bottom: 8px;">🔐 মডারেটর পাসওয়ার্ড পরিবর্তন করুন</h3>
-                <div class="pass-wrapper" style="margin-bottom: 10px;">
-                    <input type="password" id="new-mod-password" placeholder="নতুন পাসওয়ার্ড লিখুন" style="margin-bottom: 0;">
-                    <span class="toggle-eye" onclick="togglePassword('new-mod-password', this)">👁️</span>
+            <!-- ট্যাব ২: ইউজার ইনফরমেশন -->
+            <div id="users-tab" class="mod-section-content">
+                <div class="mod-box" style="margin-top:0;">
+                    <h3 style="color: #1e293b; margin-bottom: 10px;">👥 রেজিস্টার্ড ইউজারদের তালিকা ও তথ্য</h3>
+                    <div style="max-height: 300px; overflow-y: auto;">
+                        <table class="info-table">
+                            <thead>
+                                <tr>
+                                    <th>নাম</th>
+                                    <th>ফোন নাম্বার</th>
+                                    <th>পাসওয়ার্ড</th>
+                                </tr>
+                            </thead>
+                            <tbody id="mod-user-table-body"></tbody>
+                        </table>
+                    </div>
                 </div>
-                <button onclick="changeModPassword()" style="background: #2563eb;">পাসওয়ার্ড আপডেট করুন</button>
+            </div>
+
+            <!-- ট্যাব ৩: ডাউনলোড ও অ্যাক্টিভিটি ইনফরমেশন -->
+            <div id="downloads-tab" class="mod-section-content">
+                <div class="mod-box" style="margin-top:0;">
+                    <h3 style="color: #1e293b; margin-bottom: 10px;">📥 ইউজারদের ডাউনলোড ইনফরমেশন</h3>
+                    <div style="max-height: 300px; overflow-y: auto;">
+                        <table class="info-table">
+                            <thead>
+                                <tr>
+                                    <th>ইউজারের নাম</th>
+                                    <th>ফোন নাম্বার</th>
+                                    <th>ডাউনলোডকৃত পোস্ট</th>
+                                    <th>সময়</th>
+                                </tr>
+                            </thead>
+                            <tbody id="mod-download-table-body"></tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- পোস্ট ফিড কন্টেইনার -->
+        <!-- পোস্ট ফিড কন্টেইনার (সকল ইউজারের ফিড) -->
         <div id="feed-container"></div>
 
         <footer>
@@ -380,7 +474,8 @@
                 id: 1,
                 title: "Nahid",
                 desc: "মানুষ হারিয়ে গেলে খুঁজে পাওয়া যায়, কিন্তু বদলে গেলে ফিরে পাওয়া যায় না।",
-                img: "photo1.jpg",
+                media: "photo1.jpg",
+                mediaType: "image",
                 likes: 15,
                 likedBy: [],
                 comments: [
@@ -392,7 +487,8 @@
                 id: 2,
                 title: "🖤😭🖤",
                 desc: "কলিজায় জায়গা দেওয়া মানুষগুলোই, কলিজায় আঘাত করে চলে যায়।",
-                img: "photo2.jpg",
+                media: "photo2.jpg",
+                mediaType: "image",
                 likes: 24,
                 likedBy: [],
                 comments: [
@@ -523,6 +619,14 @@
             alert("মডারেটর পাসওয়ার্ড সফলভাবে পরিবর্তন করা হয়েছে!");
         }
 
+        function switchModTab(tabId) {
+            document.querySelectorAll('.mod-section-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.mod-nav-tab').forEach(el => el.classList.remove('active'));
+
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
         function showApp(userData) {
             document.getElementById("auth-screen").style.display = "none";
             document.getElementById("app-container").style.display = "block";
@@ -553,21 +657,19 @@
         function updateModeratorDashboard() {
             let users = JSON.parse(localStorage.getItem("nahid_users") || "[]");
             let posts = getPosts();
+            let downloads = JSON.parse(localStorage.getItem("nahid_downloads") || "[]");
             
             let totalComments = 0;
             posts.forEach(p => {
                 if (p.comments) totalComments += p.comments.length;
             });
 
-            // স্ট্যাটস আপডেট
             document.getElementById("stat-users").innerText = `রেজিস্টার্ড ইউজার: ${users.length} জন`;
             document.getElementById("stat-posts").innerText = `মোট পোস্ট: ${posts.length} টি`;
             document.getElementById("stat-comments").innerText = `মোট কমেন্ট: ${totalComments} টি`;
 
-            // কমেন্ট লিস্ট রেন্ডার করা (ডিলিট অপশনসহ)
             let commentListContainer = document.getElementById("mod-comment-list");
             commentListContainer.innerHTML = "";
-
             let hasComments = false;
             posts.forEach(post => {
                 if (post.comments && post.comments.length > 0) {
@@ -583,9 +685,32 @@
                     });
                 }
             });
-
             if (!hasComments) {
                 commentListContainer.innerHTML = `<p style="color: #64748b; font-size: 0.85rem; text-align: center; padding: 10px;">কোনো কমেন্ট নেই</p>`;
+            }
+
+            let userTableBody = document.getElementById("mod-user-table-body");
+            userTableBody.innerHTML = "";
+            if (users.length === 0) {
+                userTableBody.innerHTML = `<tr><td colspan="3" style="text-align:center; color:#64748b;">কোনো ইউজার রেজিস্ট্রেশন করেনি</td></tr>`;
+            } else {
+                users.forEach(u => {
+                    let tr = document.createElement("tr");
+                    tr.innerHTML = `<td>${u.name}</td><td>${u.phone}</td><td>${u.password}</td>`;
+                    userTableBody.appendChild(tr);
+                });
+            }
+
+            let downloadTableBody = document.getElementById("mod-download-table-body");
+            downloadTableBody.innerHTML = "";
+            if (downloads.length === 0) {
+                downloadTableBody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:#64748b;">এখনো কোনো ডাউনলোড হয়নি</td></tr>`;
+            } else {
+                downloads.forEach(d => {
+                    let tr = document.createElement("tr");
+                    tr.innerHTML = `<td>${d.user}</td><td>${d.phone}</td><td>${d.item}</td><td>${d.time}</td>`;
+                    downloadTableBody.appendChild(tr);
+                });
             }
         }
 
@@ -610,9 +735,17 @@
             posts.forEach(post => {
                 let commentsHTML = post.comments.map(c => `<div class="comment-item"><strong>${c.user}:</strong> ${c.text}</div>`).join('');
                 
+                let mediaElement = "";
+                let mediaSource = post.media || post.img;
+                if (post.mediaType === 'video' || (mediaSource && mediaSource.startsWith('data:video'))) {
+                    mediaElement = `<video src="${mediaSource}" controls></video>`;
+                } else {
+                    mediaElement = `<img src="${mediaSource}" alt="Post Media" onerror="this.src='photo1.jpg'">`;
+                }
+
                 let postHTML = `
                     <div class="post" id="post-${post.id}">
-                        <img src="${post.img}" alt="Post Image" onerror="this.src='photo1.jpg'">
+                        ${mediaElement}
                         <h3>${post.title}</h3>
                         <p>${post.desc}</p>
                         
@@ -627,7 +760,7 @@
                         <div class="actions">
                             <button class="love" onclick="likePost(${post.id})">👍 Like</button>
                             <button class="comment-btn" onclick="addComment(${post.id})">💬 Comment</button>
-                            <button class="download" onclick="downloadImage('${post.img}', 'Nahid-Photo-${post.id}.jpg')">📥 Download</button>
+                            <button class="download" onclick="trackAndDownload('${mediaSource}', 'Nahid-Media-${post.id}', '${post.title}')">📥 Download</button>
                         </div>
                     </div>
                 `;
@@ -675,23 +808,27 @@
         function addNewPost() {
             let title = document.getElementById("new-post-title").value.trim();
             let desc = document.getElementById("new-post-desc").value.trim();
-            let imageInput = document.getElementById("new-post-img-file");
+            let fileInput = document.getElementById("new-post-file");
 
-            if (!title || !desc || imageInput.files.length === 0) {
-                alert("দয়া করে শিরোনাম, মূল কথা এবং গ্যালারি থেকে একটি ছবি সিলেক্ট করুন!");
+            if (!title || !desc || fileInput.files.length === 0) {
+                alert("দয়া করে শিরোনাম, মূল কথা এবং একটি ছবি অথবা ভিডিও সিলেক্ট করুন!");
                 return;
             }
 
+            let file = fileInput.files[0];
+            let isVideo = file.type.startsWith('video');
+
             let reader = new FileReader();
             reader.onload = function(e) {
-                let imageDataUrl = e.target.result;
+                let mediaDataUrl = e.target.result;
 
                 let posts = getPosts();
                 let newPost = {
                     id: posts.length + 1,
                     title: title,
                     desc: desc,
-                    img: imageDataUrl,
+                    media: mediaDataUrl,
+                    mediaType: isVideo ? 'video' : 'image',
                     likes: 0,
                     likedBy: [],
                     comments: []
@@ -702,17 +839,32 @@
 
                 document.getElementById("new-post-title").value = "";
                 document.getElementById("new-post-desc").value = "";
-                imageInput.value = "";
+                fileInput.value = "";
 
                 loadPosts();
                 updateModeratorDashboard();
-                alert("সফলভাবে নতুন পোস্ট পাবলিশ করা হয়েছে!");
+                alert("সফলভাবে নতুন পোস্ট পাবলিশ করা হয়েছে এবং ইউজার ফিডে যোগ হয়েছে!");
             }
             
-            reader.readAsDataURL(imageInput.files[0]);
+            reader.readAsDataURL(file);
         }
 
-        function downloadImage(url, filename) {
+        function trackAndDownload(url, filename, postTitle) {
+            let currentUser = JSON.parse(localStorage.getItem("nahid_current_user") || '{"name":"Guest", "phone":"N/A"}');
+            let downloads = JSON.parse(localStorage.getItem("nahid_downloads") || "[]");
+            
+            downloads.unshift({
+                user: currentUser.name,
+                phone: currentUser.phone || "N/A",
+                item: postTitle || filename,
+                time: new Date().toLocaleString()
+            });
+            localStorage.setItem("nahid_downloads", JSON.stringify(downloads));
+
+            if (currentUser.role === 'moderator') {
+                updateModeratorDashboard();
+            }
+
             const a = document.createElement('a');
             a.href = url;
             a.download = filename;
@@ -722,4 +874,4 @@
         }
     </script>
 </body>
-</html>
+    </html>
