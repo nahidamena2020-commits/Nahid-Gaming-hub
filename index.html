@@ -9,7 +9,7 @@
 <style>
 /* =========================================================
    NAHID GALLERY HUB
-   PREMIUM GLASS UI WITH SIDEBAR
+   ULTIMATE PROFESSIONAL UI
    ========================================================= */
 
 :root{
@@ -40,6 +40,18 @@
         0 30px 70px rgba(15,23,42,.18);
 
     --radius:22px;
+}
+
+body.dark-mode {
+    --bg:#0f172a;
+    --card:rgba(30,41,59,.85);
+    --text:#f8fafc;
+    --muted:#94a3b8;
+    --border:rgba(51,65,85,.5);
+    background:
+        radial-gradient(circle at 10% 10%, rgba(124,58,237,.15), transparent 28%),
+        radial-gradient(circle at 90% 15%, rgba(6,182,212,.15), transparent 28%),
+        #0f172a;
 }
 
 /* ================= RESET ================= */
@@ -76,74 +88,44 @@ body{
             rgba(6,182,212,.12),
             transparent 28%
         ),
-        radial-gradient(
-            circle at 50% 90%,
-            rgba(236,72,153,.08),
-            transparent 30%
-        ),
         var(--bg);
 
     line-height:1.6;
+    transition: background 0.3s, color 0.3s;
 }
 
 /* ================= AUTH ================= */
 
 #auth-screen{
     min-height:100vh;
-
     display:flex;
     align-items:center;
     justify-content:center;
-
     padding:20px;
-
     background:
-        radial-gradient(
-            circle at 15% 20%,
-            rgba(124,58,237,.35),
-            transparent 30%
-        ),
-        radial-gradient(
-            circle at 85% 80%,
-            rgba(6,182,212,.30),
-            transparent 30%
-        ),
-        linear-gradient(
-            135deg,
-            #0f172a,
-            #111827,
-            #1e1b4b
-        );
+        radial-gradient(circle at 15% 20%, rgba(124,58,237,.35), transparent 30%),
+        radial-gradient(circle at 85% 80%, rgba(6,182,212,.30), transparent 30%),
+        linear-gradient(135deg, #0f172a, #111827, #1e1b4b);
 }
 
 .auth-card{
     width:100%;
     max-width:430px;
-
     padding:32px;
-
     background:rgba(255,255,255,.94);
-
     backdrop-filter:blur(20px);
     -webkit-backdrop-filter:blur(20px);
-
     border:1px solid rgba(255,255,255,.5);
     border-radius:28px;
-
-    box-shadow:
-        0 30px 80px rgba(0,0,0,.35);
-
+    box-shadow:0 30px 80px rgba(0,0,0,.35);
     text-align:center;
-
     animation:cardIn .6s ease;
 }
 
 .auth-card h2{
     font-size:1.8rem;
     font-weight:900;
-
     margin-bottom:25px;
-
     background:var(--gradient);
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
@@ -152,67 +134,50 @@ body{
 .auth-card input,
 .auth-card select,
 .mod-panel input,
-.mod-panel textarea{
+.mod-panel textarea,
+.modal-content input{
     width:100%;
-
     padding:13px 14px;
-
     margin-bottom:14px;
-
     border:1px solid #dbe2ea;
     border-radius:12px;
-
     outline:none;
-
     background:#fff;
-
-    color:var(--text);
-
+    color:#172033;
     font-size:.95rem;
-
     transition:.25s;
 }
 
 .auth-card input:focus,
 .auth-card select:focus,
 .mod-panel input:focus,
-.mod-panel textarea:focus{
+.mod-panel textarea:focus,
+.modal-content input:focus{
     border-color:var(--primary);
-
-    box-shadow:
-        0 0 0 4px rgba(124,58,237,.10);
+    box-shadow:0 0 0 4px rgba(124,58,237,.10);
 }
 
 .auth-card > button,
 #user-auth-btn,
-#mod-auth-section button{
+#mod-auth-section button,
+.modal-btn{
     width:100%;
-
     padding:13px;
-
     border:0;
     border-radius:12px;
-
     color:white;
-
     background:var(--gradient);
-
     font-size:.95rem;
     font-weight:800;
-
     cursor:pointer;
-
-    box-shadow:
-        0 10px 25px rgba(124,58,237,.25);
-
+    box-shadow:0 10px 25px rgba(124,58,237,.25);
     transition:.25s;
 }
 
-.auth-card button:hover{
+.auth-card button:hover,
+.modal-btn:hover{
     transform:translateY(-2px);
-
-    box-shadow:
-        0 15px 30px rgba(124,58,237,.35);
+    box-shadow:0 15px 30px rgba(124,58,237,.35);
 }
 
 .tab-btns{
@@ -223,15 +188,11 @@ body{
 
 .tab-btns button{
     flex:1;
-
     padding:10px;
-
     border:1px solid #e2e8f0;
     border-radius:11px;
-
     background:#f8fafc;
-    color:var(--text);
-
+    color:#172033;
     cursor:pointer;
     font-weight:700;
 }
@@ -255,14 +216,10 @@ body{
 
 .toggle-eye{
     position:absolute;
-
     right:13px;
     top:50%;
-
     transform:translateY(-50%);
-
     cursor:pointer;
-
     font-size:1.1rem;
 }
 
@@ -276,56 +233,14 @@ body{
 
 header{
     position:relative;
-
     padding:25px 20px 28px;
-
     text-align:center;
-
-    background:rgba(255,255,255,.78);
-
+    background:var(--card);
     backdrop-filter:blur(20px);
     -webkit-backdrop-filter:blur(20px);
-
     border-bottom:1px solid var(--border);
-
-    box-shadow:
-        0 10px 40px rgba(15,23,42,.06);
-
+    box-shadow:0 10px 40px rgba(15,23,42,.06);
     overflow:hidden;
-}
-
-header:before{
-    content:"";
-
-    position:absolute;
-
-    width:180px;
-    height:180px;
-
-    left:-80px;
-    top:-100px;
-
-    background:var(--primary);
-
-    filter:blur(70px);
-    opacity:.15;
-}
-
-header:after{
-    content:"";
-
-    position:absolute;
-
-    width:180px;
-    height:180px;
-
-    right:-80px;
-    bottom:-100px;
-
-    background:var(--secondary);
-
-    filter:blur(70px);
-    opacity:.15;
 }
 
 .menu-btn{
@@ -333,23 +248,17 @@ header:after{
     top:20px;
     left:20px;
     z-index:5;
-
     width:42px;
     height:42px;
-
     display:flex;
     align-items:center;
     justify-content:center;
-
     border:1px solid var(--border);
     border-radius:12px;
-
-    background:rgba(255,255,255,.9);
+    background:var(--card);
     color:var(--text);
-
     font-size:1.2rem;
     font-weight:bold;
-
     cursor:pointer;
     box-shadow:0 5px 15px rgba(15,23,42,.08);
     transition:.25s;
@@ -361,43 +270,65 @@ header:after{
     border-color:transparent;
 }
 
+.profile-btn{
+    position:absolute;
+    top:20px;
+    right:75px;
+    z-index:5;
+    width:42px;
+    height:42px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid var(--border);
+    border-radius:12px;
+    background:var(--card);
+    color:var(--text);
+    font-size:1.2rem;
+    cursor:pointer;
+    box-shadow:0 5px 15px rgba(15,23,42,.08);
+    transition:.25s;
+}
+
+.profile-btn:hover{
+    background:var(--secondary);
+    color:white;
+    border-color:transparent;
+}
+
 .logo-container{
     position:relative;
     z-index:2;
-
     display:flex;
-
     align-items:center;
     justify-content:center;
-
     gap:12px;
 }
 
 .logo-badge{
     width:52px;
     height:52px;
-
     display:flex;
     align-items:center;
     justify-content:center;
-
     border-radius:15px;
-
     color:white;
-
     font-size:1.8rem;
     font-weight:900;
-
     background:var(--gradient);
+    box-shadow:0 10px 25px rgba(124,58,237,.25);
+    overflow:hidden;
+}
 
-    box-shadow:
-        0 10px 25px rgba(124,58,237,.25);
+.logo-badge img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 header h1{
     font-size:clamp(1.5rem,5vw,2.3rem);
     font-weight:900;
-
     background:var(--gradient);
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
@@ -406,39 +337,27 @@ header h1{
 #welcome-user-msg{
     position:relative;
     z-index:2;
-
     margin-top:8px !important;
-
     color:var(--muted) !important;
-
     font-weight:600;
 }
 
 .logout-btn{
     position:absolute;
-
     top:20px;
     right:20px;
-
     z-index:5;
-
-    padding:9px 14px;
-
+    width:42px;
+    height:42px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
     border:0;
-    border-radius:10px;
-
+    border-radius:12px;
     color:white;
-
-    background:linear-gradient(
-        135deg,
-        #ef4444,
-        #f43f5e
-    );
-
+    background:linear-gradient(135deg, #ef4444, #f43f5e);
     font-weight:700;
-
     cursor:pointer;
-
     transition:.25s;
 }
 
@@ -473,7 +392,7 @@ header h1{
     left: -320px;
     width: 320px;
     height: 100%;
-    background: rgba(255, 255, 255, 0.95);
+    background: var(--card);
     backdrop-filter: blur(25px);
     -webkit-backdrop-filter: blur(25px);
     box-shadow: 20px 0 50px rgba(15, 23, 42, 0.15);
@@ -495,7 +414,6 @@ header h1{
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid var(--border);
-    background: rgba(255, 255, 255, 0.5);
 }
 
 .sidebar-header h3 {
@@ -513,10 +431,6 @@ header h1{
     cursor: pointer;
     color: var(--muted);
     transition: 0.2s;
-}
-
-.close-sidebar-btn:hover {
-    color: var(--red);
 }
 
 .sidebar-menu {
@@ -551,8 +465,8 @@ header h1{
 }
 
 .sidebar-item:hover {
-    background: #f8fafc;
-    border-color: #e2e8f0;
+    background: rgba(124, 58, 237, 0.08);
+    border-color: var(--border);
     transform: translateX(4px);
 }
 
@@ -570,79 +484,148 @@ header h1{
     padding-left: 26px;
 }
 
+/* ================= PROFILE & SETTINGS MODAL ================= */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.5);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    width: 90%;
+    max-width: 450px;
+    background: var(--card);
+    backdrop-filter: blur(25px);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 25px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+    transform: scale(0.9);
+    transition: 0.3s;
+}
+
+.modal-overlay.active .modal-content {
+    transform: scale(1);
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 12px;
+}
+
+.modal-header h3 {
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 900;
+}
+
+.close-modal-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: var(--muted);
+}
+
+.settings-group {
+    margin-bottom: 15px;
+}
+
+.settings-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--muted);
+    margin-bottom: 6px;
+}
+
+.theme-colors {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.color-dot {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    transition: 0.2s;
+}
+
+.color-dot:hover {
+    transform: scale(1.1);
+}
+
 /* ================= MODERATOR PANEL ================= */
 
 .mod-panel{
     width:calc(100% - 24px);
     max-width:700px;
-
     margin:25px auto;
-
     padding:20px;
-
-    background:rgba(239,246,255,.85);
-
+    background:var(--card);
     backdrop-filter:blur(15px);
-
-    border:1px solid rgba(59,130,246,.25);
-
+    border:1px solid var(--border);
     border-radius:22px;
-
     box-shadow:var(--shadow);
 }
 
 .mod-panel > h3{
     margin-bottom:15px;
-
-    color:#1d4ed8;
-
+    color:var(--primary);
     font-size:1.1rem;
 }
 
 .mod-nav-tabs{
     display:flex;
-
     gap:5px;
-
     margin-bottom:15px;
-
     padding:5px;
-
-    background:#dbeafe;
-
+    background:rgba(124,58,237,0.08);
     border-radius:12px;
 }
 
 .mod-nav-tab{
     flex:1;
-
     padding:10px 5px;
-
     border:0;
     border-radius:9px;
-
     background:transparent;
-
-    color:#1e40af;
-
+    color:var(--text);
     font-weight:700;
-
     cursor:pointer;
-
     transition:.25s;
 }
 
 .mod-nav-tab.active{
     color:white;
-
-    background:linear-gradient(
-        135deg,
-        #2563eb,
-        #06b6d4
-    );
-
-    box-shadow:
-        0 5px 15px rgba(37,99,235,.2);
+    background:var(--gradient);
+    box-shadow:0 5px 15px rgba(37,99,235,.2);
 }
 
 .mod-section-content{
@@ -655,13 +638,9 @@ header h1{
 
 .mod-box{
     padding:16px;
-
     margin-top:10px;
-
-    background:rgba(255,255,255,.9);
-
-    border:1px solid #bfdbfe;
-
+    background:var(--card);
+    border:1px solid var(--border);
     border-radius:15px;
 }
 
@@ -671,24 +650,13 @@ header h1{
 
 .mod-box button{
     width:100%;
-
     padding:11px;
-
     border:0;
     border-radius:10px;
-
     color:white;
-
-    background:linear-gradient(
-        135deg,
-        #10b981,
-        #059669
-    );
-
+    background:linear-gradient(135deg, #10b981, #059669);
     font-weight:800;
-
     cursor:pointer;
-
     transition:.25s;
 }
 
@@ -700,62 +668,44 @@ header h1{
 
 .info-table{
     width:100%;
-
     border-collapse:collapse;
-
     overflow:hidden;
-
     border-radius:10px;
-
     font-size:.84rem;
-
-    background:white;
+    background:var(--card);
 }
 
 .info-table th,
 .info-table td{
     padding:9px;
-
-    border:1px solid #dbe2ea;
-
+    border:1px solid var(--border);
     text-align:left;
 }
 
 .info-table th{
-    background:#eef2ff;
-    color:#334155;
+    background:rgba(124,58,237,0.1);
+    color:var(--text);
 }
 
 /* ================= COMMENTS ================= */
 
 .mod-comment-row{
     display:flex;
-
     justify-content:space-between;
     align-items:center;
-
     gap:8px;
-
     padding:9px;
-
     margin-bottom:7px;
-
-    background:#f8fafc;
-
-    border:1px solid #e2e8f0;
-
+    background:var(--card);
+    border:1px solid var(--border);
     border-radius:10px;
-
     font-size:.84rem;
 }
 
 .delete-comment-btn{
     width:auto !important;
-
     padding:5px 9px !important;
-
     background:#ef4444 !important;
-
     flex-shrink:0;
 }
 
@@ -763,110 +713,74 @@ header h1{
 
 .post{
     position:relative;
-
     width:calc(100% - 24px);
     max-width:700px;
-
     margin:25px auto;
-
     padding:20px;
-
     background:var(--card);
-
     backdrop-filter:blur(18px);
     -webkit-backdrop-filter:blur(18px);
-
     border:1px solid var(--border);
-
     border-radius:22px;
-
     box-shadow:var(--shadow);
-
     overflow:hidden;
-
     transition:.3s;
 }
 
 .post:before{
     content:"";
-
     position:absolute;
-
     left:0;
     top:0;
-
     width:100%;
     height:3px;
-
     background:var(--gradient);
 }
 
 .post:hover{
     transform:translateY(-5px);
-
     box-shadow:var(--shadow-hover);
 }
 
 .post img,
 .post video{
     display:block;
-
     width:100%;
-
     max-height:550px;
-
     object-fit:cover;
-
     border-radius:16px;
-
     margin-bottom:16px;
-
     background:#0f172a;
-
-    box-shadow:
-        0 10px 30px rgba(15,23,42,.12);
+    box-shadow:0 10px 30px rgba(15,23,42,.12);
 }
 
 .post h3{
     font-size:1.3rem;
-
     font-weight:800;
-
     margin-bottom:6px;
 }
 
 .post p{
     color:var(--muted);
-
     font-size:.96rem;
-
     margin-bottom:10px;
 }
 
 .post-stats{
     padding:11px 0;
-
     margin-top:10px;
-
     border-top:1px solid var(--border);
     border-bottom:1px solid var(--border);
-
     color:var(--muted);
-
     font-size:.88rem;
 }
 
 .comment-item{
     padding:9px 12px;
-
     margin-top:7px;
-
-    background:#f8fafc;
-
-    border:1px solid #e2e8f0;
-
+    background:rgba(124,58,237,0.03);
+    border:1px solid var(--border);
     border-radius:10px;
-
     font-size:.88rem;
 }
 
@@ -874,31 +788,20 @@ header h1{
 
 .actions{
     display:flex;
-
     gap:9px;
-
     margin-top:15px;
 }
 
 .actions button{
     flex:1;
-
     padding:11px 8px;
-
     border:0;
-
     border-radius:11px;
-
     color:white;
-
     font-weight:800;
-
     cursor:pointer;
-
     transition:.25s;
-
-    box-shadow:
-        0 7px 18px rgba(15,23,42,.10);
+    box-shadow:0 7px 18px rgba(15,23,42,.10);
 }
 
 .actions button:hover{
@@ -906,43 +809,26 @@ header h1{
 }
 
 .love{
-    background:linear-gradient(
-        135deg,
-        #f43f5e,
-        #ec4899
-    );
+    background:linear-gradient(135deg, #f43f5e, #ec4899);
 }
 
 .comment-btn{
-    background:linear-gradient(
-        135deg,
-        #2563eb,
-        #06b6d4
-    );
+    background:linear-gradient(135deg, #2563eb, #06b6d4);
 }
 
 .download{
-    background:linear-gradient(
-        135deg,
-        #059669,
-        #10b981
-    );
+    background:linear-gradient(135deg, #059669, #10b981);
 }
 
 /* ================= FOOTER ================= */
 
 footer{
     padding:35px 20px;
-
     margin-top:50px;
-
     text-align:center;
-
     color:var(--muted);
-
     border-top:1px solid var(--border);
-
-    background:rgba(255,255,255,.5);
+    background:var(--card);
 }
 
 /* ================= ANIMATION ================= */
@@ -952,7 +838,6 @@ footer{
         opacity:0;
         transform:translateY(25px) scale(.97);
     }
-
     to{
         opacity:1;
         transform:translateY(0) scale(1);
@@ -962,112 +847,34 @@ footer{
 /* ================= MOBILE ================= */
 
 @media(max-width:600px){
-
-    .auth-card{
-        padding:24px 18px;
-    }
-
-    header{
-        padding:24px 12px 25px;
-    }
-
-    header h1{
-        font-size:1.45rem;
-    }
-
-    .logo-badge{
-        width:45px;
-        height:45px;
-        font-size:1.5rem;
-    }
-
-    .logout-btn{
-        top:12px;
-        right:10px;
-
-        padding:7px 10px;
-
-        font-size:.75rem;
-    }
-
-    .menu-btn{
-        top:12px;
-        left:10px;
-        width:36px;
-        height:36px;
-        font-size:1rem;
-    }
-
-    .logo-container{
-        padding-top:25px;
-    }
-
-    .mod-panel,
-    .post{
-        width:calc(100% - 18px);
-
-        padding:15px;
-
-        border-radius:18px;
-    }
-
-    .mod-nav-tab{
-        font-size:.72rem;
-        padding:9px 3px;
-    }
-
-    .actions{
-        gap:6px;
-    }
-
-    .actions button{
-        font-size:.76rem;
-        padding:10px 5px;
-    }
-
-    .info-table{
-        font-size:.72rem;
-    }
-
-    .info-table th,
-    .info-table td{
-        padding:6px;
-    }
-
-    .mod-comment-row{
-        font-size:.75rem;
-    }
+    .auth-card{ padding:24px 18px; }
+    header{ padding:24px 12px 25px; }
+    header h1{ font-size:1.45rem; }
+    .logo-badge{ width:45px; height:45px; font-size:1.5rem; }
+    .logout-btn, .profile-btn, .menu-btn{ top:12px; width:36px; height:36px; font-size:1rem; }
+    .profile-btn{ right:54px; }
+    .logout-btn{ right:10px; }
+    .menu-btn{ left:10px; }
+    .logo-container{ padding-top:25px; }
+    .mod-panel, .post{ width:calc(100% - 18px); padding:15px; border-radius:18px; }
+    .mod-nav-tab{ font-size:.72rem; padding:9px 3px; }
+    .actions{ gap:6px; }
+    .actions button{ font-size:.76rem; padding:10px 5px; }
+    .info-table{ font-size:.72rem; }
+    .info-table th, .info-table td{ padding:6px; }
+    .mod-comment-row{ font-size:.75rem; }
 }
 
 @media(max-width:380px){
-
-    .actions{
-        flex-direction:column;
-    }
-
-    .actions button{
-        width:100%;
-    }
+    .actions{ flex-direction:column; }
+    .actions button{ width:100%; }
 }
 
 /* ================= SCROLLBAR ================= */
 
-::-webkit-scrollbar{
-    width:8px;
-}
-
-::-webkit-scrollbar-track{
-    background:#eef2ff;
-}
-
-::-webkit-scrollbar-thumb{
-    background:linear-gradient(
-        #7c3aed,
-        #06b6d4
-    );
-
-    border-radius:20px;
-}
+::-webkit-scrollbar{ width:8px; }
+::-webkit-scrollbar-track{ background:var(--bg); }
+::-webkit-scrollbar-thumb{ background:var(--gradient); border-radius:20px; }
 </style>
 </head>
 
@@ -1078,103 +885,42 @@ footer{
      ===================================================== -->
 
 <div id="auth-screen">
-
     <div class="auth-card">
-
         <h2>✨ Nahid Gallery Hub</h2>
-
         <select id="role-select" onchange="switchRole()">
             <option value="user">👤 ইউজার</option>
             <option value="moderator">👑 মডারেটর</option>
         </select>
 
-        <!-- USER AUTH -->
-
         <div id="user-auth-section">
-
             <div class="tab-btns">
-
-                <button
-                    id="btn-login-tab"
-                    class="active"
-                    onclick="switchAuthMode('login')">
-                    লগইন
-                </button>
-
-                <button
-                    id="btn-reg-tab"
-                    onclick="switchAuthMode('register')">
-                    রেজিস্ট্রেশন
-                </button>
-
+                <button id="btn-login-tab" class="active" onclick="switchAuthMode('login')">লগইন</button>
+                <button id="btn-reg-tab" onclick="switchAuthMode('register')">রেজিস্ট্রেশন</button>
             </div>
 
             <div id="reg-name-field" style="display:none;">
-                <input
-                    type="text"
-                    id="user-name"
-                    placeholder="আপনার নাম লিখুন">
+                <input type="text" id="user-name" placeholder="আপনার নাম লিখুন">
             </div>
 
-            <input
-                type="tel"
-                id="user-phone"
-                placeholder="ফোন নাম্বার">
+            <input type="tel" id="user-phone" placeholder="ফোন নাম্বার">
 
             <div class="pass-wrapper">
-
-                <input
-                    type="password"
-                    id="user-password"
-                    placeholder="পাসওয়ার্ড">
-
-                <span
-                    class="toggle-eye"
-                    onclick="togglePassword('user-password',this)">
-                    👁️
-                </span>
-
+                <input type="password" id="user-password" placeholder="পাসওয়ার্ড">
+                <span class="toggle-eye" onclick="togglePassword('user-password',this)">👁️</span>
             </div>
 
-            <button
-                id="user-auth-btn"
-                onclick="handleUserAuth()">
-                লগইন করুন
-            </button>
-
+            <button id="user-auth-btn" onclick="handleUserAuth()">লগইন করুন</button>
         </div>
 
-        <!-- MODERATOR AUTH -->
-
-        <div
-            id="mod-auth-section"
-            style="display:none;">
-
+        <div id="mod-auth-section" style="display:none;">
             <div class="pass-wrapper">
-
-                <input
-                    type="password"
-                    id="mod-password"
-                    placeholder="মডারেটর পাসওয়ার্ড">
-
-                <span
-                    class="toggle-eye"
-                    onclick="togglePassword('mod-password',this)">
-                    👁️
-                </span>
-
+                <input type="password" id="mod-password" placeholder="মডারেটর পাসওয়ার্ড">
+                <span class="toggle-eye" onclick="togglePassword('mod-password',this)">👁️</span>
             </div>
-
-            <button onclick="handleModLogin()">
-                👑 মডারেটর হিসেবে প্রবেশ
-            </button>
-
+            <button onclick="handleModLogin()">👑 মডারেটর হিসেবে প্রবেশ</button>
         </div>
-
     </div>
-
 </div>
-
 
 <!-- =====================================================
      MAIN APP CONTAINER
@@ -1182,7 +928,7 @@ footer{
 
 <div id="app-container">
 
-<!-- SIDEBAR NAVIGATION DRAWER -->
+<!-- SIDEBAR DRAWER -->
 <div id="sidebar-overlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
 
 <aside id="sidebar" class="sidebar">
@@ -1193,26 +939,26 @@ footer{
 
     <div class="sidebar-menu">
         <div class="sidebar-category-title">Navigation & Feed</div>
-        
         <div class="sidebar-item" onclick="scrollToSection('feed-container')">
             <div class="sidebar-item-title">🏠 Home Feed</div>
             <div class="sidebar-item-desc">Browse all published gallery posts and updates</div>
         </div>
 
         <div class="sidebar-category-title">Management & Tools</div>
-
         <div class="sidebar-item" onclick="scrollToSection('moderator-control-panel')">
             <div class="sidebar-item-title">📊 Control Panel</div>
             <div class="sidebar-item-desc">Access platform stats, users, and download logs</div>
         </div>
-
         <div class="sidebar-item" onclick="scrollToSection('new-post-title')">
             <div class="sidebar-item-title">➕ Upload Media</div>
             <div class="sidebar-item-desc">Publish new photo or video posts to the hub</div>
         </div>
 
         <div class="sidebar-category-title">Account & System</div>
-
+        <div class="sidebar-item" onclick="openProfileModal()">
+            <div class="sidebar-item-title">⚙️ Profile & Settings</div>
+            <div class="sidebar-item-desc">Update account info, dark mode & theme colors</div>
+        </div>
         <div class="sidebar-item" onclick="handleLogout()">
             <div class="sidebar-item-title">🚪 Sign Out</div>
             <div class="sidebar-item-desc">Safely terminate your active user session</div>
@@ -1220,187 +966,111 @@ footer{
     </div>
 </aside>
 
-<header>
-
-    <button class="menu-btn" onclick="toggleSidebar()" title="Open Menu">
-        ☰
-    </button>
-
-    <button
-        class="logout-btn"
-        onclick="handleLogout()">
-        লগআউট
-    </button>
-
-    <div class="logo-container">
-
-        <div class="logo-badge">
-            N
+<!-- PROFILE & SETTINGS MODAL -->
+<div id="profile-modal" class="modal-overlay" onclick="closeProfileModalOutside(event)">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>⚙️ Profile & Settings</h3>
+            <button class="close-modal-btn" onclick="closeProfileModal()">✕</button>
         </div>
 
-        <h1>Nahid Gallery Hub</h1>
+        <div class="settings-group">
+            <label>🎨 Theme Color</label>
+            <div class="theme-colors">
+                <div class="color-dot" style="background:#7c3aed;" onclick="setTheme('#7c3aed','#06b6d4')"></div>
+                <div class="color-dot" style="background:#3b82f6;" onclick="setTheme('#3b82f6','#ec4899')"></div>
+                <div class="color-dot" style="background:#10b981;" onclick="setTheme('#10b981','#3b82f6')"></div>
+                <div class="color-dot" style="background:#f43f5e;" onclick="setTheme('#f43f5e','#7c3aed')"></div>
+            </div>
+        </div>
 
+        <div class="settings-group">
+            <label>🌙 Appearance Mode</label>
+            <button class="modal-btn" onclick="toggleDarkMode()" style="background:var(--muted); margin-bottom:15px;">Toggle Dark / Light Mode</button>
+        </div>
+
+        <div id="user-profile-edit-section">
+            <div class="settings-group">
+                <label>👤 Update Name</label>
+                <input type="text" id="update-name" placeholder="New Name">
+            </div>
+            <div class="settings-group">
+                <label>📞 Update Phone</label>
+                <input type="tel" id="update-phone" placeholder="New Phone">
+            </div>
+            <div class="settings-group">
+                <label>🔒 New Password</label>
+                <input type="password" id="update-pass" placeholder="New Password">
+            </div>
+            <button class="modal-btn" onclick="saveUserProfile()">Save Changes</button>
+        </div>
     </div>
+</div>
 
+<header>
+    <button class="menu-btn" onclick="toggleSidebar()" title="Open Menu">☰</button>
+    <button class="profile-btn" onclick="openProfileModal()" title="Profile & Settings">⚙️</button>
+    <button class="logout-btn" onclick="handleLogout()" title="Logout">🚪</button>
+
+    <div class="logo-container">
+        <div class="logo-badge" id="header-logo-badge">N</div>
+        <h1 id="header-hub-title">Nahid Gallery Hub</h1>
+    </div>
     <p id="welcome-user-msg"></p>
-
 </header>
-
 
 <!-- =====================================================
      MODERATOR PANEL
      ===================================================== -->
 
-<div
-    id="moderator-control-panel"
-    class="mod-panel"
-    style="display:none;">
-
-    <h3>
-        🛠️ মডারেটর কন্ট্রোল প্যানেল
-    </h3>
+<div id="moderator-control-panel" class="mod-panel" style="display:none;">
+    <h3>🛠️ মডারেটর কন্ট্রোল প্যানেল</h3>
 
     <div class="mod-nav-tabs">
-
-        <button
-            class="mod-nav-tab active"
-            onclick="switchModTab('posts-tab',this)">
-            📝 পোস্ট
-        </button>
-
-        <button
-            class="mod-nav-tab"
-            onclick="switchModTab('users-tab',this)">
-            👤 ইউজার
-        </button>
-
-        <button
-            class="mod-nav-tab"
-            onclick="switchModTab('downloads-tab',this)">
-            📥 ডাউনলোড
-        </button>
-
+        <button class="mod-nav-tab active" onclick="switchModTab('posts-tab',this)">📝 পোস্ট</button>
+        <button class="mod-nav-tab" onclick="switchModTab('users-tab',this)">👤 ইউজার</button>
+        <button class="mod-nav-tab" onclick="switchModTab('downloads-tab',this)">📥 ডাউনলোড</button>
+        <button class="mod-nav-tab" onclick="switchModTab('settings-tab',this)">⚙️ ব্র্যান্ডিং</button>
     </div>
-
 
     <!-- POSTS TAB -->
-
-    <div
-        id="posts-tab"
-        class="mod-section-content active">
-
+    <div id="posts-tab" class="mod-section-content active">
         <div class="mod-box">
-
-            <h3>
-                ✨ নতুন পোস্ট প্রকাশ করুন
-            </h3>
-
-            <input
-                type="text"
-                id="new-post-title"
-                placeholder="পোস্টের শিরোনাম">
-
-            <textarea
-                id="new-post-desc"
-                placeholder="পোস্টের বিস্তারিত..."
-                rows="4">
-            </textarea>
-
-            <input
-                type="file"
-                id="new-post-file"
-                accept="image/*,video/*">
-
-            <button onclick="addNewPost()">
-                🚀 পোস্ট পাবলিশ করুন
-            </button>
-
+            <h3>✨ নতুন পোস্ট প্রকাশ করুন</h3>
+            <input type="text" id="new-post-title" placeholder="পোস্টের শিরোনাম">
+            <textarea id="new-post-desc" placeholder="পোস্টের বিস্তারিত..." rows="4"></textarea>
+            <input type="file" id="new-post-file" accept="image/*,video/*">
+            <button onclick="addNewPost()">🚀 পোস্ট পাবলিশ করুন</button>
         </div>
 
-
         <div class="mod-box">
-
-            <h3>
-                📊 সাইট পরিসংখ্যান
-            </h3>
-
-            <p id="stat-users">
-                রেজিস্টার্ড ইউজার: ০ জন
-            </p>
-
-            <p id="stat-posts">
-                মোট পোস্ট: ০ টি
-            </p>
-
-            <p id="stat-comments">
-                মোট কমেন্ট: ০ টি
-            </p>
-
+            <h3>📊 সাইট পরিসংখ্যান</h3>
+            <p id="stat-users">রেজিস্টার্ড ইউজার: ০ জন</p>
+            <p id="stat-posts">মোট পোস্ট: ০ টি</p>
+            <p id="stat-comments">মোট কমেন্ট: ০ টি</p>
         </div>
 
-
         <div class="mod-box">
-
-            <h3>
-                💬 কমেন্ট মডারেশন
-            </h3>
-
-            <div
-                id="mod-comment-list"
-                style="max-height:200px;overflow:auto;">
-            </div>
-
+            <h3>💬 কমেন্ট মডারেশন</h3>
+            <div id="mod-comment-list" style="max-height:200px;overflow:auto;"></div>
         </div>
 
-
         <div class="mod-box">
-
-            <h3>
-                🔐 মডারেটর পাসওয়ার্ড
-            </h3>
-
+            <h3>🔐 মডারেটর পাসওয়ার্ড</h3>
             <div class="pass-wrapper">
-
-                <input
-                    type="password"
-                    id="new-mod-password"
-                    placeholder="নতুন পাসওয়ার্ড">
-
-                <span
-                    class="toggle-eye"
-                    onclick="togglePassword('new-mod-password',this)">
-                    👁️
-                </span>
-
+                <input type="password" id="new-mod-password" placeholder="নতুন পাসওয়ার্ড">
+                <span class="toggle-eye" onclick="togglePassword('new-mod-password',this)">👁️</span>
             </div>
-
-            <button
-                onclick="changeModPassword()"
-                style="background:linear-gradient(135deg,#2563eb,#7c3aed);">
-                🔄 পাসওয়ার্ড আপডেট
-            </button>
-
+            <button onclick="changeModPassword()" style="background:linear-gradient(135deg,#2563eb,#7c3aed);">🔄 পাসওয়ার্ড আপডেট</button>
         </div>
-
     </div>
 
-
     <!-- USERS TAB -->
-
-    <div
-        id="users-tab"
-        class="mod-section-content">
-
+    <div id="users-tab" class="mod-section-content">
         <div class="mod-box">
-
-            <h3>
-                👥 রেজিস্টার্ড ইউজার
-            </h3>
-
+            <h3>👥 রেজিস্টার্ড ইউজার</h3>
             <div style="overflow:auto;max-height:300px;">
-
                 <table class="info-table">
-
                     <thead>
                         <tr>
                             <th>নাম</th>
@@ -1408,80 +1078,55 @@ footer{
                             <th>পাসওয়ার্ড</th>
                         </tr>
                     </thead>
-
-                    <tbody id="mod-user-table-body">
-                    </tbody>
-
+                    <tbody id="mod-user-table-body"></tbody>
                 </table>
-
             </div>
-
         </div>
-
     </div>
 
-
     <!-- DOWNLOAD TAB -->
-
-    <div
-        id="downloads-tab"
-        class="mod-section-content">
-
+    <div id="downloads-tab" class="mod-section-content">
         <div class="mod-box">
-
-            <h3>
-                📥 ডাউনলোড লগ
-            </h3>
-
+            <h3>📥 ডাউনলোড লগ</h3>
             <div style="overflow:auto;max-height:300px;">
-
                 <table class="info-table">
-
                     <thead>
-
                         <tr>
                             <th>ইউজার</th>
                             <th>ফোন</th>
                             <th>পোস্ট</th>
                             <th>সময়</th>
                         </tr>
-
                     </thead>
-
-                    <tbody id="mod-download-table-body">
-                    </tbody>
-
+                    <tbody id="mod-download-table-body"></tbody>
                 </table>
-
             </div>
-
         </div>
-
     </div>
 
+    <!-- BRANDING TAB (LOGO SETTING) -->
+    <div id="settings-tab" class="mod-section-content">
+        <div class="mod-box">
+            <h3>🖼️ সাইট লোগো পরিবর্তন</h3>
+            <input type="file" id="mod-logo-file" accept="image/*">
+            <button onclick="updateSiteLogo()" style="margin-top:10px;">লোগো আপডেট করুন</button>
+        </div>
+    </div>
 </div>
 
-
 <!-- FEED -->
-
 <div id="feed-container"></div>
 
-
 <footer>
-
-    <p>
-        © 2026 Nahid Gallery Hub
-    </p>
-
+    <p>© 2026 Nahid Gallery Hub</p>
 </footer>
 
 </div>
 
-
 <script>
 
 /* =====================================================
-   SIDEBAR DRAWER LOGIC
+   SIDEBAR & PROFILE MODAL LOGIC
    ===================================================== */
 
 function toggleSidebar() {
@@ -1499,1275 +1144,523 @@ function scrollToSection(sectionId) {
     }
 }
 
+function openProfileModal() {
+    let current = JSON.parse(localStorage.getItem("nahid_current_user") || "{}");
+    if(current.role === "moderator") {
+        document.getElementById("user-profile-edit-section").style.display = "none";
+    } else {
+        document.getElementById("user-profile-edit-section").style.display = "block";
+        document.getElementById("update-name").value = current.name || "";
+        document.getElementById("update-phone").value = current.phone || "";
+    }
+    document.getElementById("profile-modal").classList.add("active");
+}
+
+function closeProfileModal() {
+    document.getElementById("profile-modal").classList.remove("active");
+}
+
+function closeProfileModalOutside(e) {
+    if(e.target.id === "profile-modal") {
+        closeProfileModal();
+    }
+}
+
+function toggleDarkMode() {
+    document.body.classList.toggle("dark-mode");
+    let isDark = document.body.classList.contains("dark-mode");
+    localStorage.setItem("nahid_dark_mode", isDark);
+}
+
+function setTheme(pColor, sColor) {
+    document.documentElement.style.setProperty('--primary', pColor);
+    document.documentElement.style.setProperty('--secondary', sColor);
+    document.documentElement.style.setProperty('--gradient', `linear-gradient(135deg, ${pColor}, ${sColor})`);
+    localStorage.setItem("nahid_primary", pColor);
+    localStorage.setItem("nahid_secondary", sColor);
+}
+
+// Load saved theme preferences
+window.addEventListener('DOMContentLoaded', () => {
+    if(localStorage.getItem("nahid_dark_mode") === "true") {
+        document.body.classList.add("dark-mode");
+    }
+    let p = localStorage.getItem("nahid_primary");
+    let s = localStorage.getItem("nahid_secondary");
+    if(p && s) {
+        setTheme(p, s);
+    }
+    loadCustomLogo();
+});
+
+function loadCustomLogo() {
+    let logoData = localStorage.getItem("nahid_site_logo");
+    if(logoData) {
+        let badge = document.getElementById("header-logo-badge");
+        badge.innerHTML = `<img src="${logoData}" alt="Logo">`;
+    }
+}
+
 
 /* =====================================================
-   AUTH
+   AUTH & USER MANAGEMENT
    ===================================================== */
 
 let authMode = "login";
 
-
 const defaultPosts = [
-
     {
         id:1,
-
         title:"Nahid",
-
-        desc:
-        "মানুষ হারিয়ে গেলে খুঁজে পাওয়া যায়, কিন্তু বদলে গেলে ফিরে পাওয়া যায় না।",
-
+        desc:"মানুষ হারিয়ে গেলে খুঁজে পাওয়া যায়, কিন্তু বদলে গেলে ফিরে পাওয়া যায় না।",
         media:"photo1.jpg",
-
         mediaType:"image",
-
         likes:15,
-
         likedBy:[],
-
         comments:[
-            {
-                user:"Tanvir",
-                text:"অসলেই ভাই 😓!"
-            },
-            {
-                user:"Rakibul",
-                text:"সত্যিই ভাই 😓😔!"
-            }
+            {user:"Tanvir", text:"অসলেই ভাই 😓!"},
+            {user:"Rakibul", text:"সত্যিই ভাই 😓😔!"}
         ]
     },
-
     {
         id:2,
-
         title:"🖤😭🖤",
-
-        desc:
-        "কলিজায় জায়গা দেওয়া মানুষগুলোই, কলিজায় আঘাত করে চলে যায়।",
-
+        desc:"কলিজায় জায়গা দেওয়া মানুষগুলোই, কলিজায় আঘাত করে চলে যায়।",
         media:"photo2.jpg",
-
         mediaType:"image",
-
         likes:24,
-
         likedBy:[],
-
         comments:[
-            {
-                user:"Sakib",
-                text:"একদম ঠিক কথা ভাই!"
-            },
-            {
-                user:"Fahim",
-                text:"সত্যি, ভাই এটাই বাস্তব!"
-            }
+            {user:"Sakib", text:"একদম ঠিক কথা ভাই!"},
+            {user:"Fahim", text:"সত্যি, ভাই এটাই বাস্তব!"}
         ]
     }
-
 ];
 
-
-/* ================= START ================= */
-
 window.onload=function(){
-
     if(!localStorage.getItem("nahid_mod_pass")){
-        localStorage.setItem(
-            "nahid_mod_pass",
-            "nahid123"
-        );
+        localStorage.setItem("nahid_mod_pass", "nahid123");
     }
-
-    let current=
-        localStorage.getItem(
-            "nahid_current_user"
-        );
-
+    let current = localStorage.getItem("nahid_current_user");
     if(current){
-
-        showApp(
-            JSON.parse(current)
-        );
-
+        showApp(JSON.parse(current));
     }
-
 };
 
-
-/* ================= PASSWORD ================= */
-
 function togglePassword(id,icon){
-
-    let input=
-        document.getElementById(id);
-
+    let input = document.getElementById(id);
     if(input.type==="password"){
-
         input.type="text";
         icon.innerText="🙈";
-
     }else{
-
         input.type="password";
         icon.innerText="👁️";
-
     }
-
 }
-
-
-/* ================= ROLE ================= */
 
 function switchRole(){
-
-    let role=
-        document.getElementById(
-            "role-select"
-        ).value;
-
+    let role = document.getElementById("role-select").value;
     if(role==="moderator"){
-
-        document.getElementById(
-            "user-auth-section"
-        ).style.display="none";
-
-        document.getElementById(
-            "mod-auth-section"
-        ).style.display="block";
-
+        document.getElementById("user-auth-section").style.display="none";
+        document.getElementById("mod-auth-section").style.display="block";
     }else{
-
-        document.getElementById(
-            "user-auth-section"
-        ).style.display="block";
-
-        document.getElementById(
-            "mod-auth-section"
-        ).style.display="none";
-
+        document.getElementById("user-auth-section").style.display="block";
+        document.getElementById("mod-auth-section").style.display="none";
     }
-
 }
-
-
-/* ================= AUTH MODE ================= */
 
 function switchAuthMode(mode){
-
     authMode=mode;
-
-    let nameField=
-        document.getElementById(
-            "reg-name-field"
-        );
-
-    let loginTab=
-        document.getElementById(
-            "btn-login-tab"
-        );
-
-    let regTab=
-        document.getElementById(
-            "btn-reg-tab"
-        );
-
-    let btn=
-        document.getElementById(
-            "user-auth-btn"
-        );
-
+    let nameField = document.getElementById("reg-name-field");
+    let loginTab = document.getElementById("btn-login-tab");
+    let regTab = document.getElementById("btn-reg-tab");
+    let btn = document.getElementById("user-auth-btn");
 
     if(mode==="register"){
-
         nameField.style.display="block";
-
         loginTab.classList.remove("active");
         regTab.classList.add("active");
-
-        btn.innerText=
-            "রেজিস্ট্রেশন সম্পন্ন করুন";
-
+        btn.innerText="রেজিস্ট্রেশন সম্পন্ন করুন";
     }else{
-
         nameField.style.display="none";
-
         regTab.classList.remove("active");
         loginTab.classList.add("active");
-
-        btn.innerText=
-            "লগইন করুন";
-
+        btn.innerText="লগইন করুন";
     }
-
 }
-
-
-/* ================= USER AUTH ================= */
 
 function handleUserAuth(){
-
-    let phone=
-        document.getElementById(
-            "user-phone"
-        ).value.trim();
-
-    let password=
-        document.getElementById(
-            "user-password"
-        ).value.trim();
-
-    let users=
-        JSON.parse(
-            localStorage.getItem(
-                "nahid_users"
-            ) || "[]"
-        );
-
+    let phone = document.getElementById("user-phone").value.trim();
+    let password = document.getElementById("user-password").value.trim();
+    let users = JSON.parse(localStorage.getItem("nahid_users") || "[]");
 
     if(!phone || !password){
-
-        alert(
-            "দয়া করে ফোন নাম্বার এবং পাসওয়ার্ড দিন!"
-        );
-
+        alert("দয়া করে ফোন নাম্বার এবং পাসওয়ার্ড দিন!");
         return;
     }
-
 
     if(authMode==="register"){
-
-        let name=
-            document.getElementById(
-                "user-name"
-            ).value.trim();
-
-
+        let name = document.getElementById("user-name").value.trim();
         if(!name){
-
-            alert(
-                "দয়া করে আপনার নাম লিখুন!"
-            );
-
+            alert("দয়া করে আপনার নাম লিখুন!");
             return;
         }
-
-
-        let exists=
-            users.find(
-                u=>u.phone===phone
-            );
-
-
+        let exists = users.find(u=>u.phone===phone);
         if(exists){
-
-            alert(
-                "এই ফোন নাম্বারে ইতিমধ্যে অ্যাকাউন্ট আছে!"
-            );
-
+            alert("এই ফোন নাম্বারে ইতিমধ্যে অ্যাকাউন্ট আছে!");
             return;
         }
 
-
-        users.push({
-
-            name:name,
-
-            phone:phone,
-
-            password:password,
-
-            role:"user"
-
-        });
-
-
-        localStorage.setItem(
-            "nahid_users",
-            JSON.stringify(users)
-        );
-
-
-        alert(
-            "✅ রেজিস্ট্রেশন সফল হয়েছে!"
-        );
-
-
+        users.push({name:name, phone:phone, password:password, role:"user"});
+        localStorage.setItem("nahid_users", JSON.stringify(users));
+        alert("✅ রেজিস্ট্রেশন সফল হয়েছে!");
         switchAuthMode("login");
-
-        document.getElementById(
-            "user-password"
-        ).value="";
-
-
+        document.getElementById("user-password").value="";
     }else{
-
-        let user=
-            users.find(
-                u=>
-                u.phone===phone &&
-                u.password===password
-            );
-
-
+        let user = users.find(u=>u.phone===phone && u.password===password);
         if(!user){
-
-            alert(
-                "❌ ভুল ফোন নাম্বার অথবা পাসওয়ার্ড!"
-            );
-
+            alert("❌ ভুল ফোন নাম্বার অথবা পাসওয়ার্ড!");
             return;
         }
-
-
-        let session={
-
-            name:user.name,
-
-            phone:user.phone,
-
-            role:"user"
-
-        };
-
-
-        localStorage.setItem(
-            "nahid_current_user",
-            JSON.stringify(session)
-        );
-
-
+        let session = {name:user.name, phone:user.phone, role:"user"};
+        localStorage.setItem("nahid_current_user", JSON.stringify(session));
         showApp(session);
-
     }
-
 }
-
-
-/* ================= MOD LOGIN ================= */
 
 function handleModLogin(){
-
-    let password=
-        document.getElementById(
-            "mod-password"
-        ).value;
-
-
-    let saved=
-        localStorage.getItem(
-            "nahid_mod_pass"
-        );
-
-
+    let password = document.getElementById("mod-password").value;
+    let saved = localStorage.getItem("nahid_mod_pass");
     if(password!==saved){
+        alert("❌ ভুল মডারেটর পাসওয়ার্ড!");
+        return;
+    }
+    let mod = {name:"মডারেটর", role:"moderator"};
+    localStorage.setItem("nahid_current_user", JSON.stringify(mod));
+    showApp(mod);
+}
 
-        alert(
-            "❌ ভুল মডারেটর পাসওয়ার্ড!"
-        );
+function saveUserProfile() {
+    let current = JSON.parse(localStorage.getItem("nahid_current_user"));
+    let newName = document.getElementById("update-name").value.trim();
+    let newPhone = document.getElementById("update-phone").value.trim();
+    let newPass = document.getElementById("update-pass").value.trim();
 
+    if(!newName || !newPhone) {
+        alert("নাম এবং ফোন নম্বর খালি রাখা যাবে না!");
         return;
     }
 
+    let users = JSON.parse(localStorage.getItem("nahid_users") || "[]");
+    let userIndex = users.findIndex(u => u.phone === current.phone);
 
-    let mod={
+    if(userIndex !== -1) {
+        users[userIndex].name = newName;
+        users[userIndex].phone = newPhone;
+        if(newPass) users[userIndex].password = newPass;
+        localStorage.setItem("nahid_users", JSON.stringify(users));
+    }
 
-        name:"মডারেটর",
+    current.name = newName;
+    current.phone = newPhone;
+    localStorage.setItem("nahid_current_user", JSON.stringify(current));
 
-        role:"moderator"
-
-    };
-
-
-    localStorage.setItem(
-        "nahid_current_user",
-        JSON.stringify(mod)
-    );
-
-
-    showApp(mod);
-
+    alert("✅ প্রফাইল সফলভাবে আপডেট হয়েছে!");
+    closeProfileModal();
+    showApp(current);
 }
-
-
-/* ================= CHANGE PASSWORD ================= */
 
 function changeModPassword(){
-
-    let pass=
-        document.getElementById(
-            "new-mod-password"
-        ).value.trim();
-
-
+    let pass = document.getElementById("new-mod-password").value.trim();
     if(!pass){
-
-        alert(
-            "নতুন পাসওয়ার্ড লিখুন!"
-        );
-
+        alert("নতুন পাসওয়ার্ড লিখুন!");
         return;
     }
-
-
-    localStorage.setItem(
-        "nahid_mod_pass",
-        pass
-    );
-
-
-    document.getElementById(
-        "new-mod-password"
-    ).value="";
-
-
-    alert(
-        "✅ মডারেটর পাসওয়ার্ড পরিবর্তন হয়েছে!"
-    );
-
+    localStorage.setItem("nahid_mod_pass", pass);
+    document.getElementById("new-mod-password").value="";
+    alert("✅ মডারেটর পাসওয়ার্ড পরিবর্তন হয়েছে!");
 }
 
-
-/* ================= MOD TABS ================= */
+function updateSiteLogo() {
+    let fileInput = document.getElementById("mod-logo-file");
+    if(!fileInput.files.length) {
+        alert("দয়া করে একটি লোগো ছবি সিলেক্ট করুন!");
+        return;
+    }
+    let reader = new FileReader();
+    reader.onload = function(e) {
+        localStorage.setItem("nahid_site_logo", e.target.result);
+        loadCustomLogo();
+        alert("✅ সাইট লোগো সফলভাবে আপডেট হয়েছে!");
+    };
+    reader.readAsDataURL(fileInput.files[0]);
+}
 
 function switchModTab(tabId,button){
-
-    document
-        .querySelectorAll(
-            ".mod-section-content"
-        )
-        .forEach(
-            el=>
-            el.classList.remove("active")
-        );
-
-
-    document
-        .querySelectorAll(
-            ".mod-nav-tab"
-        )
-        .forEach(
-            el=>
-            el.classList.remove("active")
-        );
-
-
-    document
-        .getElementById(tabId)
-        .classList.add("active");
-
-
+    document.querySelectorAll(".mod-section-content").forEach(el=>el.classList.remove("active"));
+    document.querySelectorAll(".mod-nav-tab").forEach(el=>el.classList.remove("active"));
+    document.getElementById(tabId).classList.add("active");
     button.classList.add("active");
-
 }
-
-
-/* ================= SHOW APP ================= */
 
 function showApp(user){
-
-    document.getElementById(
-        "auth-screen"
-    ).style.display="none";
-
-
-    document.getElementById(
-        "app-container"
-    ).style.display="block";
-
-
-    document.getElementById(
-        "welcome-user-msg"
-    ).innerText=
-        `স্বাগতম, ${user.name} ${
-            user.role==="moderator"
-            ? "👑"
-            : "👤"
-        }`;
-
+    document.getElementById("auth-screen").style.display="none";
+    document.getElementById("app-container").style.display="block";
+    document.getElementById("welcome-user-msg").innerText = `স্বাগতম, ${user.name} ${user.role==="moderator" ? "👑" : "👤"}`;
 
     if(user.role==="moderator"){
-
-        document.getElementById(
-            "moderator-control-panel"
-        ).style.display="block";
-
-
+        document.getElementById("moderator-control-panel").style.display="block";
         updateModeratorDashboard();
-
     }
-
-
     loadPosts();
-
 }
-
-
-/* ================= LOGOUT ================= */
 
 function handleLogout(){
-
-    localStorage.removeItem(
-        "nahid_current_user"
-    );
-
+    localStorage.removeItem("nahid_current_user");
     location.reload();
-
 }
 
-
-/* ================= POSTS ================= */
+/* =====================================================
+   POSTS & FEED
+   ===================================================== */
 
 function getPosts(){
-
-    let data=
-        localStorage.getItem(
-            "nahid_posts"
-        );
-
-
+    let data = localStorage.getItem("nahid_posts");
     if(!data){
-
-        localStorage.setItem(
-            "nahid_posts",
-            JSON.stringify(defaultPosts)
-        );
-
+        localStorage.setItem("nahid_posts", JSON.stringify(defaultPosts));
         return defaultPosts;
-
     }
-
-
     return JSON.parse(data);
-
 }
-
-
-/* ================= LOAD POSTS ================= */
 
 function loadPosts(){
-
-    let posts=getPosts();
-
-    let container=
-        document.getElementById(
-            "feed-container"
-        );
-
-
+    let posts = getPosts();
+    let container = document.getElementById("feed-container");
     container.innerHTML="";
 
-
     posts.forEach(post=>{
+        let comments = post.comments.map(c=>
+            `<div class="comment-item">
+                <strong>${escapeHTML(c.user)}:</strong> ${escapeHTML(c.text)}
+            </div>`
+        ).join("");
 
-        let comments=
-            post.comments
-            .map(
-                c=>
-                `<div class="comment-item">
-                    <strong>${escapeHTML(c.user)}:</strong>
-                    ${escapeHTML(c.text)}
-                </div>`
-            )
-            .join("");
-
-
-        let source=
-            post.media || post.img;
-
-
+        let source = post.media || post.img;
         let media;
 
-
-        if(
-            post.mediaType==="video" ||
-            (source &&
-            source.startsWith("data:video"))
-        ){
-
-            media=
-                `<video
-                    src="${source}"
-                    controls>
-                </video>`;
-
+        if(post.mediaType==="video" || (source && source.startsWith("data:video"))){
+            media = `<video src="${source}" controls></video>`;
         }else{
-
-            media=
-                `<img
-                    src="${source}"
-                    alt="Post"
-                    onerror="this.style.display='none'">`;
-
+            media = `<img src="${source}" alt="Post" onerror="this.style.display='none'">`;
         }
-
 
         container.innerHTML+=`
-
             <div class="post">
-
                 ${media}
-
-                <h3>
-                    ${escapeHTML(post.title)}
-                </h3>
-
-                <p>
-                    ${escapeHTML(post.desc)}
-                </p>
-
+                <h3>${escapeHTML(post.title)}</h3>
+                <p>${escapeHTML(post.desc)}</p>
                 <div class="post-stats">
-
-                    👍
-                    <span id="like-${post.id}">
-                        ${post.likes}
-                    </span>
-                    likes
-
-                    • 💬
-
-                    ${post.comments.length}
-                    comments
-
+                    👍 <span id="like-${post.id}">${post.likes}</span> likes • 💬 ${post.comments.length} comments
                 </div>
-
-                <div>
-                    ${comments}
-                </div>
-
+                <div>${comments}</div>
                 <div class="actions">
-
-                    <button
-                        class="love"
-                        onclick="likePost(${post.id})">
-                        ❤️ Like
-                    </button>
-
-                    <button
-                        class="comment-btn"
-                        onclick="addComment(${post.id})">
-                        💬 Comment
-                    </button>
-
-                    <button
-                        class="download"
-                        onclick="trackAndDownload(
-                            '${source}',
-                            'Nahid-Media-${post.id}',
-                            '${escapeAttr(post.title)}'
-                        )">
-                        📥 Download
-                    </button>
-
+                    <button class="love" onclick="likePost(${post.id})">❤️ Like</button>
+                    <button class="comment-btn" onclick="addComment(${post.id})">💬 Comment</button>
+                    <button class="download" onclick="trackAndDownload('${source}','Nahid-Media-${post.id}','${escapeAttr(post.title)}')">📥 Download</button>
                 </div>
-
             </div>
-
         `;
-
     });
-
 }
-
-
-/* ================= LIKE ================= */
 
 function likePost(id){
+    let current = JSON.parse(localStorage.getItem("nahid_current_user"));
+    let posts = getPosts();
+    let post = posts.find(p=>p.id===id);
 
-    let current=
-        JSON.parse(
-            localStorage.getItem(
-                "nahid_current_user"
-            )
-        );
-
-
-    let posts=getPosts();
-
-    let post=
-        posts.find(
-            p=>p.id===id
-        );
-
-
-    if(!post.likedBy){
-        post.likedBy=[];
-    }
-
-
-    if(
-        post.likedBy.includes(
-            current.name
-        )
-    ){
-
-        alert(
-            "আপনি ইতিমধ্যে লাইক দিয়েছেন!"
-        );
-
+    if(!post.likedBy) post.likedBy=[];
+    if(post.likedBy.includes(current.name)){
+        alert("আপনি ইতিমধ্যে লাইক দিয়েছেন!");
         return;
-
     }
 
-
-    post.likedBy.push(
-        current.name
-    );
-
+    post.likedBy.push(current.name);
     post.likes++;
-
-
-    localStorage.setItem(
-        "nahid_posts",
-        JSON.stringify(posts)
-    );
-
-
+    localStorage.setItem("nahid_posts", JSON.stringify(posts));
     loadPosts();
-
 }
-
-
-/* ================= COMMENT ================= */
 
 function addComment(id){
+    let current = JSON.parse(localStorage.getItem("nahid_current_user"));
+    let text = prompt("আপনার কমেন্ট লিখুন:");
+    if(!text || !text.trim()) return;
 
-    let current=
-        JSON.parse(
-            localStorage.getItem(
-                "nahid_current_user"
-            )
-        );
-
-
-    let text=
-        prompt(
-            "আপনার কমেন্ট লিখুন:"
-        );
-
-
-    if(
-        !text ||
-        !text.trim()
-    ){
-        return;
-    }
-
-
-    let posts=getPosts();
-
-    let post=
-        posts.find(
-            p=>p.id===id
-        );
-
-
-    post.comments.push({
-
-        user:current.name,
-
-        text:text.trim()
-
-    });
-
-
-    localStorage.setItem(
-        "nahid_posts",
-        JSON.stringify(posts)
-    );
-
-
+    let posts = getPosts();
+    let post = posts.find(p=>p.id===id);
+    post.comments.push({user:current.name, text:text.trim()});
+    localStorage.setItem("nahid_posts", JSON.stringify(posts));
     loadPosts();
-
-
-    if(
-        current.role==="moderator"
-    ){
+    if(current.role==="moderator"){
         updateModeratorDashboard();
     }
-
 }
-
-
-/* ================= ADD POST ================= */
 
 function addNewPost(){
+    let title = document.getElementById("new-post-title").value.trim();
+    let desc = document.getElementById("new-post-desc").value.trim();
+    let fileInput = document.getElementById("new-post-file");
 
-    let title=
-        document.getElementById(
-            "new-post-title"
-        ).value.trim();
-
-
-    let desc=
-        document.getElementById(
-            "new-post-desc"
-        ).value.trim();
-
-
-    let fileInput=
-        document.getElementById(
-            "new-post-file"
-        );
-
-
-    if(
-        !title ||
-        !desc ||
-        !fileInput.files.length
-    ){
-
-        alert(
-            "শিরোনাম, বিবরণ এবং ছবি/ভিডিও দিন!"
-        );
-
+    if(!title || !desc || !fileInput.files.length){
+        alert("শিরোনাম, বিবরণ এবং ছবি/ভিডিও দিন!");
         return;
     }
 
-
-    let file=
-        fileInput.files[0];
-
-
-    let reader=
-        new FileReader();
-
-
+    let file = fileInput.files[0];
+    let reader = new FileReader();
     reader.onload=function(e){
-
-        let posts=getPosts();
-
-
-        let newPost={
-
+        let posts = getPosts();
+        let newPost = {
             id:Date.now(),
-
             title:title,
-
             desc:desc,
-
             media:e.target.result,
-
-            mediaType:
-                file.type.startsWith("video")
-                ? "video"
-                : "image",
-
+            mediaType:file.type.startsWith("video") ? "video" : "image",
             likes:0,
-
             likedBy:[],
-
             comments:[]
-
         };
 
-
         posts.unshift(newPost);
-
-
-        localStorage.setItem(
-            "nahid_posts",
-            JSON.stringify(posts)
-        );
-
-
-        document.getElementById(
-            "new-post-title"
-        ).value="";
-
-
-        document.getElementById(
-            "new-post-desc"
-        ).value="";
-
-
+        localStorage.setItem("nahid_posts", JSON.stringify(posts));
+        document.getElementById("new-post-title").value="";
+        document.getElementById("new-post-desc").value="";
         fileInput.value="";
-
-
         loadPosts();
-
         updateModeratorDashboard();
-
-
-        alert(
-            "🎉 পোস্ট সফলভাবে প্রকাশ হয়েছে!"
-        );
-
+        alert("🎉 পোস্ট সফলভাবে প্রকাশ হয়েছে!");
     };
-
-
     reader.readAsDataURL(file);
-
 }
 
-
-/* ================= DOWNLOAD ================= */
-
-function trackAndDownload(
-    url,
-    filename,
-    title
-){
-
-    let current=
-        JSON.parse(
-            localStorage.getItem(
-                "nahid_current_user"
-            ) ||
-            '{"name":"Guest","phone":"N/A"}'
-        );
-
-
-    let downloads=
-        JSON.parse(
-            localStorage.getItem(
-                "nahid_downloads"
-            ) || "[]"
-        );
-
+function trackAndDownload(url, filename, title){
+    let current = JSON.parse(localStorage.getItem("nahid_current_user") || '{"name":"Guest","phone":"N/A"}');
+    let downloads = JSON.parse(localStorage.getItem("nahid_downloads") || "[]");
 
     downloads.unshift({
-
         user:current.name,
-
         phone:current.phone || "N/A",
-
         item:title,
-
         time:new Date().toLocaleString()
-
     });
 
+    localStorage.setItem("nahid_downloads", JSON.stringify(downloads));
 
-    localStorage.setItem(
-        "nahid_downloads",
-        JSON.stringify(downloads)
-    );
-
-
-    let a=
-        document.createElement("a");
-
-
+    let a = document.createElement("a");
     a.href=url;
-
     a.download=filename;
-
     document.body.appendChild(a);
-
     a.click();
-
     a.remove();
 
-
-    if(
-        current.role==="moderator"
-    ){
+    if(current.role==="moderator"){
         updateModeratorDashboard();
     }
-
 }
-
-
-/* ================= MOD DASHBOARD ================= */
 
 function updateModeratorDashboard(){
+    let users = JSON.parse(localStorage.getItem("nahid_users") || "[]");
+    let posts = getPosts();
+    let downloads = JSON.parse(localStorage.getItem("nahid_downloads") || "[]");
+    let totalComments = 0;
 
-    let users=
-        JSON.parse(
-            localStorage.getItem(
-                "nahid_users"
-            ) || "[]"
-        );
+    posts.forEach(p=>{ totalComments += p.comments.length; });
 
+    document.getElementById("stat-users").innerText = `রেজিস্টার্ড ইউজার: ${users.length} জন`;
+    document.getElementById("stat-posts").innerText = `মোট পোস্ট: ${posts.length} টি`;
+    document.getElementById("stat-comments").innerText = `মোট কমেন্ট: ${totalComments} টি`;
 
-    let posts=getPosts();
-
-
-    let downloads=
-        JSON.parse(
-            localStorage.getItem(
-                "nahid_downloads"
-            ) || "[]"
-        );
-
-
-    let totalComments=0;
-
-
-    posts.forEach(
-        p=>{
-            totalComments+=
-                p.comments.length;
-        }
-    );
-
-
-    document.getElementById(
-        "stat-users"
-    ).innerText=
-        `রেজিস্টার্ড ইউজার: ${users.length} জন`;
-
-
-    document.getElementById(
-        "stat-posts"
-    ).innerText=
-        `মোট পোস্ট: ${posts.length} টি`;
-
-
-    document.getElementById(
-        "stat-comments"
-    ).innerText=
-        `মোট কমেন্ট: ${totalComments} টি`;
-
-
-    /* COMMENTS */
-
-    let commentBox=
-        document.getElementById(
-            "mod-comment-list"
-        );
-
-
+    // Comments
+    let commentBox = document.getElementById("mod-comment-list");
     commentBox.innerHTML="";
-
-
     posts.forEach(post=>{
-
-        post.comments.forEach(
-            (comment,index)=>{
-
-                let row=
-                    document.createElement(
-                        "div"
-                    );
-
-
-                row.className=
-                    "mod-comment-row";
-
-
-                row.innerHTML=`
-
-                    <span>
-                        <strong>
-                            ${escapeHTML(comment.user)}:
-                        </strong>
-
-                        ${escapeHTML(comment.text)}
-                    </span>
-
-                    <button
-                        class="delete-comment-btn"
-                        onclick="deleteComment(
-                            ${post.id},
-                            ${index}
-                        )">
-                        মুছুন
-                    </button>
-
-                `;
-
-
-                commentBox.appendChild(row);
-
-            }
-        );
-
+        post.comments.forEach((comment,index)=>{
+            let row = document.createElement("div");
+            row.className = "mod-comment-row";
+            row.innerHTML = `
+                <span><strong>${escapeHTML(comment.user)}:</strong> ${escapeHTML(comment.text)}</span>
+                <button class="delete-comment-btn" onclick="deleteComment(${post.id},${index})">মুছুন</button>
+            `;
+            commentBox.appendChild(row);
+        });
     });
-
-
     if(!commentBox.children.length){
-
-        commentBox.innerHTML=
-            `<p style="
-                text-align:center;
-                color:#64748b;
-                padding:10px;
-            ">
-                কোনো কমেন্ট নেই
-            </p>`;
-
+        commentBox.innerHTML = `<p style="text-align:center;color:var(--muted);padding:10px;">কোনো কমেন্ট নেই</p>`;
     }
 
-
-    /* USERS */
-
-    let userBody=
-        document.getElementById(
-            "mod-user-table-body"
-        );
-
-
+    // Users
+    let userBody = document.getElementById("mod-user-table-body");
     userBody.innerHTML="";
-
-
     if(!users.length){
-
-        userBody.innerHTML=
-            `<tr>
-                <td colspan="3"
-                    style="text-align:center">
-                    কোনো ইউজার নেই
-                </td>
-            </tr>`;
-
+        userBody.innerHTML = `<tr><td colspan="3" style="text-align:center">কোনো ইউজার নেই</td></tr>`;
     }else{
-
         users.forEach(u=>{
-
-            userBody.innerHTML+=`
-
+            userBody.innerHTML += `
                 <tr>
-
-                    <td>
-                        ${escapeHTML(u.name)}
-                    </td>
-
-                    <td>
-                        ${escapeHTML(u.phone)}
-                    </td>
-
-                    <td>
-                        ${escapeHTML(u.password)}
-                    </td>
-
+                    <td>${escapeHTML(u.name)}</td>
+                    <td>${escapeHTML(u.phone)}</td>
+                    <td>${escapeHTML(u.password)}</td>
                 </tr>
-
             `;
-
         });
-
     }
 
-
-    /* DOWNLOADS */
-
-    let downloadBody=
-        document.getElementById(
-            "mod-download-table-body"
-        );
-
-
+    // Downloads
+    let downloadBody = document.getElementById("mod-download-table-body");
     downloadBody.innerHTML="";
-
-
     if(!downloads.length){
-
-        downloadBody.innerHTML=
-            `<tr>
-                <td colspan="4"
-                    style="text-align:center">
-                    এখনো কোনো ডাউনলোড হয়নি
-                </td>
-            </tr>`;
-
+        downloadBody.innerHTML = `<tr><td colspan="4" style="text-align:center">এখনো কোনো ডাউনলোড হয়নি</td></tr>`;
     }else{
-
         downloads.forEach(d=>{
-
-            downloadBody.innerHTML+=`
-
+            downloadBody.innerHTML += `
                 <tr>
-
-                    <td>
-                        ${escapeHTML(d.user)}
-                    </td>
-
-                    <td>
-                        ${escapeHTML(d.phone)}
-                    </td>
-
-                    <td>
-                        ${escapeHTML(d.item)}
-                    </td>
-
-                    <td>
-                        ${escapeHTML(d.time)}
-                    </td>
-
+                    <td>${escapeHTML(d.user)}</td>
+                    <td>${escapeHTML(d.phone)}</td>
+                    <td>${escapeHTML(d.item)}</td>
+                    <td>${escapeHTML(d.time)}</td>
                 </tr>
-
             `;
-
         });
-
     }
-
 }
 
-
-/* ================= DELETE COMMENT ================= */
-
-function deleteComment(
-    postId,
-    commentIndex
-){
-
-    if(
-        !confirm(
-            "এই কমেন্টটি মুছে ফেলবেন?"
-        )
-    ){
-        return;
-    }
-
-
-    let posts=getPosts();
-
-
-    let post=
-        posts.find(
-            p=>p.id===postId
-        );
-
-
+function deleteComment(postId, commentIndex){
+    if(!confirm("এই কমেন্টটি মুছে ফেলবেন?")) return;
+    let posts = getPosts();
+    let post = posts.find(p=>p.id===postId);
     if(post){
-
-        post.comments.splice(
-            commentIndex,
-            1
-        );
-
-
-        localStorage.setItem(
-            "nahid_posts",
-            JSON.stringify(posts)
-        );
-
-
+        post.comments.splice(commentIndex, 1);
+        localStorage.setItem("nahid_posts", JSON.stringify(posts));
         loadPosts();
-
         updateModeratorDashboard();
-
     }
-
 }
-
-
-/* ================= SECURITY HELPERS ================= */
 
 function escapeHTML(value){
-
     return String(value)
         .replace(/&/g,"&amp;")
         .replace(/</g,"&lt;")
         .replace(/>/g,"&gt;")
         .replace(/"/g,"&quot;")
         .replace(/'/g,"&#039;");
-
 }
 
-
 function escapeAttr(value){
-
     return String(value)
         .replace(/'/g,"&#039;")
         .replace(/"/g,"&quot;");
-
 }
 
 </script>
 
 </body>
-   </html>
+           </html>
