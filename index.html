@@ -9,7 +9,7 @@
 <style>
 /* =========================================================
    NAHID GALLERY HUB
-   PREMIUM GLASS UI
+   PREMIUM GLASS UI WITH SIDEBAR
    ========================================================= */
 
 :root{
@@ -328,6 +328,39 @@ header:after{
     opacity:.15;
 }
 
+.menu-btn{
+    position:absolute;
+    top:20px;
+    left:20px;
+    z-index:5;
+
+    width:42px;
+    height:42px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border:1px solid var(--border);
+    border-radius:12px;
+
+    background:rgba(255,255,255,.9);
+    color:var(--text);
+
+    font-size:1.2rem;
+    font-weight:bold;
+
+    cursor:pointer;
+    box-shadow:0 5px 15px rgba(15,23,42,.08);
+    transition:.25s;
+}
+
+.menu-btn:hover{
+    background:var(--primary);
+    color:white;
+    border-color:transparent;
+}
+
 .logo-container{
     position:relative;
     z-index:2;
@@ -411,6 +444,130 @@ header h1{
 
 .logout-btn:hover{
     transform:translateY(-2px);
+}
+
+/* ================= SIDEBAR DRAWER ================= */
+
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.4);
+    backdrop-filter: blur(4px);
+    z-index: 998;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s ease;
+}
+
+.sidebar-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -320px;
+    width: 320px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    box-shadow: 20px 0 50px rgba(15, 23, 42, 0.15);
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+    border-right: 1px solid var(--border);
+}
+
+.sidebar.active {
+    left: 0;
+}
+
+.sidebar-header {
+    padding: 24px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.sidebar-header h3 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.close-sidebar-btn {
+    background: none;
+    border: none;
+    font-size: 1.3rem;
+    cursor: pointer;
+    color: var(--muted);
+    transition: 0.2s;
+}
+
+.close-sidebar-btn:hover {
+    color: var(--red);
+}
+
+.sidebar-menu {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sidebar-category-title {
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 10px 12px 4px;
+    letter-spacing: 0.5px;
+}
+
+.sidebar-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 12px 14px;
+    border-radius: 14px;
+    text-decoration: none;
+    color: var(--text);
+    background: transparent;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: 0.25s;
+    text-align: left;
+}
+
+.sidebar-item:hover {
+    background: #f8fafc;
+    border-color: #e2e8f0;
+    transform: translateX(4px);
+}
+
+.sidebar-item-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.92rem;
+    font-weight: 700;
+}
+
+.sidebar-item-desc {
+    font-size: 0.78rem;
+    color: var(--muted);
+    padding-left: 26px;
 }
 
 /* ================= MODERATOR PANEL ================= */
@@ -833,6 +990,14 @@ footer{
         font-size:.75rem;
     }
 
+    .menu-btn{
+        top:12px;
+        left:10px;
+        width:36px;
+        height:36px;
+        font-size:1rem;
+    }
+
     .logo-container{
         padding-top:25px;
     }
@@ -1012,12 +1177,54 @@ footer{
 
 
 <!-- =====================================================
-     MAIN APP
+     MAIN APP CONTAINER
      ===================================================== -->
 
 <div id="app-container">
 
+<!-- SIDEBAR NAVIGATION DRAWER -->
+<div id="sidebar-overlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+<aside id="sidebar" class="sidebar">
+    <div class="sidebar-header">
+        <h3>✨ Hub Menu</h3>
+        <button class="close-sidebar-btn" onclick="toggleSidebar()">✕</button>
+    </div>
+
+    <div class="sidebar-menu">
+        <div class="sidebar-category-title">Navigation & Feed</div>
+        
+        <div class="sidebar-item" onclick="scrollToSection('feed-container')">
+            <div class="sidebar-item-title">🏠 Home Feed</div>
+            <div class="sidebar-item-desc">Browse all published gallery posts and updates</div>
+        </div>
+
+        <div class="sidebar-category-title">Management & Tools</div>
+
+        <div class="sidebar-item" onclick="scrollToSection('moderator-control-panel')">
+            <div class="sidebar-item-title">📊 Control Panel</div>
+            <div class="sidebar-item-desc">Access platform stats, users, and download logs</div>
+        </div>
+
+        <div class="sidebar-item" onclick="scrollToSection('new-post-title')">
+            <div class="sidebar-item-title">➕ Upload Media</div>
+            <div class="sidebar-item-desc">Publish new photo or video posts to the hub</div>
+        </div>
+
+        <div class="sidebar-category-title">Account & System</div>
+
+        <div class="sidebar-item" onclick="handleLogout()">
+            <div class="sidebar-item-title">🚪 Sign Out</div>
+            <div class="sidebar-item-desc">Safely terminate your active user session</div>
+        </div>
+    </div>
+</aside>
+
 <header>
+
+    <button class="menu-btn" onclick="toggleSidebar()" title="Open Menu">
+        ☰
+    </button>
 
     <button
         class="logout-btn"
@@ -1272,6 +1479,26 @@ footer{
 
 
 <script>
+
+/* =====================================================
+   SIDEBAR DRAWER LOGIC
+   ===================================================== */
+
+function toggleSidebar() {
+    let sidebar = document.getElementById("sidebar");
+    let overlay = document.getElementById("sidebar-overlay");
+    sidebar.classList.toggle("active");
+    overlay.classList.toggle("active");
+}
+
+function scrollToSection(sectionId) {
+    toggleSidebar();
+    let element = document.getElementById(sectionId);
+    if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+    }
+}
+
 
 /* =====================================================
    AUTH
@@ -2543,4 +2770,4 @@ function escapeAttr(value){
 </script>
 
 </body>
-    </html>
+   </html>
