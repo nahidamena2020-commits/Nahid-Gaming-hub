@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sign Up for Thinking | Thinking</title>
-<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+<title>Instagram • Feed & Management Portal</title>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
 <style>
   * {
     box-sizing: border-box;
@@ -13,21 +13,23 @@
   }
 
   body {
-    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
-    background-color: #f0f2f5;
-    color: #1d2129;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #fafafa;
+    color: #262626;
   }
 
-  /* Navbar */
+  /* Navbar Style */
   #navwrapper {
-    background: #1877f2;
-    border-bottom: 1px solid #1052a2;
-    padding: 10px 0;
-    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+    background: #ffffff;
+    border-bottom: 1px solid #dbdbdb;
+    padding: 12px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
   }
 
   #navbar {
-    width: 980px;
+    width: 935px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -38,353 +40,549 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    color: #ffffff;
-    font-size: 28px;
-    font-weight: bold;
-    letter-spacing: -1px;
-    text-transform: lowercase;
+    font-size: 24px;
+    font-weight: 700;
   }
 
-  /* Custom Thinking Logo Design */
-  .thinking-logo-badge {
-    width: 40px;
-    height: 40px;
-    background: linear-gradient(135deg, #ffffff, #e4e6eb);
-    color: #1877f2;
+  .ig-logo-badge {
+    width: 36px;
+    height: 36px;
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+    color: #ffffff;
     border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 900;
-    font-size: 24px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    font-size: 18px;
   }
 
-  .tablewrapper {
-    border-spacing: 0;
+  /* Container */
+  .container {
+    width: 935px;
+    margin: 40px auto;
   }
 
-  .row1 {
-    font-size: 12px;
-    color: #ffffff;
-    padding-bottom: 4px;
-    font-weight: 700;
-  }
-
-  .inputtext {
-    border: 1px solid #1d2129;
-    border-radius: 2px;
-    font-size: 12px;
-    margin: 0 5px 5px 0;
-    padding: 3px;
-    width: 150px;
-  }
-
-  #button {
-    background-color: #4267b2;
-    border: 1px solid #29487d;
-    color: #ffffff;
-    cursor: pointer;
-    font-size: 12px;
-    font-weight: bold;
-    padding: 3px 8px;
-    border-radius: 2px;
-    text-align: center;
-  }
-
-  #button:hover {
-    background-color: #365899;
-  }
-
-  .row2 {
-    font-size: 11px;
-    color: #9cb4d8;
-  }
-
-  .row2.h:hover {
-    text-decoration: underline;
-    cursor: pointer;
-  }
-
-  /* Content Wrapper */
-  #contentwrapper {
-    width: 980px;
-    margin: 20px auto;
-  }
-
-  #content {
+  .auth-box {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    background: #fff;
+    border: 1px solid #dbdbdb;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 40px;
+    flex-direction: column;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
   }
 
-  #leftbod {
-    flex: 1;
-    padding-right: 20px;
+  .auth-box h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-family: cursive;
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 32px;
   }
 
-  #leftbod h2 {
-    color: #1877f2;
-    font-size: 24px;
-    font-weight: 600;
-    line-height: 32px;
-    margin-bottom: 20px;
-  }
-
-  /* Right Signup Box */
-  #rightbod {
-    width: 420px;
-    background: #ffffff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  }
-
-  .formbox {
-    margin-bottom: 10px;
-  }
-
-  .mt1 {
-    margin-top: 15px;
-  }
-
-  .inputbody {
+  .inputfield {
     width: 100%;
-    height: 40px;
-    padding: 8px 10px;
-    border: 1px solid #ccd0d5;
-    border-radius: 5px;
-    font-size: 15px;
-    background-color: #f5f6f7;
+    height: 38px;
+    padding: 9px 12px;
+    background: #fafafa;
+    border: 1px solid #dbdbdb;
+    border-radius: 3px;
+    font-size: 13px;
+    margin-bottom: 10px;
     outline: none;
   }
 
-  .inputbody:focus {
-    border-color: #1877f2;
-    background-color: #fff;
-  }
-
-  .in2 {
-    width: 100%;
-  }
-
-  .bday {
-    font-size: 16px;
-    font-weight: 600;
-    color: #606770;
-    margin-bottom: 4px;
-  }
-
-  .selectbody {
-    height: 36px;
-    padding: 0 8px;
-    border: 1px solid #ccd0d5;
-    border-radius: 4px;
-    background-color: #fff;
-    font-size: 13px;
-    color: #1d2129;
-    margin-right: 5px;
-  }
-
-  .selectbody.fl {
-    float: none;
-  }
-
-  .fb1.why {
-    font-size: 11px;
-    color: #1877f2;
-    margin-top: 4px;
-  }
-
-  .fb1.why.h:hover {
-    text-decoration: underline;
-    cursor: pointer;
-  }
-
-  .spanpad {
-    display: flex;
-    gap: 15px;
-  }
-
-  .m0 {
-    margin-right: 4px;
-  }
-
-  .gender {
-    font-size: 15px;
-    color: #1d2129;
-    cursor: pointer;
-    font-weight: normal;
-    border: 1px solid #ccd0d5;
-    padding: 8px 20px;
-    border-radius: 4px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 32%;
+  .inputfield:focus {
+    border-color: #a8a8a8;
     background: #fff;
   }
 
-  .gender:hover {
-    background: #f2f4f7;
-  }
-
-  .agree {
-    font-size: 11px;
-    color: #777;
-    line-height: 1.34;
-    margin: 10px 0;
-  }
-
-  .link {
-    color: #1877f2;
-    display: inline;
-    cursor: pointer;
-  }
-
-  .link:hover {
-    text-decoration: underline;
-  }
-
-  .signbut {
-    background-color: #42b72a;
-    border: none;
-    border-radius: 6px;
-    box-shadow: none;
-    color: #fff;
-    font-size: 18px;
-    font-weight: bold;
-    height: 40px;
-    line-height: 40px;
-    padding: 0 32px;
-    cursor: pointer;
+  .btn {
     width: 100%;
-    margin: 10px 0;
+    background-color: #0095f6;
+    border: none;
+    color: #fff;
+    padding: 8px;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
+  .btn:hover {
+    background-color: #1877f2;
+  }
+
+  .toggle-link {
     text-align: center;
-  }
-
-  .signbut:hover {
-    background-color: #36a420;
-  }
-
-  .bolder {
-    font-weight: bold;
-  }
-
-  .create {
+    margin-top: 15px;
     font-size: 13px;
-    color: #1d2129;
-    margin-top: 20px;
-    border-top: 1px solid #dadde1;
-    padding-top: 15px;
-    text-align: center;
+    color: #00376b;
+    cursor: pointer;
   }
 
-  @media(max-width: 800px) {
-    #navbar, #contentwrapper {
-      width: 100%;
-      padding: 0 10px;
-    }
-    #content {
-      flex-direction: column;
-    }
-    #rightbod {
-      width: 100%;
-    }
+  /* Dashboards */
+  .dashboard {
+    display: none;
+    width: 700px;
+    margin: 30px auto;
+  }
+
+  .section-box {
+    background: #fff;
+    border: 1px solid #dbdbdb;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+
+  /* Feed Post Styling */
+  .post-card {
+    background: #fff;
+    border: 1px solid #dbdbdb;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+
+  .post-header {
+    padding: 12px 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    border-bottom: 1px solid #efefef;
+    font-size: 14px;
+  }
+
+  .post-body {
+    padding: 15px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .post-stats {
+    padding: 0 15px 10px 15px;
+    font-size: 13px;
+    color: #8e8e8e;
+  }
+
+  .post-actions {
+    display: flex;
+    border-top: 1px solid #efefef;
+    border-bottom: 1px solid #efefef;
+    padding: 8px 15px;
+    gap: 20px;
+    font-size: 14px;
+  }
+
+  .action-btn {
+    cursor: pointer;
+    font-weight: 600;
+    color: #262626;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .action-btn:hover {
+    color: #0095f6;
+  }
+
+  .comments-section {
+    padding: 10px 15px;
+    background: #fafafa;
+    font-size: 13px;
+  }
+
+  .comment-item {
+    margin-bottom: 6px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 4px;
+  }
+
+  .comment-box-area {
+    display: flex;
+    padding: 10px 15px;
+    gap: 10px;
+    border-top: 1px solid #efefef;
+  }
+
+  .comment-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 13px;
+    background: transparent;
+  }
+
+  .comment-submit {
+    color: #0095f6;
+    font-weight: 600;
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+
+  th, td {
+    border: 1px solid #dbdbdb;
+    padding: 8px 12px;
+    text-align: left;
+    font-size: 13px;
+  }
+
+  th {
+    background-color: #efefef;
+  }
+
+  .logout-btn {
+    background-color: #ed4956;
+    color: white;
+    border: none;
+    padding: 6px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    float: right;
   }
 </style>
 </head>
 <body>
 
-  <!-- Top Navbar -->
+  <!-- Navbar -->
   <div id="navwrapper">
     <div id="navbar">
       <div class="logowrapper">
-        <div class="thinking-logo-badge">T</div>
-        <span>thinking</span>
+        <div class="ig-logo-badge">📷</div>
+        <span>Instagram</span>
       </div>
-      <table class="tablewrapper">
+      <div id="navRight"></div>
+    </div>
+  </div>
+
+  <!-- Authentication Wrapper -->
+  <div class="container" id="authContainer">
+    <div class="auth-box" id="loginBox">
+      <h2>Instagram</h2>
+      <input type="text" id="loginPhone" class="inputfield" placeholder="Phone number">
+      <input type="password" id="loginPass" class="inputfield" placeholder="Password">
+      <button class="btn" onclick="handleLogin()">Log In</button>
+      <div class="toggle-link" onclick="switchForm('signup')">Don't have an account? Sign up</div>
+    </div>
+
+    <div class="auth-box" id="signupBox" style="display:none;">
+      <h2>Instagram</h2>
+      <input type="text" id="regName" class="inputfield" placeholder="Full Name">
+      <input type="text" id="regPhone" class="inputfield" placeholder="Phone number">
+      <input type="password" id="regPass" class="inputfield" placeholder="Password">
+      <button class="btn" onclick="handleSignup()">Sign Up</button>
+      <div class="toggle-link" onclick="switchForm('login')">Have an account? Log in</div>
+    </div>
+  </div>
+
+  <!-- User Dashboard -->
+  <div class="dashboard" id="userDashboard">
+    <div style="margin-bottom: 15px; overflow:hidden;">
+      <h2 style="float:left; font-size:20px;">News Feed</h2>
+      <button class="logout-btn" onclick="logout()">Log Out</button>
+    </div>
+
+    <div class="section-box">
+      <h3>Edit Profile Settings</h3>
+      <input type="text" id="editName" class="inputfield" style="margin-top:10px;" placeholder="Full Name">
+      <input type="text" id="editPhone" class="inputfield" placeholder="Phone Number">
+      <input type="password" id="editPass" class="inputfield" placeholder="New Password">
+      <button class="btn" onclick="updateProfile()">Save Changes</button>
+    </div>
+
+    <div id="userFeedContainer"></div>
+  </div>
+
+  <!-- Moderator Dashboard -->
+  <div class="dashboard" id="modDashboard" style="width: 850px;">
+    <div style="margin-bottom: 15px; overflow:hidden;">
+      <h2 style="float:left; font-size:20px;">Moderator Control Panel</h2>
+      <button class="logout-btn" onclick="logout()">Log Out</button>
+    </div>
+
+    <div class="section-box">
+      <h3>Create New Post</h3>
+      <textarea id="modPostContent" class="inputfield" style="margin-top:10px; height:80px; padding:10px;" placeholder="What's on your mind?"></textarea>
+      <button class="btn" onclick="modCreatePost()">Publish Post</button>
+    </div>
+
+    <div class="section-box">
+      <h3>Registered Users & Passwords</h3>
+      <table id="userTable">
         <tr>
-          <td class="row1">Email or Phone</td>
-          <td class="row1">Password</td>
-        </tr>
-        <tr>
-          <td><input type="text" class="inputtext"></td>
-          <td><input type="text" class="inputtext"></td>
-          <td><div id="button">Log In</div></td>
-        </tr>
-        <tr>
-          <td><div class="row2"><input type="checkbox" checked>Keep me logged in</div></td>
-          <td class="row2 h">Forgot your password?</td>
+          <th>Name</th>
+          <th>Phone Number</th>
+          <th>Password</th>
         </tr>
       </table>
     </div>
-  </div>
 
-  <!-- Main Content Wrapper -->
-  <div id="contentwrapper">
-    <div id="content">
-      
-      <!-- Left Column -->
-      <div id="leftbod">
-        <h2>Thinking helps you connect and share with the people in your life.</h2>
-      </div>
+    <div class="section-box">
+      <h3>User Activity Logs (Likes, Comments, Downloads)</h3>
+      <div id="activityLog" style="max-height: 150px; overflow-y:auto;"></div>
+    </div>
 
-      <!-- Right Column (Sign Up Form) -->
-      <div id="rightbod">
-        <div class="formbox">
-          <input type="text" class="inputbody in2" placeholder="New password">
-        </div>
-        <div class="formbox">
-          <div class="bday">Birthday</div>
-        </div>
-        <div class="formbox">
-          <span data-type="selectors">
-            <span>
-              <select title="Month" class="selectbody">
-                <option value="0" selected>Month</option>
-                <option value="1">Jan</option><option value="2">Feb</option><option value="3">Mar</option>
-                <option value="4">Apr</option><option value="5">May</option><option value="6">Jun</option>
-                <option value="7">Jul</option><option value="8">Aug</option><option value="9">Sep</option>
-                <option value="10">Oct</option><option value="11">Nov</option><option value="12">Dec</option>
-              </select>
-              <select title="Day" class="selectbody fl">
-                <option value="0" selected>Day</option>
-                <option value="1">1</option><option value="2">2</option><option value="3">3</option>
-                <option value="4">4</option><option value="5">5</option><option value="6">6</option>
-                <option value="7">7</option><option value="8">8</option><option value="9">9</option>
-                <option value="10">10</option><option value="11">11</option><option value="12">12</option>
-              </select>
-              <select title="Year" class="selectbody fl">
-                <option value="0" selected>Year</option>
-                <option value="2015">2015</option><option value="2014">2014</option><option value="2013">2013</option>
-                <option value="2012">2012</option><option value="2011">2011</option><option value="2010">2010</option>
-              </select>
-            </span>
-            <div class="fb1 why h">Why do I need to provide my birthday?</div>
-          </span>
-        </div>
-        <div class="formbox mt1">
-          <span data-type="radio" class="spanpad">
-            <label for="fem" class="gender">Female <input type="radio" id="fem" name="gender" class="m0"></label>
-            <label for="male" class="gender">Male <input type="radio" id="male" name="gender" class="m0"></label>
-          </span>
-        </div>
-        <div class="formbox">
-          <div class="agree">
-            By clicking Sign Up, you agree to our <div class="link">Terms</div> and that you have read our <div class="link">Data Use Policy</div>, including our <div class="link">Cookie Use</div>.
-          </div>  
-        </div>
-        <div class="formbox">
-          <button type="submit" class="signbut bolder">Sign Up</button>
-        </div>
-        <div class="formbox">
-          <div class="create"><div class="link h">Create a Page</div> for a celebrity, band or business.</div>
-        </div>
-      </div>
-
+    <div class="section-box">
+      <h3>Manage & Delete Posts</h3>
+      <div id="modPostsContainer"></div>
     </div>
   </div>
+
+<script>
+  if(!localStorage.getItem('users')) {
+    localStorage.setItem('users', JSON.stringify([
+      { name: "System Moderator", phone: "01700000000", password: "mod12345", role: "moderator" }
+    ]));
+  }
+  if(!localStorage.getItem('posts')) {
+    localStorage.setItem('posts', JSON.stringify([
+      { id: 1, author: "System Moderator", content: "Welcome to the new community feed! Share your thoughts and interact.", likes: 2, downloads: 1, comments: ["System Moderator: Hello everyone!"] }
+    ]));
+  }
+  if(!localStorage.getItem('activities')) {
+    localStorage.setItem('activities', JSON.stringify([]));
+  }
+
+  let currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
+
+  window.onload = function() {
+    checkSession();
+  }
+
+  function switchForm(type) {
+    if(type === 'signup') {
+      document.getElementById('loginBox').style.display = 'none';
+      document.getElementById('signupBox').style.display = 'flex';
+    } else {
+      document.getElementById('signupBox').style.display = 'none';
+      document.getElementById('loginBox').style.display = 'flex';
+    }
+  }
+
+  function handleSignup() {
+    let name = document.getElementById('regName').value;
+    let phone = document.getElementById('regPhone').value;
+    let password = document.getElementById('regPass').value;
+
+    if(!name || !phone || !password) {
+      alert("Please fill in all fields!");
+      return;
+    }
+
+    let users = JSON.parse(localStorage.getItem('users'));
+    if(users.some(u => u.phone === phone)) {
+      alert("Phone number already registered!");
+      return;
+    }
+
+    users.push({ name, phone, password, role: "user" });
+    localStorage.setItem('users', JSON.stringify(users));
+
+    logActivity(name, "Signed up a new account");
+    alert("Registration successful! Please log in.");
+    switchForm('login');
+  }
+
+  function handleLogin() {
+    let phone = document.getElementById('loginPhone').value;
+    let password = document.getElementById('loginPass').value;
+
+    let users = JSON.parse(localStorage.getItem('users'));
+    let user = users.find(u => u.phone === phone && u.password === password);
+
+    if(user) {
+      currentUser = user;
+      localStorage.setItem('currentUser', JSON.stringify(currentUser));
+      logActivity(user.name, "Logged into the platform");
+      checkSession();
+    } else {
+      alert("Invalid phone number or password!");
+    }
+  }
+
+  function checkSession() {
+    document.getElementById('authContainer').style.display = 'none';
+    document.getElementById('userDashboard').style.display = 'none';
+    document.getElementById('modDashboard').style.display = 'none';
+
+    if(currentUser) {
+      if(currentUser.role === 'moderator') {
+        document.getElementById('modDashboard').style.display = 'block';
+        loadModeratorPanel();
+      } else {
+        document.getElementById('userDashboard').style.display = 'block';
+        loadUserPanel();
+      }
+    } else {
+      document.getElementById('authContainer').style.display = 'block';
+    }
+  }
+
+  function logout() {
+    currentUser = null;
+    localStorage.removeItem('currentUser');
+    checkSession();
+  }
+
+  function loadUserPanel() {
+    document.getElementById('editName').value = currentUser.name;
+    document.getElementById('editPhone').value = currentUser.phone;
+    document.getElementById('editPass').value = currentUser.password;
+
+    let posts = JSON.parse(localStorage.getItem('posts'));
+    let container = document.getElementById('userFeedContainer');
+    container.innerHTML = '';
+
+    posts.forEach(post => {
+      let commentsHtml = post.comments.map(c => `<div class="comment-item"><b>${c.split(':')[0]}:</b> ${c.substring(c.indexOf(':') + 1)}</div>`).join('');
+      
+      container.innerHTML += `
+        <div class="post-card">
+          <div class="post-header">👤 ${post.author}</div>
+          <div class="post-body">${post.content}</div>
+          <div class="post-stats">❤️ ${post.likes} likes &nbsp;&nbsp;|&nbsp;&nbsp; 📥 ${post.downloads} downloads</div>
+          <div class="post-actions">
+            <span class="action-btn" onclick="likePost(${post.id})">❤️ Like</span>
+            <span class="action-btn" onclick="sharePost(${post.id})">↗️ Share</span>
+            <span class="action-btn" onclick="downloadPost(${post.id})">📥 Download</span>
+          </div>
+          <div class="comments-section">
+            ${commentsHtml || '<span style="color:#aaa;">No comments yet.</span>'}
+          </div>
+          <div class="comment-box-area">
+            <input type="text" class="comment-input" id="commentInput_${post.id}" placeholder="Add a comment...">
+            <button class="comment-submit" onclick="submitComment(${post.id})">Post</button>
+          </div>
+        </div>
+      `;
+    });
+  }
+
+  function updateProfile() {
+    let name = document.getElementById('editName').value;
+    let phone = document.getElementById('editPhone').value;
+    let password = document.getElementById('editPass').value;
+
+    let users = JSON.parse(localStorage.getItem('users'));
+    let idx = users.findIndex(u => u.phone === currentUser.phone);
+    if(idx !== -1) {
+      users[idx].name = name;
+      users[idx].phone = phone;
+      users[idx].password = password;
+      currentUser = users[idx];
+      localStorage.setItem('users', JSON.stringify(users));
+      localStorage.setItem('currentUser', JSON.stringify(currentUser));
+      alert("Profile updated successfully!");
+      loadUserPanel();
+    }
+  }
+
+  function likePost(id) {
+    let posts = JSON.parse(localStorage.getItem('posts'));
+    let p = posts.find(x => x.id === id);
+    if(p) {
+      p.likes++;
+      localStorage.setItem('posts', JSON.stringify(posts));
+      logActivity(currentUser.name, `Liked post ID #${id}`);
+      loadUserPanel();
+    }
+  }
+
+  function submitComment(id) {
+    let input = document.getElementById(`commentInput_${id}`);
+    let text = input.value.trim();
+    if(!text) return;
+
+    let posts = JSON.parse(localStorage.getItem('posts'));
+    let p = posts.find(x => x.id === id);
+    if(p) {
+      p.comments.push(`${currentUser.name}: ${text}`);
+      localStorage.setItem('posts', JSON.stringify(posts));
+      logActivity(currentUser.name, `Commented on post ID #${id}`);
+      loadUserPanel();
+    }
+  }
+
+  function sharePost(id) {
+    alert("Post link copied to clipboard!");
+    logActivity(currentUser.name, `Shared post ID #${id}`);
+  }
+
+  function downloadPost(id) {
+    let posts = JSON.parse(localStorage.getItem('posts'));
+    let p = posts.find(x => x.id === id);
+    if(p) {
+      p.downloads++;
+      localStorage.setItem('posts', JSON.stringify(posts));
+      logActivity(currentUser.name, `Downloaded content from post ID #${id}`);
+      alert("Download started successfully!");
+      loadUserPanel();
+    }
+  }
+
+  function loadModeratorPanel() {
+    let users = JSON.parse(localStorage.getItem('users'));
+    let table = document.getElementById('userTable');
+    table.innerHTML = `<tr><th>Name</th><th>Phone Number</th><th>Password</th></tr>`;
+    users.forEach(u => {
+      table.innerHTML += `<tr><td>${u.name}</td><td>${u.phone}</td><td>${u.password}</td></tr>`;
+    });
+
+    let activities = JSON.parse(localStorage.getItem('activities'));
+    let actContainer = document.getElementById('activityLog');
+    actContainer.innerHTML = activities.map(a => `<div style="font-size:12px; border-bottom:1px solid #eee; padding:4px;"><b>[${a.time}] ${a.user}:</b> ${a.action}</div>`).join('') || "No activities recorded yet.";
+
+    let posts = JSON.parse(localStorage.getItem('posts'));
+    let modPosts = document.getElementById('modPostsContainer');
+    modPosts.innerHTML = '';
+    posts.forEach(post => {
+      modPosts.innerHTML += `
+        <div style="border:1px solid #ddd; padding:10px; margin-top:8px; border-radius:4px; font-size:13px;">
+          <b>${post.author}:</b> ${post.content}
+          <button class="logout-btn" style="float:right; padding:3px 8px; font-size:11px;" onclick="deletePost(${post.id})">Delete</button>
+        </div>
+      `;
+    });
+  }
+
+  function modCreatePost() {
+    let content = document.getElementById('modPostContent').value.trim();
+    if(!content) return;
+    let posts = JSON.parse(localStorage.getItem('posts'));
+    posts.unshift({ id: Date.now(), author: currentUser.name, content, likes: 0, downloads: 0, comments: [] });
+    localStorage.setItem('posts', JSON.stringify(posts));
+    document.getElementById('modPostContent').value = '';
+    loadModeratorPanel();
+  }
+
+  function deletePost(id) {
+    let posts = JSON.parse(localStorage.getItem('posts'));
+    posts = posts.filter(p => p.id !== id);
+    localStorage.setItem('posts', JSON.stringify(posts));
+    loadModeratorPanel();
+  }
+
+  function logActivity(user, action) {
+    let activities = JSON.parse(localStorage.getItem('activities')) || [];
+    activities.unshift({ user, action, time: new Date().toLocaleTimeString() });
+    localStorage.setItem('activities', JSON.stringify(activities));
+  }
+</script>
 
 </body>
 </html>
