@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Instagram • Feed & Management Portal</title>
+<title>নাহিদ • সোশ্যাল পোর্টাল</title>
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
 <style>
   * {
@@ -14,15 +14,15 @@
 
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: #fafafa;
-    color: #262626;
+    background-color: #f0f2f5;
+    color: #1c1e21;
   }
 
-  /* Navbar Style */
+  /* Navbar */
   #navwrapper {
     background: #ffffff;
-    border-bottom: 1px solid #dbdbdb;
-    padding: 12px 0;
+    border-bottom: 1px solid #ccd0d5;
+    padding: 10px 0;
     position: sticky;
     top: 0;
     z-index: 100;
@@ -40,20 +40,22 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 24px;
-    font-weight: 700;
+    font-size: 26px;
+    font-weight: 800;
+    color: #1877f2;
   }
 
-  .ig-logo-badge {
-    width: 36px;
-    height: 36px;
-    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+  .logo-badge {
+    width: 40px;
+    height: 40px;
+    background: #1877f2;
     color: #ffffff;
-    border-radius: 10px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 18px;
+    font-size: 20px;
+    font-weight: bold;
   }
 
   /* Container */
@@ -65,85 +67,92 @@
   .auth-box {
     display: flex;
     background: #fff;
-    border: 1px solid #dbdbdb;
+    border: 1px solid #ccd0d5;
     max-width: 400px;
     margin: 0 auto;
-    padding: 40px;
+    padding: 30px;
     flex-direction: column;
-    border-radius: 4px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   }
 
   .auth-box h2 {
     text-align: center;
-    margin-bottom: 25px;
-    font-family: cursive;
-    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-size: 32px;
+    margin-bottom: 20px;
+    color: #1877f2;
+    font-size: 28px;
   }
 
   .inputfield {
     width: 100%;
-    height: 38px;
+    height: 40px;
     padding: 9px 12px;
-    background: #fafafa;
-    border: 1px solid #dbdbdb;
-    border-radius: 3px;
-    font-size: 13px;
-    margin-bottom: 10px;
+    background: #f5f6f7;
+    border: 1px solid #ccd0d5;
+    border-radius: 6px;
+    font-size: 14px;
+    margin-bottom: 12px;
     outline: none;
   }
 
   .inputfield:focus {
-    border-color: #a8a8a8;
+    border-color: #1877f2;
     background: #fff;
   }
 
   .btn {
     width: 100%;
-    background-color: #0095f6;
+    background-color: #1877f2;
     border: none;
     color: #fff;
-    padding: 8px;
-    font-weight: 600;
-    border-radius: 4px;
+    padding: 10px;
+    font-weight: bold;
+    border-radius: 6px;
     cursor: pointer;
-    margin-top: 10px;
+    font-size: 15px;
   }
 
   .btn:hover {
-    background-color: #1877f2;
+    background-color: #166fe5;
   }
 
   .toggle-link {
     text-align: center;
     margin-top: 15px;
-    font-size: 13px;
-    color: #00376b;
+    font-size: 14px;
+    color: #1877f2;
     cursor: pointer;
   }
 
   /* Dashboards */
   .dashboard {
     display: none;
-    width: 700px;
+    width: 750px;
     margin: 30px auto;
   }
 
   .section-box {
     background: #fff;
-    border: 1px solid #dbdbdb;
+    border: 1px solid #ccd0d5;
     padding: 20px;
     border-radius: 8px;
     margin-bottom: 20px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
   }
 
-  /* Feed Post Styling */
+  .profile-pic-preview {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #1877f2;
+    margin-bottom: 10px;
+  }
+
+  /* Post Card */
   .post-card {
     background: #fff;
-    border: 1px solid #dbdbdb;
+    border: 1px solid #ccd0d5;
     border-radius: 8px;
     margin-bottom: 20px;
     overflow: hidden;
@@ -153,28 +162,42 @@
     padding: 12px 15px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     font-weight: 600;
-    border-bottom: 1px solid #efefef;
+    border-bottom: 1px solid #eee;
     font-size: 14px;
+  }
+
+  .author-avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #ccc;
+  }
+
+  .post-img {
+    width: 100%;
+    max-height: 450px;
+    object-fit: cover;
+    background: #000;
   }
 
   .post-body {
     padding: 15px;
     font-size: 14px;
-    line-height: 1.5;
   }
 
   .post-stats {
     padding: 0 15px 10px 15px;
     font-size: 13px;
-    color: #8e8e8e;
+    color: #65676b;
   }
 
   .post-actions {
     display: flex;
-    border-top: 1px solid #efefef;
-    border-bottom: 1px solid #efefef;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
     padding: 8px 15px;
     gap: 20px;
     font-size: 14px;
@@ -183,25 +206,22 @@
   .action-btn {
     cursor: pointer;
     font-weight: 600;
-    color: #262626;
-    display: flex;
-    align-items: center;
-    gap: 5px;
+    color: #65676b;
   }
 
   .action-btn:hover {
-    color: #0095f6;
+    color: #1877f2;
   }
 
   .comments-section {
     padding: 10px 15px;
-    background: #fafafa;
+    background: #f0f2f5;
     font-size: 13px;
   }
 
   .comment-item {
     margin-bottom: 6px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #ddd;
     padding-bottom: 4px;
   }
 
@@ -209,23 +229,26 @@
     display: flex;
     padding: 10px 15px;
     gap: 10px;
-    border-top: 1px solid #efefef;
+    border-top: 1px solid #eee;
   }
 
   .comment-input {
     flex: 1;
-    border: none;
+    border: 1px solid #ccd0d5;
+    padding: 6px 10px;
+    border-radius: 4px;
     outline: none;
     font-size: 13px;
-    background: transparent;
   }
 
   .comment-submit {
-    color: #0095f6;
+    color: #fff;
+    background: #1877f2;
     font-weight: 600;
     cursor: pointer;
-    background: none;
     border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
   }
 
   table {
@@ -235,24 +258,24 @@
   }
 
   th, td {
-    border: 1px solid #dbdbdb;
-    padding: 8px 12px;
+    border: 1px solid #ccd0d5;
+    padding: 8px 10px;
     text-align: left;
     font-size: 13px;
   }
 
   th {
-    background-color: #efefef;
+    background-color: #f5f6f7;
   }
 
   .logout-btn {
-    background-color: #ed4956;
+    background-color: #e41e3f;
     color: white;
     border: none;
     padding: 6px 15px;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
-    font-weight: 600;
+    font-weight: bold;
     float: right;
   }
 </style>
@@ -263,46 +286,59 @@
   <div id="navwrapper">
     <div id="navbar">
       <div class="logowrapper">
-        <div class="ig-logo-badge">📷</div>
-        <span>Instagram</span>
+        <div class="logo-badge">ন</div>
+        <span>নাহিদ</span>
       </div>
-      <div id="navRight"></div>
     </div>
   </div>
 
   <!-- Authentication Wrapper -->
   <div class="container" id="authContainer">
     <div class="auth-box" id="loginBox">
-      <h2>Instagram</h2>
-      <input type="text" id="loginPhone" class="inputfield" placeholder="Phone number">
-      <input type="password" id="loginPass" class="inputfield" placeholder="Password">
-      <button class="btn" onclick="handleLogin()">Log In</button>
-      <div class="toggle-link" onclick="switchForm('signup')">Don't have an account? Sign up</div>
+      <h2>নাহিদ লগইন</h2>
+      <input type="text" id="loginPhone" class="inputfield" placeholder="ফোন নাম্বার">
+      <input type="password" id="loginPass" class="inputfield" placeholder="পাসওয়ার্ড">
+      <button class="btn" onclick="handleLogin()">লগ ইন</button>
+      <div class="toggle-link" onclick="switchForm('signup')">একাউন্ট নেই? সাইন আপ করুন</div>
     </div>
 
     <div class="auth-box" id="signupBox" style="display:none;">
-      <h2>Instagram</h2>
-      <input type="text" id="regName" class="inputfield" placeholder="Full Name">
-      <input type="text" id="regPhone" class="inputfield" placeholder="Phone number">
-      <input type="password" id="regPass" class="inputfield" placeholder="Password">
-      <button class="btn" onclick="handleSignup()">Sign Up</button>
-      <div class="toggle-link" onclick="switchForm('login')">Have an account? Log in</div>
+      <h2>নাহিদ সাইন আপ</h2>
+      <input type="text" id="regName" class="inputfield" placeholder="পূর্ণ নাম">
+      <input type="text" id="regPhone" class="inputfield" placeholder="ফোন নাম্বার">
+      <input type="password" id="regPass" class="inputfield" placeholder="পাসওয়ার্ড">
+      <button class="btn" onclick="handleSignup()">সাইন আপ</button>
+      <div class="toggle-link" onclick="switchForm('login')">একাউন্ট আছে? লগইন করুন</div>
     </div>
   </div>
 
   <!-- User Dashboard -->
   <div class="dashboard" id="userDashboard">
     <div style="margin-bottom: 15px; overflow:hidden;">
-      <h2 style="float:left; font-size:20px;">News Feed</h2>
-      <button class="logout-btn" onclick="logout()">Log Out</button>
+      <h2 style="float:left; font-size:22px;">নাহিদ নিউজ ফিড</h2>
+      <button class="logout-btn" onclick="logout()">লগ আউট</button>
     </div>
 
+    <div class="section-box" style="text-align: center;">
+      <img id="userCurrentPic" class="profile-pic-preview" src="" alt="প্রোফাইল ছবি">
+      <h3>ইউজার প্রোফাইল সেটিংস</h3>
+      <div style="text-align: left; margin-top: 10px;">
+        <label style="font-size:12px; font-weight:600;">প্রোফাইল ছবি পরিবর্তন করুন:</label>
+        <input type="file" id="userPicFile" accept="image/*" class="inputfield" style="background:#fff;">
+        <input type="text" id="editName" class="inputfield" placeholder="নাম পরিবর্তন করুন">
+        <input type="text" id="editPhone" class="inputfield" placeholder="ফোন নাম্বার পরিবর্তন করুন">
+        <input type="password" id="editPass" class="inputfield" placeholder="নতুন পাসওয়ার্ড">
+        <button class="btn" onclick="updateProfile()">প্রোফাইল আপডেট করুন</button>
+      </div>
+    </div>
+
+    <!-- User Express / Post Section -->
     <div class="section-box">
-      <h3>Edit Profile Settings</h3>
-      <input type="text" id="editName" class="inputfield" style="margin-top:10px;" placeholder="Full Name">
-      <input type="text" id="editPhone" class="inputfield" placeholder="Phone Number">
-      <input type="password" id="editPass" class="inputfield" placeholder="New Password">
-      <button class="btn" onclick="updateProfile()">Save Changes</button>
+      <h3>আপনার বক্তব্য বা পোস্ট প্রকাশ করুন</h3>
+      <textarea id="userPostContent" class="inputfield" style="height:70px; padding:10px;" placeholder="আজ আপনার মনে কী চলছে?"></textarea>
+      <label style="font-size:13px; font-weight:600; display:block; margin-bottom:5px;">গ্যালারি থেকে ছবি যুক্ত করুন (ঐচ্ছিক):</label>
+      <input type="file" id="userPostImageFile" accept="image/*" class="inputfield" style="background:#fff;">
+      <button class="btn" onclick="userCreatePost()">পোস্ট শেয়ার করুন</button>
     </div>
 
     <div id="userFeedContainer"></div>
@@ -311,47 +347,66 @@
   <!-- Moderator Dashboard -->
   <div class="dashboard" id="modDashboard" style="width: 850px;">
     <div style="margin-bottom: 15px; overflow:hidden;">
-      <h2 style="float:left; font-size:20px;">Moderator Control Panel</h2>
-      <button class="logout-btn" onclick="logout()">Log Out</button>
+      <h2 style="float:left; font-size:22px;">মডারেটর কন্ট্রোল প্যানেল (Full Control)</h2>
+      <button class="logout-btn" onclick="logout()">লগ আউট</button>
+    </div>
+
+    <div class="section-box" style="text-align: center;">
+      <img id="modCurrentPic" class="profile-pic-preview" src="" alt="মডারেটর ছবি">
+      <h3>মডারেটর প্রোফাইল সেটিংস</h3>
+      <div style="text-align: left; margin-top: 10px;">
+        <label style="font-size:12px; font-weight:600;">প্রোফাইল ছবি পরিবর্তন করুন:</label>
+        <input type="file" id="modPicFile" accept="image/*" class="inputfield" style="background:#fff;">
+        <input type="text" id="modEditName" class="inputfield" placeholder="মডারেটর নাম">
+        <input type="text" id="modEditPhone" class="inputfield" placeholder="মডারেটর ফোন নাম্বার">
+        <input type="password" id="modEditPass" class="inputfield" placeholder="মডারেটর পাসওয়ার্ড">
+        <button class="btn" onclick="updateModProfile()">মডারেটর প্রোফাইল আপডেট করুন</button>
+      </div>
     </div>
 
     <div class="section-box">
-      <h3>Create New Post</h3>
-      <textarea id="modPostContent" class="inputfield" style="margin-top:10px; height:80px; padding:10px;" placeholder="What's on your mind?"></textarea>
-      <button class="btn" onclick="modCreatePost()">Publish Post</button>
+      <h3>নতুন পোস্ট তৈরি করুন</h3>
+      <input type="text" id="modPostContent" class="inputfield" placeholder="ছবির ক্যাপশন লিখুন...">
+      <label style="font-size:13px; font-weight:600; display:block; margin-bottom:5px;">গ্যালারি থেকে ছবি সিলেক্ট করুন:</label>
+      <input type="file" id="modPostImageFile" accept="image/*" class="inputfield" style="background:#fff;">
+      <button class="btn" onclick="modCreatePost()">পোস্ট পাবলিশ করুন</button>
     </div>
 
     <div class="section-box">
-      <h3>Registered Users & Passwords</h3>
+      <h3>অ্যাকাউন্ট ও সিস্টেম কাউন্ট স্ট্যাটিস্টিকস (Total Stats)</h3>
+      <div id="statsSummary" style="font-size:14px; font-weight:600; margin-bottom:10px; color:#1877f2;"></div>
+      <h4>ইউজার লিস্ট, পাসওয়ার্ড ও অ্যাকাউন্ট বাউন্ড কন্ট্রোল</h4>
       <table id="userTable">
         <tr>
-          <th>Name</th>
-          <th>Phone Number</th>
-          <th>Password</th>
+          <th>নাম</th>
+          <th>ফোন নাম্বার</th>
+          <th>পাসওয়ার্ড</th>
+          <th>অ্যাকশন</th>
         </tr>
       </table>
     </div>
 
     <div class="section-box">
-      <h3>User Activity Logs (Likes, Comments, Downloads)</h3>
-      <div id="activityLog" style="max-height: 150px; overflow-y:auto;"></div>
+      <h3>ইউজার অ্যাক্টিভিটি ও ট্র্যাকিং (কে কি করছে)</h3>
+      <div id="activityLog" style="max-height: 180px; overflow-y:auto; background:#f5f6f7; padding:10px; border-radius:4px;"></div>
     </div>
 
     <div class="section-box">
-      <h3>Manage & Delete Posts</h3>
+      <h3>সকল পোস্ট ও ইন্টারঅ্যাকশন ম্যানেজমেন্ট</h3>
       <div id="modPostsContainer"></div>
     </div>
   </div>
 
 <script>
+  // Initial local storage setup with default Moderator
   if(!localStorage.getItem('users')) {
     localStorage.setItem('users', JSON.stringify([
-      { name: "System Moderator", phone: "01700000000", password: "mod12345", role: "moderator" }
+      { name: "প্রধান মডারেটর", phone: "01700000000", password: "mod12345", pic: "", role: "moderator" }
     ]));
   }
   if(!localStorage.getItem('posts')) {
     localStorage.setItem('posts', JSON.stringify([
-      { id: 1, author: "System Moderator", content: "Welcome to the new community feed! Share your thoughts and interact.", likes: 2, downloads: 1, comments: ["System Moderator: Hello everyone!"] }
+      { id: 1, author: "প্রধান মডারেটর", authorPic: "", content: "নাহিদ প্ল্যাটফর্মে স্বাগতম! সবাই এখন নিজের বক্তব্য ও ছবি পোস্ট করতে পারবে।", image: "", likes: 0, downloads: 0, comments: [], likedBy: [], downloadedBy: [] }
     ]));
   }
   if(!localStorage.getItem('activities')) {
@@ -380,21 +435,21 @@
     let password = document.getElementById('regPass').value;
 
     if(!name || !phone || !password) {
-      alert("Please fill in all fields!");
+      alert("সবগুলো ফিল্ড পূরণ করুন!");
       return;
     }
 
     let users = JSON.parse(localStorage.getItem('users'));
     if(users.some(u => u.phone === phone)) {
-      alert("Phone number already registered!");
+      alert("এই ফোন নাম্বার দিয়ে ইতিমধ্যে অ্যাকাউন্ট খোলা হয়েছে!");
       return;
     }
 
-    users.push({ name, phone, password, role: "user" });
+    users.push({ name, phone, password, pic: "", role: "user" });
     localStorage.setItem('users', JSON.stringify(users));
 
-    logActivity(name, "Signed up a new account");
-    alert("Registration successful! Please log in.");
+    logActivity(name, "নতুন অ্যাকাউন্ট সাইন আপ করেছেন");
+    alert("রেজিস্ট্রেশন সফল হয়েছে! এবার লগইন করুন।");
     switchForm('login');
   }
 
@@ -408,10 +463,10 @@
     if(user) {
       currentUser = user;
       localStorage.setItem('currentUser', JSON.stringify(currentUser));
-      logActivity(user.name, "Logged into the platform");
+      logActivity(user.name, "সিস্টেমে লগইন করেছেন");
       checkSession();
     } else {
-      alert("Invalid phone number or password!");
+      alert("ভুল ফোন নাম্বার অথবা পাসওয়ার্ড!");
     }
   }
 
@@ -421,6 +476,13 @@
     document.getElementById('modDashboard').style.display = 'none';
 
     if(currentUser) {
+      let users = JSON.parse(localStorage.getItem('users'));
+      let freshUser = users.find(u => u.phone === currentUser.phone);
+      if(freshUser) {
+        currentUser = freshUser;
+        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+      }
+
       if(currentUser.role === 'moderator') {
         document.getElementById('modDashboard').style.display = 'block';
         loadModeratorPanel();
@@ -443,6 +505,7 @@
     document.getElementById('editName').value = currentUser.name;
     document.getElementById('editPhone').value = currentUser.phone;
     document.getElementById('editPass').value = currentUser.password;
+    document.getElementById('userCurrentPic').src = currentUser.pic || 'https://via.placeholder.com/70';
 
     let posts = JSON.parse(localStorage.getItem('posts'));
     let container = document.getElementById('userFeedContainer');
@@ -450,23 +513,26 @@
 
     posts.forEach(post => {
       let commentsHtml = post.comments.map(c => `<div class="comment-item"><b>${c.split(':')[0]}:</b> ${c.substring(c.indexOf(':') + 1)}</div>`).join('');
+      let imgHtml = post.image ? `<img src="${post.image}" class="post-img">` : '';
+      let authorAvatarHtml = post.authorPic ? `<img src="${post.authorPic}" class="author-avatar">` : `<div class="author-avatar" style="display:flex;align-items:center;justify-content:center;font-weight:bold;color:#555;">👤</div>`;
       
       container.innerHTML += `
         <div class="post-card">
-          <div class="post-header">👤 ${post.author}</div>
+          <div class="post-header">${authorAvatarHtml} ${post.author}</div>
+          ${imgHtml}
           <div class="post-body">${post.content}</div>
-          <div class="post-stats">❤️ ${post.likes} likes &nbsp;&nbsp;|&nbsp;&nbsp; 📥 ${post.downloads} downloads</div>
+          <div class="post-stats">❤️ ${post.likes} লাইক &nbsp;&nbsp;|&nbsp;&nbsp; 📥 ${post.downloads} ডাউনলোড</div>
           <div class="post-actions">
-            <span class="action-btn" onclick="likePost(${post.id})">❤️ Like</span>
-            <span class="action-btn" onclick="sharePost(${post.id})">↗️ Share</span>
-            <span class="action-btn" onclick="downloadPost(${post.id})">📥 Download</span>
+            <span class="action-btn" onclick="likePost(${post.id})">❤️ লাইক দিন</span>
+            <span class="action-btn" onclick="sharePost(${post.id})">↗️ শেয়ার</span>
+            <span class="action-btn" onclick="downloadPost(${post.id})">📥 ডাউনলোড</span>
           </div>
           <div class="comments-section">
-            ${commentsHtml || '<span style="color:#aaa;">No comments yet.</span>'}
+            ${commentsHtml || '<span style="color:#777;">কোনো কমেন্ট নেই।</span>'}
           </div>
           <div class="comment-box-area">
-            <input type="text" class="comment-input" id="commentInput_${post.id}" placeholder="Add a comment...">
-            <button class="comment-submit" onclick="submitComment(${post.id})">Post</button>
+            <input type="text" class="comment-input" id="commentInput_${post.id}" placeholder="একটি কমেন্ট লিখুন...">
+            <button class="comment-submit" onclick="submitComment(${post.id})">কমেন্ট</button>
           </div>
         </div>
       `;
@@ -477,29 +543,90 @@
     let name = document.getElementById('editName').value;
     let phone = document.getElementById('editPhone').value;
     let password = document.getElementById('editPass').value;
+    let fileInput = document.getElementById('userPicFile');
 
     let users = JSON.parse(localStorage.getItem('users'));
     let idx = users.findIndex(u => u.phone === currentUser.phone);
+
     if(idx !== -1) {
-      users[idx].name = name;
-      users[idx].phone = phone;
-      users[idx].password = password;
-      currentUser = users[idx];
-      localStorage.setItem('users', JSON.stringify(users));
-      localStorage.setItem('currentUser', JSON.stringify(currentUser));
-      alert("Profile updated successfully!");
-      loadUserPanel();
+      if(fileInput.files && fileInput.files[0]) {
+        let reader = new FileReader();
+        reader.onload = function(e) {
+          users[idx].pic = e.target.result;
+          saveUserChanges(users, idx, name, phone, password);
+        }
+        reader.readAsDataURL(fileInput.files[0]);
+      } else {
+        saveUserChanges(users, idx, name, phone, password);
+      }
     }
+  }
+
+  function saveUserChanges(users, idx, name, phone, password) {
+    users[idx].name = name;
+    users[idx].phone = phone;
+    users[idx].password = password;
+    currentUser = users[idx];
+    localStorage.setItem('users', JSON.stringify(users));
+    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+    alert("প্রোফাইল সফলভাবে আপডেট হয়েছে!");
+    loadUserPanel();
+  }
+
+  function userCreatePost() {
+    let content = document.getElementById('userPostContent').value.trim();
+    let fileInput = document.getElementById('userPostImageFile');
+
+    if(!content && fileInput.files.length === 0) {
+      alert("দয়া করে কিছু লিখুন অথবা ছবি সিলেক্ট করুন!");
+      return;
+    }
+
+    if(fileInput.files && fileInput.files[0]) {
+      let reader = new FileReader();
+      reader.onload = function(e) {
+        savePostToStorage(content, e.target.result);
+      }
+      reader.readAsDataURL(fileInput.files[0]);
+    } else {
+      savePostToStorage(content, "");
+    }
+  }
+
+  function savePostToStorage(content, imageUrl) {
+    let posts = JSON.parse(localStorage.getItem('posts'));
+    posts.unshift({ 
+      id: Date.now(), 
+      author: currentUser.name, 
+      authorPic: currentUser.pic || "",
+      content, 
+      image: imageUrl, 
+      likes: 0, 
+      downloads: 0, 
+      comments: [], 
+      likedBy: [], 
+      downloadedBy: [] 
+    });
+    localStorage.setItem('posts', JSON.stringify(posts));
+    document.getElementById('userPostContent').value = '';
+    document.getElementById('userPostImageFile').value = '';
+    logActivity(currentUser.name, "নতুন পোস্ট/বক্তব্য প্রকাশ করেছেন");
+    loadUserPanel();
   }
 
   function likePost(id) {
     let posts = JSON.parse(localStorage.getItem('posts'));
     let p = posts.find(x => x.id === id);
     if(p) {
-      p.likes++;
-      localStorage.setItem('posts', JSON.stringify(posts));
-      logActivity(currentUser.name, `Liked post ID #${id}`);
-      loadUserPanel();
+      if(!p.likedBy.includes(currentUser.name)) {
+        p.likes++;
+        p.likedBy.push(currentUser.name);
+        localStorage.setItem('posts', JSON.stringify(posts));
+        logActivity(currentUser.name, `পোস্ট #${id} এ লাইক দিয়েছেন`);
+        loadUserPanel();
+      } else {
+        alert("আপনি ইতিমধ্যে এই পোস্টে লাইক দিয়েছেন!");
+      }
     }
   }
 
@@ -513,14 +640,14 @@
     if(p) {
       p.comments.push(`${currentUser.name}: ${text}`);
       localStorage.setItem('posts', JSON.stringify(posts));
-      logActivity(currentUser.name, `Commented on post ID #${id}`);
+      logActivity(currentUser.name, `পোস্ট #${id} এ কমেন্ট করেছেন`);
       loadUserPanel();
     }
   }
 
   function sharePost(id) {
-    alert("Post link copied to clipboard!");
-    logActivity(currentUser.name, `Shared post ID #${id}`);
+    alert("পোস্ট লিংক কপি করা হয়েছে!");
+    logActivity(currentUser.name, `পোস্ট #${id} শেয়ার করেছেন`);
   }
 
   function downloadPost(id) {
@@ -528,45 +655,116 @@
     let p = posts.find(x => x.id === id);
     if(p) {
       p.downloads++;
+      if(!p.downloadedBy) p.downloadedBy = [];
+      p.downloadedBy.push(currentUser.name);
       localStorage.setItem('posts', JSON.stringify(posts));
-      logActivity(currentUser.name, `Downloaded content from post ID #${id}`);
-      alert("Download started successfully!");
+      logActivity(currentUser.name, `পোস্ট #${id} থেকে কন্টেন্ট ডাউনলোড করেছেন`);
+      alert("ডাউনলোড সফল হয়েছে!");
       loadUserPanel();
     }
   }
 
   function loadModeratorPanel() {
+    document.getElementById('modEditName').value = currentUser.name;
+    document.getElementById('modEditPhone').value = currentUser.phone;
+    document.getElementById('modEditPass').value = currentUser.password;
+    document.getElementById('modCurrentPic').src = currentUser.pic || 'https://via.placeholder.com/70';
+
     let users = JSON.parse(localStorage.getItem('users'));
+    let posts = JSON.parse(localStorage.getItem('posts'));
+    let activities = JSON.parse(localStorage.getItem('activities'));
+
+    // Count statistics
+    let totalPosts = posts.length;
+    let totalLikes = posts.reduce((sum, p) => sum + p.likes, 0);
+    let totalDownloads = posts.reduce((sum, p) => sum + p.downloads, 0);
+    let totalUsers = users.length;
+    document.getElementById('statsSummary').innerHTML = `মোট ইউজার: ${totalUsers} | মোট পোস্ট: ${totalPosts} | মোট লাইক: ${totalLikes} | মোট ডাউনলোড: ${totalDownloads}`;
+
     let table = document.getElementById('userTable');
-    table.innerHTML = `<tr><th>Name</th><th>Phone Number</th><th>Password</th></tr>`;
+    table.innerHTML = `<tr><th>নাম</th><th>ফোন নাম্বার</th><th>পাসওয়ার্ড</th><th>অ্যাকশন</th></tr>`;
     users.forEach(u => {
-      table.innerHTML += `<tr><td>${u.name}</td><td>${u.phone}</td><td>${u.password}</td></tr>`;
+      let deleteBtn = u.role !== 'moderator' ? `<button onclick="deleteUser('${u.phone}')" style="background:#e41e3f; color:#fff; border:none; padding:4px 10px; border-radius:4px; cursor:pointer;">ডিলিট অ্যাকাউন্ট</button>` : 'প্রধান মডারেটর';
+      table.innerHTML += `<tr><td>${u.name}</td><td>${u.phone}</td><td>${u.password}</td><td>${deleteBtn}</td></tr>`;
     });
 
-    let activities = JSON.parse(localStorage.getItem('activities'));
     let actContainer = document.getElementById('activityLog');
-    actContainer.innerHTML = activities.map(a => `<div style="font-size:12px; border-bottom:1px solid #eee; padding:4px;"><b>[${a.time}] ${a.user}:</b> ${a.action}</div>`).join('') || "No activities recorded yet.";
+    actContainer.innerHTML = activities.map(a => `<div style="font-size:12px; border-bottom:1px solid #ddd; padding:4px;"><b>[${a.time}] ${a.user}:</b> ${a.action}</div>`).join('') || "কোনো অ্যাক্টিভিটি রেকর্ড করা হয়নি।";
 
-    let posts = JSON.parse(localStorage.getItem('posts'));
     let modPosts = document.getElementById('modPostsContainer');
     modPosts.innerHTML = '';
     posts.forEach(post => {
+      let imgPrev = post.image ? `<br><img src="${post.image}" style="max-width:120px; margin-top:5px; border-radius:4px;">` : '';
+      let likedList = post.likedBy && post.likedBy.length > 0 ? post.likedBy.join(', ') : 'কেউ না';
+      let downList = post.downloadedBy && post.downloadedBy.length > 0 ? post.downloadedBy.join(', ') : 'কেউ না';
+
       modPosts.innerHTML += `
-        <div style="border:1px solid #ddd; padding:10px; margin-top:8px; border-radius:4px; font-size:13px;">
-          <b>${post.author}:</b> ${post.content}
-          <button class="logout-btn" style="float:right; padding:3px 8px; font-size:11px;" onclick="deletePost(${post.id})">Delete</button>
+        <div style="border:1px solid #ccd0d5; padding:12px; margin-top:10px; border-radius:6px; font-size:13px; background:#fafafa; position:relative;">
+          <b>লেখক: ${post.author}</b><br>${post.content} ${imgPrev}
+          <div style="margin-top:8px; color:#65676b; font-size:12px; border-top:1px dashed #ddd; padding-top:5px;">
+            👍 লাইক দিয়েছে: [<b>${likedList}</b>] <br>
+            📥 ডাউনলোড করেছে: [<b>${downList}</b>]
+          </div>
+          <button class="logout-btn" style="float:right; padding:4px 10px; font-size:12px; margin-top:-30px;" onclick="deletePost(${post.id})">পোস্ট ডিলিট</button>
         </div>
       `;
     });
   }
 
+  function updateModProfile() {
+    let name = document.getElementById('modEditName').value;
+    let phone = document.getElementById('modEditPhone').value;
+    let password = document.getElementById('modEditPass').value;
+    let fileInput = document.getElementById('modPicFile');
+
+    let users = JSON.parse(localStorage.getItem('users'));
+    let idx = users.findIndex(u => u.phone === currentUser.phone);
+
+    if(idx !== -1) {
+      if(fileInput.files && fileInput.files[0]) {
+        let reader = new FileReader();
+        reader.onload = function(e) {
+          users[idx].pic = e.target.result;
+          saveModChanges(users, idx, name, phone, password);
+        }
+        reader.readAsDataURL(fileInput.files[0]);
+      } else {
+        saveModChanges(users, idx, name, phone, password);
+      }
+    }
+  }
+
+  function saveModChanges(users, idx, name, phone, password) {
+    users[idx].name = name;
+    users[idx].phone = phone;
+    users[idx].password = password;
+    currentUser = users[idx];
+    localStorage.setItem('users', JSON.stringify(users));
+    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+    alert("মডারেটর প্রোফাইল সফলভাবে আপডেট হয়েছে!");
+    loadModeratorPanel();
+  }
+
   function modCreatePost() {
     let content = document.getElementById('modPostContent').value.trim();
-    if(!content) return;
-    let posts = JSON.parse(localStorage.getItem('posts'));
-    posts.unshift({ id: Date.now(), author: currentUser.name, content, likes: 0, downloads: 0, comments: [] });
-    localStorage.setItem('posts', JSON.stringify(posts));
+    let fileInput = document.getElementById('modPostImageFile');
+
+    if(!content && fileInput.files.length === 0) {
+      alert("দয়া করে কিছু লিখুন অথবা ছবি সিলেক্ট করুন!");
+      return;
+    }
+
+    if(fileInput.files && fileInput.files[0]) {
+      let reader = new FileReader();
+      reader.onload = function(e) {
+        savePostToStorage(content, e.target.result);
+      }
+      reader.readAsDataURL(fileInput.files[0]);
+    } else {
+      savePostToStorage(content, "");
+    }
     document.getElementById('modPostContent').value = '';
+    document.getElementById('modPostImageFile').value = '';
     loadModeratorPanel();
   }
 
@@ -574,7 +772,17 @@
     let posts = JSON.parse(localStorage.getItem('posts'));
     posts = posts.filter(p => p.id !== id);
     localStorage.setItem('posts', JSON.stringify(posts));
-    loadModeratorPanel();
+    if(currentUser.role === 'moderator') loadModeratorPanel();
+    else loadUserPanel();
+  }
+
+  function deleteUser(phone) {
+    if(confirm("আপনি কি নিশ্চিত এই ইউজারের অ্যাকাউন্ট সম্পূর্ণ ডিলিট করতে চান?")) {
+      let users = JSON.parse(localStorage.getItem('users'));
+      users = users.filter(u => u.phone !== phone);
+      localStorage.setItem('users', JSON.stringify(users));
+      loadModeratorPanel();
+    }
   }
 
   function logActivity(user, action) {
