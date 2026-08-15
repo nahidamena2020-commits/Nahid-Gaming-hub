@@ -3,58 +3,214 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ডাউনলোড কর্নার - আমার ইউটিউব রিসোর্স</title>
-    <!-- Tailwind CSS CDN for modern design -->
+
+    <title>Download Center | My YouTube</title>
+
+    <meta name="description" content="আমার YouTube ভিডিওর প্রয়োজনীয় ফাইল, নোটস ও রিসোর্স ডাউনলোড করুন।">
+
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: "class"
+        }
+    </script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            transition: background-color .3s, color .3s;
+        }
+
+        .glass {
+            background: rgba(255,255,255,.75);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+        }
+
+        .dark .glass {
+            background: rgba(15,23,42,.75);
+        }
+
+        .file-card {
+            transition: transform .25s ease, box-shadow .25s ease;
+        }
+
+        .file-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .modal {
+            animation: popup .2s ease-out;
+        }
+
+        @keyframes popup {
+            from {
+                opacity: 0;
+                transform: scale(.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg,#2563eb,#7c3aed,#db2777);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col justify-between">
 
-    <!-- Header Section -->
-    <header class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-8 shadow-lg">
-        <div class="container mx-auto px-4 text-center">
-            <h1 class="text-3xl md:text-4xl font-bold">আমার ডকুমেন্ট ডাউনলোডের জায়গা</h1>
-            <p class="mt-2 text-blue-100 text-sm md:text-base">ইউটিউব ভিডিওর সমস্ত প্রয়োজনীয় ফাইল ও নোটস এখান থেকে সহজে ডাউনলোড করুন।</p>
+<body class="bg-slate-100 dark:bg-slate-950 text-slate-800 dark:text-slate-100 min-h-screen">
+
+<!-- ================= HEADER ================= -->
+
+<header class="relative overflow-hidden bg-gradient-to-br from-blue-700 via-indigo-700 to-purple-800 text-white">
+
+    <div class="absolute inset-0 opacity-10">
+        <div class="absolute -top-20 -left-20 w-72 h-72 bg-white rounded-full blur-3xl"></div>
+        <div class="absolute top-20 right-0 w-80 h-80 bg-pink-400 rounded-full blur-3xl"></div>
+    </div>
+
+    <div class="relative max-w-6xl mx-auto px-5 py-12 md:py-16">
+
+        <div class="flex justify-between items-center mb-10">
+
+            <div class="font-bold text-lg">
+                📦 My Download Center
+            </div>
+
+            <button
+                onclick="toggleDarkMode()"
+                class="glass text-slate-800 dark:text-white px-4 py-2 rounded-full text-sm font-semibold">
+                🌙 Theme
+            </button>
+
         </div>
-    </header>
 
-    <!-- Main Content / File List Section -->
-    <main class="container mx-auto px-4 py-10 max-w-3xl flex-grow">
-        <h2 class="text-xl font-semibold mb-6 text-slate-700 border-b pb-2">উপলভ্য ফাইলসমূহ</h2>
-        
-        <div class="space-y-4">
-            <!-- File Item 1 -->
-            <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 transition hover:shadow-md">
-                <div>
-                    <h3 class="text-lg font-bold text-slate-900">গুরুত্বপূর্ণ নোটস (পিডিএফ)</h3>
-                    <p class="text-sm text-slate-500 mt-1">ভিডিওতে আলোচিত সম্পূর্ণ নোটস এবং প্রশ্ন-উত্তর।</p>
-                </div>
-                <a href="files/sample-notes.pdf" download class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg font-medium text-sm transition duration-200 text-center w-full sm:w-auto shadow-sm">ডাউনলোড করুন</a>
+        <div class="text-center">
+
+            <div class="inline-block px-4 py-2 rounded-full bg-white/15 border border-white/20 text-sm mb-5">
+                🎬 Official YouTube Resources
             </div>
 
-            <!-- File Item 2 -->
-            <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 transition hover:shadow-md">
-                <div>
-                    <h3 class="text-lg font-bold text-slate-900">প্রজেক্ট সোর্স কোড (ZIP)</h3>
-                    <p class="text-sm text-slate-500 mt-1">টিউটোরিয়ালে ব্যবহৃত সমস্ত সোর্স কোড ফাইল।</p>
-                </div>
-                <a href="files/source-code.zip" download class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg font-medium text-sm transition duration-200 text-center w-full sm:w-auto shadow-sm">ডাউনলোড করুন</a>
-            </div>
+            <h1 class="text-4xl md:text-6xl font-black leading-tight">
+                Download Center
+            </h1>
 
-            <!-- File Item 3 -->
-            <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 transition hover:shadow-md">
-                <div>
-                    <h3 class="text-lg font-bold text-slate-900">প্রয়োজনীয় সফটওয়্যার বা টুলস</h3>
-                    <p class="text-sm text-slate-500 mt-1">কাজের সুবিধার জন্য প্রয়োজনীয় ফ্রি টুলস।</p>
-                </div>
-                <a href="files/tools.zip" download class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg font-medium text-sm transition duration-200 text-center w-full sm:w-auto shadow-sm">ডাউনলোড করুন</a>
-            </div>
+            <p class="mt-5 text-blue-100 max-w-2xl mx-auto text-sm md:text-lg">
+                আমার YouTube ভিডিওর প্রয়োজনীয় ফাইল, নোটস,
+                সোর্স কোড এবং অন্যান্য রিসোর্স এখান থেকে ডাউনলোড করুন।
+            </p>
+
         </div>
-    </main>
 
-    <!-- Footer Section -->
-    <footer class="bg-slate-900 text-slate-400 text-center py-6 mt-12">
-        <p class="text-sm">সর্বস্বত্ব সংরক্ষিত © ২০২৬ | তোমার ইউটিউব চ্যানেল</p>
-    </footer>
+    </div>
+</header>
 
-</body>
-</html>
+
+<!-- ================= MAIN ================= -->
+
+<main class="max-w-6xl mx-auto px-5 py-10">
+
+    <!-- Statistics -->
+
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+
+        <div class="glass rounded-2xl border border-slate-200 dark:border-slate-800 p-5 text-center shadow-sm">
+            <div class="text-3xl font-black text-blue-600" id="totalFiles">
+                0
+            </div>
+            <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">
+                মোট ফাইল
+            </p>
+        </div>
+
+        <div class="glass rounded-2xl border border-slate-200 dark:border-slate-800 p-5 text-center shadow-sm">
+            <div class="text-3xl font-black text-purple-600">
+                🔐
+            </div>
+            <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">
+                PIN Protected
+            </p>
+        </div>
+
+        <div class="hidden md:block glass rounded-2xl border border-slate-200 dark:border-slate-800 p-5 text-center shadow-sm">
+            <div class="text-3xl font-black text-green-600">
+                ⚡
+            </div>
+            <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">
+                Fast Download
+            </p>
+        </div>
+
+    </div>
+
+
+    <!-- Search -->
+
+    <div class="mb-8">
+
+        <div class="relative">
+
+            <span class="absolute left-4 top-1/2 -translate-y-1/2">
+                🔎
+            </span>
+
+            <input
+                id="searchBox"
+                oninput="searchFiles()"
+                type="text"
+                placeholder="ফাইলের নাম লিখে খুঁজুন..."
+                class="w-full pl-12 pr-5 py-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 outline-none focus:ring-2 focus:ring-blue-500"
+            >
+
+        </div>
+
+    </div>
+
+
+    <!-- File Section -->
+
+    <div class="flex items-center justify-between mb-5">
+
+        <div>
+            <h2 class="text-2xl font-black">
+                📂 Available Files
+            </h2>
+
+            <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">
+                প্রয়োজনীয় ফাইল নির্বাচন করুন
+            </p>
+        </div>
+
+    </div>
+
+
+    <div
+        id="fileContainer"
+        class="grid grid-cols-1 md:grid-cols-2 gap-5">
+    </div>
+
+
+    <!-- No result -->
+
+    <div
+        id="noResult"
+        class="hidden text-center py-16">
+
+        <div class="text-5xl mb-4">
+            🔍
+        </div>
+
+        <h3 class="font-bold text-xl">
+            কোনো ফাইল পাওয়া যায়নি
+        </h3>
+
+        <p class="text-s
